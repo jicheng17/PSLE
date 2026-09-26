@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Science Sense</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Lexend:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #EEF6F0;
+    --surface: #FFFFFF;
+    --ink: #16321F;
+    --muted: #4B6B54;
+    --line: #CBE0CE;
+    --accent: #1E8A5A;
+    --on-accent: #FFFFFF;
+    --tint: #DCF1E1;
+    --formula: #E4F3E7;
+    --warn-bg: #FFF1D6;
+    --warn-ink: #6E4300;
+    --warn-line: #E2AD45;
+    --shadow: 0 1px 0 rgba(22,50,31,.06), 0 8px 24px -12px rgba(22,50,31,.2);
+    --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Lexend", "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --petal: #E38BB9; --sepal: #6FA96B; --anther: #F2C14E; --ovary: #C98A4B;
+    --artery: #D9694F; --vein: #4E7FBF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E1D14; --surface: #16301F; --ink: #E4F3E7; --muted: #9AC0A4;
+      --line: #274A32; --accent: #55C88C; --on-accent: #06210F; --tint: #1B3B26;
+      --formula: #1A3A24; --warn-bg: #362A0E; --warn-ink: #F3CD85; --warn-line: #8A6620;
+      --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+      --petal: #D888B3; --sepal: #7BB878; --anther: #E8BE55; --ovary: #C08A57;
+      --artery: #E08268; --vein: #6C97D1;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E1D14; --surface: #16301F; --ink: #E4F3E7; --muted: #9AC0A4;
+    --line: #274A32; --accent: #55C88C; --on-accent: #06210F; --tint: #1B3B26;
+    --formula: #1A3A24; --warn-bg: #362A0E; --warn-ink: #F3CD85; --warn-line: #8A6620;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    --petal: #D888B3; --sepal: #7BB878; --anther: #E8BE55; --ovary: #C08A57;
+    --artery: #E08268; --vein: #6C97D1;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.55;
+    padding-inline: 16px;
+  }
+  .wrap { max-width: 1040px; margin-inline: auto; padding-block: 28px 56px; }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.12; margin: 0; }
+  p { margin: 0; }
+
+  .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(2.3rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: -.02em; margin-top: 6px; }
+  .lede { max-width: 62ch; color: var(--muted); margin-top: 12px; font-size: 1.05rem; }
+
+  .nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    background: var(--bg); padding-block: 12px; margin-top: 18px;
+    border-bottom: 1px solid var(--line);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .nav a {
+    text-decoration: none; color: var(--ink); font-size: 14px; font-weight: 500;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+  }
+  .nav a:hover { border-color: var(--accent); color: var(--accent); }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .sec { margin-top: 44px; scroll-margin-top: 80px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .sec-head h2 { font-size: clamp(1.5rem, 4.2vw, 2rem); font-weight: 700; letter-spacing: -.01em; }
+  .strand { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .cols { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; margin-top: 16px; }
+  @media (min-width: 820px) { .cols { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; box-shadow: var(--shadow); }
+  .panel h3 { font-size: 1.05rem; margin-bottom: 10px; }
+  .stack { display: grid; gap: 16px; }
+
+  .figs { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+  .figs figure { margin: 0; }
+  .figs svg { width: 100%; max-width: 220px; margin-inline: auto; }
+  .figs figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; text-align: center; }
+  .figs figcaption b { color: var(--ink); font-weight: 600; display: block; font-size: 14px; }
+
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .rules li { background: var(--formula); border-radius: 8px; padding: 10px 12px; font-size: 15px; }
+  .rules b { font-weight: 600; font-size: 14.5px; display: block; }
+  .rules span { color: var(--muted); font-size: 14px; }
+  .tag { font-family: var(--body); font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-left: 6px; white-space: nowrap; font-weight: 400; }
+
+  .qa { border-left: 3px solid var(--tint); padding-left: 12px; }
+  .qa p:first-child { font-weight: 500; }
+  .qa .a { margin-top: 6px; display: inline-block; background: var(--accent); color: var(--on-accent); font-weight: 600; padding: 3px 10px; border-radius: 6px; font-size: 14.5px; }
+  .sep { border: 0; border-top: 1px dashed var(--line); margin: 16px 0; }
+
+  .warn { background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); border-radius: 10px; padding: 12px 14px; font-size: 14.5px; }
+  .warn b { font-weight: 600; }
+
+  details.try { border: 1px dashed var(--accent); border-radius: 10px; padding: 12px 14px; }
+  details.try summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+  details.try p { margin-top: 8px; }
+  details.try .reveal { font-size: 14.5px; color: var(--muted); }
+
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child th, tr:last-child td { border-bottom: 0; }
+  thead th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  tbody th { font-family: var(--display); font-weight: 600; white-space: nowrap; color: var(--accent); font-size: 15px; }
+
+  svg { max-width: 100%; height: auto; display: block; margin-inline: auto; }
+  svg text { font-family: var(--body); fill: var(--ink); font-size: 10.5px; }
+  svg .lbl { font-weight: 600; font-size: 11px; }
+  svg .mut { fill: var(--muted); font-size: 9.5px; }
+  svg .shape { fill: var(--tint); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+  svg .plain { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+  svg .ray { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+  svg .arc { fill: none; stroke: var(--accent); stroke-width: 2; }
+  svg .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  svg .dot { fill: var(--ink); }
+  svg .node { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+
+  .checklist { margin-top: 44px; }
+  .checklist ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .checklist li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+  .checklist li b { display: block; font-family: var(--display); font-size: 1.05rem; margin-bottom: 2px; }
+  footer { margin-top: 36px; font-size: 13px; color: var(--muted); }
+
+  @media print {
+    body { background: #fff; padding-inline: 0; font-size: 12px; }
+    .nav { display: none; }
+    .panel, .warn, .checklist li { box-shadow: none; break-inside: avoid; }
+    .sec { break-inside: avoid-page; }
+    details.try:not([open]) > *:not(summary) { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+  .sitebar { display:flex; gap:14px; align-items:center; padding:12px 16px; max-width:1040px; margin:0 auto; font-size:13px; color:var(--muted); }
+  .sitebar a { color:var(--muted); text-decoration:none; }
+  .sitebar a:hover { color:var(--accent); }
+  .sitebar a.current { color:var(--ink); font-weight:600; }
+  .sitebar .sep { opacity:.4; }
+</style>
+</head>
+<body>
+<div class="sitebar"><a href="/">All subjects</a><span class="sep">/</span><a href="/math">Math</a><span class="sep">/</span><a href="/science" class="current">Science</a></div>
+
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Primary 5 Science · Chapters 1–6</p>
+    <h1>Science Sense</h1>
+    <p class="lede">Reproduction in plants and animals, the water cycle, and how air, blood and electricity each travel their own circuit through a system. Key facts, diagrams, and a quick check for each topic.</p>
+  </header>
+
+  <nav class="nav" aria-label="Topics">
+    <a href="#plants">Plant reproduction</a>
+    <a href="#animals">Animal &amp; human reproduction</a>
+    <a href="#matter">Matter &amp; water cycle</a>
+    <a href="#lungs">Respiratory system</a>
+    <a href="#heart">Circulatory system</a>
+    <a href="#circuits">Electrical circuits</a>
+    <a href="#habits">Exam habits</a>
+  </nav>
+
+  <!-- 1. PLANT REPRODUCTION -->
+  <section class="sec" id="plants" aria-labelledby="plants-h">
+    <div class="sec-head"><h2 id="plants-h">Plant reproduction</h2><span class="strand">Diversity</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Parts of a flower</h3>
+        <svg viewBox="0 0 280 220" role="img" aria-label="A flower cross-section showing petals, sepals, two stamens with anther and filament, and a pistil made of stigma, style and ovary containing ovules.">
+          <line class="ray" x1="140" y1="216" x2="140" y2="176" style="stroke:var(--sepal)"/>
+          <path class="shape" style="fill:var(--petal)" d="M140,150 C92,142 70,96 98,52 C120,90 132,128 140,150 Z"/>
+          <path class="shape" style="fill:var(--petal)" d="M140,150 C188,142 210,96 182,52 C160,90 148,128 140,150 Z"/>
+          <polygon points="140,158 116,178 133,164" style="fill:var(--sepal);stroke:var(--ink);stroke-width:1"/>
+          <polygon points="140,158 164,178 147,164" style="fill:var(--sepal);stroke:var(--ink);stroke-width:1"/>
+          <ellipse cx="140" cy="172" rx="20" ry="13" style="fill:var(--ovary);stroke:var(--ink);stroke-width:1.5"/>
+          <circle class="dot" cx="132" cy="172" r="2.6" style="fill:#fff"/>
+          <circle class="dot" cx="140" cy="168" r="2.6" style="fill:#fff"/>
+          <circle class="dot" cx="148" cy="172" r="2.6" style="fill:#fff"/>
+          <line class="ray" x1="118" y1="150" x2="102" y2="100" style="stroke:var(--ink);stroke-width:1.6"/>
+          <ellipse cx="101" cy="94" rx="9" ry="5.5" transform="rotate(-24 101 94)" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.2"/>
+          <line class="ray" x1="162" y1="150" x2="178" y2="100" style="stroke:var(--ink);stroke-width:1.6"/>
+          <ellipse cx="179" cy="94" rx="9" ry="5.5" transform="rotate(24 179 94)" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.2"/>
+          <line class="ray" x1="140" y1="159" x2="140" y2="96" style="stroke:var(--ink);stroke-width:2"/>
+          <ellipse cx="140" cy="90" rx="11" ry="7" style="fill:var(--tint);stroke:var(--accent);stroke-width:1.6"/>
+          <g class="lbl">
+            <text x="60" y="58" text-anchor="middle">petal</text>
+            <text x="220" y="58" text-anchor="middle">petal</text>
+            <text x="140" y="196" text-anchor="middle">ovary</text>
+            <text x="103" y="192" text-anchor="middle" style="font-size:9.5px">sepal</text>
+            <text x="60" y="98" text-anchor="end">anther</text>
+            <text x="60" y="130" text-anchor="end">filament</text>
+            <text x="220" y="98" text-anchor="start">anther</text>
+            <text x="152" y="112" text-anchor="start">style</text>
+            <text x="152" y="86" text-anchor="start">stigma</text>
+          </g>
+          <line class="dash" x1="66" y1="94" x2="92" y2="94"/>
+          <line class="dash" x1="66" y1="126" x2="112" y2="140"/>
+          <line class="dash" x1="205" y1="94" x2="188" y2="94"/>
+          <line class="dash" x1="150" y1="110" x2="140" y2="115"/>
+          <line class="dash" x1="150" y1="86" x2="150" y2="88"/>
+          <line class="dash" x1="112" y1="188" x2="126" y2="180"/>
+        </svg>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts</h3>
+          <ul class="rules">
+            <li><b>Pollination</b><span>Transfer of pollen grains from the anther to the stigma. Self-pollination: within the same flower or plant. Cross-pollination: to a flower on a different plant of the same species.</span></li>
+            <li><b>Two main agents</b><span>Wind and insects carry pollen between flowers.</span></li>
+            <li><b>Wind-pollinated flowers</b><span>Small, dull, no scent or nectar; produce lots of light, powdery pollen; feathery stigma to catch it.</span></li>
+            <li><b>Insect-pollinated flowers</b><span>Large, brightly coloured, scented, with nectar; pollen is larger and sticky or spiky so it clings to insects.</span></li>
+            <li><b>Fertilisation</b><span>A pollen grain fuses with an ovule inside the ovary, forming a zygote that develops into a seed. The ovary grows into the fruit.</span></li>
+            <li><b>Why seeds are dispersed</b><span>To avoid overcrowding and competition for light, water and nutrients, and to colonise new areas.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> pollination and fertilisation are not the same event. Pollination just lands the pollen on the stigma; fertilisation is the pollen fusing with the ovule afterwards. A flower can be pollinated and still fail to be fertilised.</div>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <h3>Seed dispersal: match the seed to its clue</h3>
+      <div class="figs">
+        <figure>
+          <svg viewBox="0 0 100 90" role="img" aria-label="A light fluffy seed blown sideways by curved wind lines.">
+            <path class="dash" d="M8 30 Q22 26 34 30"/><path class="dash" d="M6 42 Q20 38 32 42"/>
+            <line class="ray" x1="55" y1="45" x2="55" y2="30" style="stroke-width:1.4"/>
+            <ellipse cx="55" cy="50" rx="6" ry="9" class="shape"/>
+            <g stroke="var(--accent)" stroke-width="1.2">
+              <line x1="55" y1="30" x2="46" y2="18"/><line x1="55" y1="30" x2="55" y2="14"/><line x1="55" y1="30" x2="64" y2="18"/>
+            </g>
+          </svg>
+          <figcaption><b>Wind</b>Light, with hairs or wings that catch a breeze</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 100 90" role="img" aria-label="A seed floating on wavy water.">
+            <path class="ray" d="M10 55 Q22 48 34 55 T58 55" style="stroke-width:1.6"/>
+            <path class="ray" d="M10 66 Q22 59 34 66 T58 66" style="stroke-width:1.6"/>
+            <ellipse cx="45" cy="46" rx="12" ry="7" class="shape"/>
+          </svg>
+          <figcaption><b>Water</b>Light and waterproof, so it can float</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 100 90" role="img" aria-label="A seed covered in small hooks that catch onto fur.">
+            <circle cx="50" cy="48" r="14" class="shape"/>
+            <g stroke="var(--accent)" stroke-width="1.6" fill="none">
+              <line x1="50" y1="34" x2="50" y2="26"/><line x1="61" y1="39" x2="68" y2="32"/><line x1="66" y1="50" x2="75" y2="50"/>
+              <line x1="61" y1="57" x2="68" y2="64"/><line x1="50" y1="62" x2="50" y2="70"/><line x1="39" y1="57" x2="32" y2="64"/>
+              <line x1="34" y1="50" x2="25" y2="50"/><line x1="39" y1="39" x2="32" y2="32"/>
+            </g>
+          </svg>
+          <figcaption><b>Animals</b>Hooks cling to fur, or juicy fruit gets eaten and the seed dropped elsewhere</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 100 90" role="img" aria-label="A seed pod splitting open and flinging seeds outward.">
+            <path class="shape" d="M30 50 Q45 30 60 50 Q45 45 30 50 Z"/>
+            <path class="shape" d="M30 50 Q45 70 60 50 Q45 55 30 50 Z"/>
+            <g><circle class="dot" cx="72" cy="34" r="2.4"/><circle class="dot" cx="80" cy="50" r="2.4"/><circle class="dot" cx="72" cy="65" r="2.4"/></g>
+            <g class="dash"><line x1="60" y1="46" x2="72" y2="34"/><line x1="62" y1="50" x2="80" y2="50"/><line x1="60" y1="54" x2="72" y2="65"/></g>
+          </svg>
+          <figcaption><b>Explosive</b>A dry pod splits and flings the seeds away</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ANIMAL/HUMAN REPRODUCTION -->
+  <section class="sec" id="animals" aria-labelledby="animals-h">
+    <div class="sec-head"><h2 id="animals-h">Animal and human reproduction</h2><span class="strand">Diversity</span></div>
+    <div class="panel">
+      <h3>Three kinds of life cycle</h3>
+      <div class="figs">
+        <figure>
+          <svg viewBox="0 0 120 120" role="img" aria-label="No metamorphosis: a three-stage cycle of egg or young, young, and adult, arranged in a loop, where the young already looks like the adult.">
+            <path class="arc" d="M 71 24 A 45 45 0 0 1 104 71" marker-end="url(#ar)"/>
+            <path class="arc" d="M 96 92 A 45 45 0 0 1 42 103" marker-end="url(#ar)"/>
+            <path class="arc" d="M 20 84 A 45 45 0 0 1 46 26" marker-end="url(#ar)"/>
+            <circle class="node" cx="60" cy="16" r="18"/><circle class="node" cx="107" cy="80" r="18"/><circle class="node" cx="13" cy="80" r="18"/>
+            <text class="lbl" x="60" y="19" text-anchor="middle" style="font-size:9.5px">egg</text>
+            <text class="lbl" x="107" y="83" text-anchor="middle" style="font-size:9.5px">young</text>
+            <text class="lbl" x="13" y="83" text-anchor="middle" style="font-size:9.5px">adult</text>
+          </svg>
+          <figcaption><b>No metamorphosis</b>e.g. human, dog, chicken</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 120 120" role="img" aria-label="Incomplete metamorphosis: a three-stage cycle of egg, nymph, and adult, where the nymph looks like a small wingless adult.">
+            <path class="arc" d="M 71 24 A 45 45 0 0 1 104 71"/>
+            <path class="arc" d="M 96 92 A 45 45 0 0 1 42 103"/>
+            <path class="arc" d="M 20 84 A 45 45 0 0 1 46 26"/>
+            <circle class="node" cx="60" cy="16" r="18"/><circle class="node" cx="107" cy="80" r="18"/><circle class="node" cx="13" cy="80" r="18"/>
+            <text class="lbl" x="60" y="19" text-anchor="middle" style="font-size:9.5px">egg</text>
+            <text class="lbl" x="107" y="83" text-anchor="middle" style="font-size:9.5px">nymph</text>
+            <text class="lbl" x="13" y="83" text-anchor="middle" style="font-size:9.5px">adult</text>
+          </svg>
+          <figcaption><b>Incomplete metamorphosis</b>e.g. cockroach, grasshopper</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 120 120" role="img" aria-label="Complete metamorphosis: a four-stage cycle of egg, larva, pupa, and adult, where each stage looks very different from the last.">
+            <path class="arc" d="M 75 18 A 48 48 0 0 1 102 68"/>
+            <path class="arc" d="M 99 87 A 48 48 0 0 1 55 105"/>
+            <path class="arc" d="M 34 100 A 48 48 0 0 1 15 60"/>
+            <path class="arc" d="M 20 42 A 48 48 0 0 1 55 15"/>
+            <circle class="node" cx="60" cy="12" r="15"/><circle class="node" cx="108" cy="60" r="15"/><circle class="node" cx="60" cy="108" r="15"/><circle class="node" cx="12" cy="60" r="15"/>
+            <text class="lbl" x="60" y="15" text-anchor="middle" style="font-size:9.5px">egg</text>
+            <text class="lbl" x="108" y="64" text-anchor="middle" style="font-size:9.5px">larva</text>
+            <text class="lbl" x="60" y="112" text-anchor="middle" style="font-size:9.5px">pupa</text>
+            <text class="lbl" x="12" y="64" text-anchor="middle" style="font-size:9.5px">adult</text>
+          </svg>
+          <figcaption><b>Complete metamorphosis</b>e.g. butterfly, mosquito, housefly</figcaption>
+        </figure>
+      </div>
+      <p class="fig-note" style="font-size:13px;color:var(--muted);margin-top:6px">Arrows run clockwise from stage to stage.</p>
+    </div>
+
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts</h3>
+        <ul class="rules">
+          <li><b>No metamorphosis</b><span>The young resembles the adult from birth or hatching and simply grows bigger. No larva or pupa stage.</span></li>
+          <li><b>Incomplete metamorphosis</b><span>Egg → nymph → adult. The nymph looks like a small, wingless version of the adult, and moults (sheds its skin) as it grows.</span></li>
+          <li><b>Complete metamorphosis</b><span>Egg → larva → pupa → adult. The larva looks nothing like the adult, and the pupa is a resting stage where the body is rebuilt.</span></li>
+          <li><b>Human reproduction</b><span>A sperm (from the testes) fuses with an egg (from the ovaries) in the oviduct — this is fertilisation, forming a zygote.</span></li>
+          <li><b>Growth before birth</b><span>The zygote implants in the uterus and develops into an embryo, then a fetus, fed through the placenta and umbilical cord for about 9 months before birth.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="warn"><b>Watch out:</b> a cockroach nymph already looks a lot like the adult, but it still moults and has no wings yet — that makes it incomplete metamorphosis, not "no metamorphosis". Only animals that look the same at every stage (like humans, dogs, chickens) count as no metamorphosis.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>A mosquito's life cycle goes egg → larva → pupa → adult. What type of life cycle is this?</p>
+          <p class="reveal">Complete metamorphosis — four very different-looking stages, including a pupa.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. MATTER & WATER CYCLE -->
+  <section class="sec" id="matter" aria-labelledby="matter-h">
+    <div class="sec-head"><h2 id="matter-h">States of matter and the water cycle</h2><span class="strand">Cycles</span></div>
+    <div class="panel">
+      <h3>Changing state</h3>
+      <svg viewBox="0 0 480 170" role="img" aria-label="Solid, liquid and gas particle diagrams. Melting turns solid to liquid and freezing turns liquid to solid; evaporation or boiling turns liquid to gas and condensation turns gas to liquid.">
+        <g>
+          <rect class="shape" x="14" y="40" width="110" height="100" rx="6"/>
+          <g class="dot">
+            <circle cx="34" cy="60" r="4"/><circle cx="59" cy="60" r="4"/><circle cx="84" cy="60" r="4"/><circle cx="109" cy="60" r="4"/>
+            <circle cx="34" cy="85" r="4"/><circle cx="59" cy="85" r="4"/><circle cx="84" cy="85" r="4"/><circle cx="109" cy="85" r="4"/>
+            <circle cx="34" cy="110" r="4"/><circle cx="59" cy="110" r="4"/><circle cx="84" cy="110" r="4"/><circle cx="109" cy="110" r="4"/>
+            <circle cx="34" cy="130" r="4"/><circle cx="59" cy="130" r="4"/><circle cx="84" cy="130" r="4"/><circle cx="109" cy="130" r="4"/>
+          </g>
+          <text class="lbl" x="69" y="158" text-anchor="middle">solid</text>
+        </g>
+        <g>
+          <rect class="shape" x="185" y="40" width="110" height="100" rx="6"/>
+          <g class="dot">
+            <circle cx="205" cy="58" r="4"/><circle cx="228" cy="66" r="4"/><circle cx="255" cy="56" r="4"/><circle cx="277" cy="68" r="4"/>
+            <circle cx="212" cy="88" r="4"/><circle cx="240" cy="92" r="4"/><circle cx="268" cy="86" r="4"/>
+            <circle cx="200" cy="115" r="4"/><circle cx="230" cy="120" r="4"/><circle cx="258" cy="112" r="4"/><circle cx="278" cy="128" r="4"/>
+          </g>
+          <text class="lbl" x="240" y="158" text-anchor="middle">liquid</text>
+        </g>
+        <g>
+          <rect class="shape" x="356" y="40" width="110" height="100" rx="6"/>
+          <g class="dot">
+            <circle cx="375" cy="55" r="4"/><circle cx="430" cy="65" r="4"/><circle cx="450" cy="120" r="4"/>
+            <circle cx="390" cy="100" r="4"/><circle cx="410" cy="130" r="4"/><circle cx="370" cy="125" r="4"/>
+          </g>
+          <text class="lbl" x="411" y="158" text-anchor="middle">gas</text>
+        </g>
+        <g class="mut" text-anchor="middle">
+          <path class="ray" d="M132 58 h44" marker-end="url(#ah)"/><text x="154" y="52">melting</text>
+          <path class="ray" d="M176 96 h-44" marker-end="url(#ah)"/><text x="154" y="112">freezing</text>
+          <path class="ray" d="M303 58 h44" marker-end="url(#ah)"/><text x="325" y="48" style="font-size:8px">evaporation / boiling</text>
+          <path class="ray" d="M347 96 h-44" marker-end="url(#ah)"/><text x="325" y="112">condensation</text>
+        </g>
+        <defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" style="fill:var(--ink)"/></marker></defs>
+      </svg>
+    </div>
+
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts</h3>
+        <ul class="rules">
+          <li><b>Solid</b><span>Fixed shape and volume. Particles are tightly packed and only vibrate in place.</span></li>
+          <li><b>Liquid</b><span>Fixed volume but takes the shape of its container. Particles are close but slide past each other.</span></li>
+          <li><b>Gas</b><span>No fixed shape or volume; spreads to fill its container. Particles are far apart and move quickly.</span></li>
+          <li><b>Evaporation vs boiling</b><span>Evaporation happens at the surface, at any temperature. Boiling happens throughout the liquid, only at its boiling point.</span></li>
+          <li><b>Water cycle stages</b><span>Evaporation → condensation → precipitation → collection, then it repeats.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>The water cycle</h3>
+          <svg viewBox="0 0 300 190" role="img" aria-label="The sun heats the sea, water evaporates and rises, condenses into a cloud, falls as rain, and collects back in the sea and rivers.">
+            <circle cx="34" cy="30" r="16" style="fill:var(--anther)"/>
+            <g stroke="var(--anther)" stroke-width="2"><line x1="34" y1="4" x2="34" y2="-4"/><line x1="12" y1="12" x2="6" y2="6"/><line x1="56" y1="12" x2="62" y2="6"/><line x1="4" y1="30" x2="-4" y2="30"/></g>
+            <rect x="0" y="150" width="300" height="30" style="fill:var(--vein);opacity:.45"/>
+            <path d="M0,150 Q40,138 90,150 T190,150 T300,148 V180 H0 Z" style="fill:var(--vein);opacity:.7"/>
+            <path d="M170,150 Q190,120 230,120 Q270,120 300,140 V150 H170 Z" style="fill:var(--sepal);opacity:.8"/>
+            <path class="ray" d="M70 148 Q65 100 55 55" style="stroke:var(--accent)" marker-end="url(#ah)"/>
+            <text class="mut" x="30" y="95" text-anchor="middle">evaporation</text>
+            <g>
+              <circle cx="150" cy="45" r="18" style="fill:var(--surface);stroke:var(--muted)"/>
+              <circle cx="172" cy="42" r="22" style="fill:var(--surface);stroke:var(--muted)"/>
+              <circle cx="128" cy="42" r="16" style="fill:var(--surface);stroke:var(--muted)"/>
+            </g>
+            <text class="mut" x="150" y="20" text-anchor="middle">condensation</text>
+            <g stroke="var(--vein)" stroke-width="2">
+              <line x1="130" y1="66" x2="122" y2="86"/><line x1="150" y1="68" x2="144" y2="90"/><line x1="170" y1="66" x2="166" y2="86"/>
+            </g>
+            <text class="mut" x="148" y="105" text-anchor="middle">precipitation</text>
+            <path class="ray" d="M180 152 Q230 160 260 150" style="stroke:var(--accent)" marker-end="url(#ah)"/>
+            <text class="mut" x="230" y="172" text-anchor="middle">collection</text>
+          </svg>
+        </div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Puddles shrink and disappear on a hot, sunny day. Which change of state is this, and why?</p>
+          <p class="reveal">Evaporation — the sun heats the surface of the water and turns it into water vapour (a gas).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. RESPIRATORY -->
+  <section class="sec" id="lungs" aria-labelledby="lungs-h">
+    <div class="sec-head"><h2 id="lungs-h">The respiratory system</h2><span class="strand">Systems</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Path of air</h3>
+        <svg viewBox="0 0 235 230" role="img" aria-label="Air travels from the nose down the windpipe, splitting into two bronchi that lead to the lungs, ending in clusters of alveoli. The diaphragm below moves down on inhaling and up on exhaling.">
+          <ellipse cx="100" cy="26" rx="26" ry="22" class="plain"/>
+          <path d="M92 30 q8 8 16 0" class="ray" style="stroke-width:1.4"/>
+          <line class="ray" x1="100" y1="46" x2="100" y2="90" style="stroke-width:5;stroke:var(--tint)"/>
+          <line class="ray" x1="100" y1="46" x2="100" y2="90" style="stroke-width:2"/>
+          <path class="ray" d="M100 90 L66 122" style="stroke-width:3"/>
+          <path class="ray" d="M100 90 L134 122" style="stroke-width:3"/>
+          <path class="shape" d="M66 122 Q40 140 46 175 Q52 205 78 200 Q70 160 66 122 Z"/>
+          <path class="shape" d="M134 122 Q160 140 154 175 Q148 205 122 200 Q130 160 134 122 Z"/>
+          <g class="dot" opacity=".8">
+            <circle cx="58" cy="168" r="3"/><circle cx="64" cy="180" r="3"/><circle cx="70" cy="166" r="3"/><circle cx="72" cy="188" r="3"/>
+            <circle cx="142" cy="168" r="3"/><circle cx="136" cy="180" r="3"/><circle cx="130" cy="166" r="3"/><circle cx="128" cy="188" r="3"/>
+          </g>
+          <path class="dash" d="M40 210 Q100 226 160 210" style="stroke-width:2"/>
+          <path class="ray" d="M96 214 v10" marker-end="url(#ah)" style="stroke:var(--accent)"/>
+          <text class="lbl" x="140" y="18" text-anchor="start">nose</text>
+          <text class="lbl" x="112" y="70" text-anchor="start">windpipe</text>
+          <text class="lbl" x="155" y="115" text-anchor="start">bronchus</text>
+          <text class="lbl" x="150" y="150" text-anchor="start">lung</text>
+          <text class="mut" x="100" y="196" text-anchor="middle">alveoli</text>
+          <text class="mut" x="96" y="227" text-anchor="middle">diaphragm (inhaling)</text>
+        </svg>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts</h3>
+          <ul class="rules">
+            <li><b>Path of air in</b><span>Nose → windpipe (trachea) → bronchus → bronchioles → alveoli (tiny air sacs) in the lungs.</span></li>
+            <li><b>Job of the nose</b><span>Tiny hairs and mucus filter out dust and germs, and warm and moisten the air.</span></li>
+            <li><b>Gas exchange</b><span>In the alveoli, oxygen passes into the blood and carbon dioxide passes out, across thin walls surrounded by capillaries.</span></li>
+            <li><b>Breathing in</b><span>The diaphragm contracts and moves down; the chest cavity gets bigger; air is drawn into the lungs.</span></li>
+            <li><b>Breathing out</b><span>The diaphragm relaxes and moves up; the chest cavity gets smaller; air is pushed out.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> "breathing" (the physical movement of air in and out) is not the same as "respiration" (the chemical process inside cells that releases energy from food using oxygen). Use the term the question asks for.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Where exactly does gas exchange take place, and why are its walls so thin?</p>
+          <p class="reveal">In the alveoli. Thin walls let oxygen and carbon dioxide pass through quickly and easily.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CIRCULATORY -->
+  <section class="sec" id="heart" aria-labelledby="heart-h">
+    <div class="sec-head"><h2 id="heart-h">The circulatory system</h2><span class="strand">Systems</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Heart and blood vessels</h3>
+        <svg viewBox="0 0 220 210" role="img" aria-label="A heart with four chambers, an artery carrying blood away from the heart, a vein carrying blood back, and a bed of capillaries near a body cell.">
+          <path class="shape" d="M110 48 C70 8 20 38 26 82 C30 118 80 150 110 180 C140 150 190 118 194 82 C200 38 150 8 110 48 Z"/>
+          <line class="dash" x1="110" y1="30" x2="110" y2="165" style="stroke:var(--ink)"/>
+          <line class="dash" x1="45" y1="95" x2="175" y2="95" style="stroke:var(--ink)"/>
+          <text class="mut" x="70" y="65" text-anchor="middle">atrium</text>
+          <text class="mut" x="150" y="65" text-anchor="middle">atrium</text>
+          <text class="mut" x="70" y="130" text-anchor="middle">ventricle</text>
+          <text class="mut" x="150" y="130" text-anchor="middle">ventricle</text>
+          <path class="ray" d="M150 55 q30 -25 40 -45" style="stroke:var(--artery);stroke-width:4" marker-end="url(#ah)"/>
+          <text class="lbl" x="196" y="8" text-anchor="middle" style="fill:var(--artery)">artery</text>
+          <path class="ray" d="M60 40 q-30 5 -42 30" style="stroke:var(--vein);stroke-width:3" marker-end="url(#ah)"/>
+          <g stroke="var(--vein)" stroke-width="2"><line x1="35" y1="55" x2="42" y2="48"/><line x1="30" y1="62" x2="37" y2="55"/></g>
+          <text class="lbl" x="2" y="82" text-anchor="start" style="fill:var(--vein)">vein</text>
+          <path class="ray" d="M188 90 q10 40 -18 65" style="stroke:var(--artery);stroke-width:4"/>
+          <g stroke-linecap="round">
+            <path class="dash" d="M172 158 h30" style="stroke:var(--artery)"/>
+            <path class="dash" d="M172 165 h30" style="stroke:var(--artery)"/>
+            <path class="dash" d="M172 172 h30" style="stroke:var(--vein)"/>
+            <path class="dash" d="M172 179 h30" style="stroke:var(--vein)"/>
+          </g>
+          <text class="mut" x="187" y="150" text-anchor="middle">capillaries</text>
+          <rect x="205" y="160" width="14" height="14" rx="3" class="plain"/>
+          <text class="mut" x="212" y="192" text-anchor="middle">cell</text>
+          <path class="ray" d="M35 90 q5 45 30 70" style="stroke:var(--vein);stroke-width:3" marker-end="url(#ah)"/>
+        </svg>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts</h3>
+          <ul class="rules">
+            <li><b>Job of the heart</b><span>Pumps blood around the body through blood vessels, carrying oxygen, nutrients, carbon dioxide and waste.</span></li>
+            <li><b>Four chambers</b><span>Two atria (upper) receive blood; two ventricles (lower) pump blood out.</span></li>
+            <li><b>Arteries</b><span>Carry blood away from the heart. Thick, elastic walls to handle high pressure.</span></li>
+            <li><b>Veins</b><span>Carry blood back to the heart. Thinner walls, with valves to stop blood flowing backward.</span></li>
+            <li><b>Capillaries</b><span>Tiny vessels linking arteries to veins. Thin walls let oxygen, nutrients, carbon dioxide and waste pass through to and from cells.</span></li>
+            <li><b>Blood</b><span>Red blood cells carry oxygen; white blood cells fight infection; platelets help blood clot; plasma carries it all.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> "artery = away from the heart" and "vein = towards the heart" is always true by direction — but not every artery carries oxygen-rich blood. The artery to the lungs carries oxygen-poor blood, and the vein from the lungs carries oxygen-rich blood.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Which blood vessel has valves, and what are the valves for?</p>
+          <p class="reveal">Veins. The valves stop blood from flowing backward as it travels toward the heart.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. CIRCUITS -->
+  <section class="sec" id="circuits" aria-labelledby="circuits-h">
+    <div class="sec-head"><h2 id="circuits-h">Electrical circuits</h2><span class="strand">Systems</span></div>
+    <div class="panel">
+      <h3>Closed circuit vs open circuit</h3>
+      <div class="figs" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
+        <figure>
+          <svg viewBox="0 0 200 120" role="img" aria-label="A closed circuit: battery, switch and bulb connected in an unbroken loop, with the bulb lit.">
+            <rect x="20" y="20" width="160" height="80" rx="8" class="dash" style="stroke:var(--line)"/>
+            <line class="ray" x1="20" y1="20" x2="20" y2="100" style="stroke-width:3"/>
+            <line class="ray" x1="20" y1="100" x2="70" y2="100" style="stroke-width:3"/>
+            <line class="ray" x1="130" y1="100" x2="180" y2="100" style="stroke-width:3"/>
+            <line class="ray" x1="180" y1="100" x2="180" y2="20" style="stroke-width:3"/>
+            <line class="ray" x1="180" y1="20" x2="120" y2="20" style="stroke-width:3"/>
+            <line class="ray" x1="80" y1="20" x2="20" y2="20" style="stroke-width:3"/>
+            <line x1="14" y1="46" x2="26" y2="46" style="stroke:var(--ink);stroke-width:4"/>
+            <line x1="16" y1="60" x2="24" y2="60" style="stroke:var(--ink);stroke-width:2"/>
+            <circle cx="100" cy="20" r="14" style="fill:var(--anther);stroke:var(--ink);stroke-width:2"/>
+            <line x1="90" y1="10" x2="110" y2="30" style="stroke:var(--ink);stroke-width:1.4"/>
+            <line x1="110" y1="10" x2="90" y2="30" style="stroke:var(--ink);stroke-width:1.4"/>
+            <g stroke="var(--anther)" stroke-width="1.4"><line x1="100" y1="2" x2="100" y2="-4"/><line x1="86" y1="6" x2="80" y2="0"/><line x1="114" y1="6" x2="120" y2="0"/></g>
+            <circle cx="100" cy="100" r="3" style="fill:var(--ink)"/><circle cx="130" cy="100" r="3" style="fill:var(--ink)"/>
+            <line x1="100" y1="100" x2="130" y2="100" style="stroke:var(--ink);stroke-width:3"/>
+          </svg>
+          <figcaption><b>Closed — bulb lights up</b>An unbroken loop for current to flow around</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 200 120" role="img" aria-label="An open circuit: the switch is lifted, breaking the loop, and the bulb stays off.">
+            <rect x="20" y="20" width="160" height="80" rx="8" class="dash" style="stroke:var(--line)"/>
+            <line class="ray" x1="20" y1="20" x2="20" y2="100" style="stroke-width:3"/>
+            <line class="ray" x1="20" y1="100" x2="70" y2="100" style="stroke-width:3"/>
+            <line class="ray" x1="130" y1="100" x2="180" y2="100" style="stroke-width:3"/>
+            <line class="ray" x1="180" y1="100" x2="180" y2="20" style="stroke-width:3"/>
+            <line class="ray" x1="180" y1="20" x2="120" y2="20" style="stroke-width:3"/>
+            <line class="ray" x1="80" y1="20" x2="20" y2="20" style="stroke-width:3"/>
+            <line x1="14" y1="46" x2="26" y2="46" style="stroke:var(--ink);stroke-width:4"/>
+            <line x1="16" y1="60" x2="24" y2="60" style="stroke:var(--ink);stroke-width:2"/>
+            <circle cx="100" cy="20" r="14" style="fill:var(--surface);stroke:var(--muted);stroke-width:2"/>
+            <line x1="90" y1="10" x2="110" y2="30" style="stroke:var(--muted);stroke-width:1.4"/>
+            <line x1="110" y1="10" x2="90" y2="30" style="stroke:var(--muted);stroke-width:1.4"/>
+            <circle cx="100" cy="100" r="3" style="fill:var(--ink)"/><circle cx="130" cy="100" r="3" style="fill:var(--ink)"/>
+            <line x1="100" y1="100" x2="120" y2="86" style="stroke:var(--ink);stroke-width:3"/>
+          </svg>
+          <figcaption><b>Open — bulb stays off</b>The gap at the switch breaks the loop</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts</h3>
+        <ul class="rules">
+          <li><b>What a circuit needs</b><span>A power source (battery), conductors (wires), and a load (bulb, buzzer) all forming one complete, unbroken loop.</span></li>
+          <li><b>Switch</b><span>Closed switch completes the circuit, so current flows and the bulb lights. Open switch breaks it, so the bulb stays off.</span></li>
+          <li><b>Conductors</b><span>Let electric current pass through easily, e.g. copper, iron and other metals.</span></li>
+          <li><b>Insulators</b><span>Block electric current, e.g. plastic, rubber, wood, glass. Used to cover wires safely.</span></li>
+          <li><b>Series circuit</b><span>All parts share a single loop. If one bulb blows or a wire breaks, the whole circuit stops — there's no other path for current.</span></li>
+          <li><b>More bulbs, dimmer light</b><span>Bulbs added in series to the same battery share the same current, so each one glows more dimly.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="warn"><b>Watch out:</b> the exam-friendly rule is simple — a circuit must be one complete, unbroken loop. A single gap anywhere (an open switch, a missing wire, a blown bulb in series) stops current everywhere in that loop, not just at the gap.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Three bulbs are connected in series. One bulb blows. What happens to the other two, and why?</p>
+          <p class="reveal">They go off too. In a series circuit there is only one path, so a break anywhere stops the current everywhere.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- HABITS -->
+  <section class="checklist" id="habits" aria-labelledby="habits-h">
+    <h2 id="habits-h" style="font-size:clamp(1.5rem,4.2vw,2rem)">Exam habits for science</h2>
+    <ul>
+      <li><b>Use the exact term</b>"Respire" is not "breathe"; "melt" is not "boil". Precise words earn marks.</li>
+      <li><b>Label diagrams neatly</b>Use a ruler for straight lines, and write labels clearly.</li>
+      <li><b>Give a reason</b>Answer "because…" or "so that…", not just what happens.</li>
+      <li><b>Compare both ways</b>When asked to compare, give a similarity and a difference.</li>
+      <li><b>Watch the direction word</b>"Cools" points to condensation or freezing; "heated" points to evaporation, boiling or melting.</li>
+      <li><b>Trace the whole loop</b>For circuits, check every part of the path is actually connected.</li>
+    </ul>
+  </section>
+
+  <footer>Content follows the general MOE Primary 5 Science themes (Diversity, Cycles, Systems). Check your son's own textbook for the exact chapter order and any school-specific detail.</footer>
+</div>
+
+</body>
+</html>

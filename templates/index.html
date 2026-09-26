@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>PSLE Cheat Sheets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Lexend:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #F1F0F7;
+    --surface: #FFFFFF;
+    --ink: #201E33;
+    --muted: #59567A;
+    --line: #D6D3E8;
+    --accent: #5B4FE0;
+    --on-accent: #FFFFFF;
+    --shadow: 0 1px 0 rgba(32,30,51,.06), 0 10px 28px -14px rgba(32,30,51,.28);
+    --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Lexend", "Segoe UI", system-ui, sans-serif;
+    --math: #0B7C86; --science: #1E8A5A;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #17151F; --surface: #211E2C; --ink: #EDEBF7; --muted: #ABA7C9;
+      --line: #37324A; --accent: #9C93F5; --on-accent: #14122099;
+      --shadow: 0 1px 0 rgba(0,0,0,.3), 0 10px 28px -14px rgba(0,0,0,.6);
+      --math: #4FC3CE; --science: #55C88C;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #17151F; --surface: #211E2C; --ink: #EDEBF7; --muted: #ABA7C9;
+    --line: #37324A; --accent: #9C93F5; --on-accent: #14122099;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 10px 28px -14px rgba(0,0,0,.6);
+    --math: #4FC3CE; --science: #55C88C;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.55;
+    padding-inline: 16px;
+    min-height: 100dvh; display: flex; align-items: center;
+  }
+  .wrap { max-width: 760px; margin-inline: auto; padding-block: 56px; width: 100%; }
+  h1, h2 { font-family: var(--display); text-wrap: balance; line-height: 1.12; margin: 0; }
+  p { margin: 0; }
+  .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(2.1rem, 6.5vw, 3rem); font-weight: 700; letter-spacing: -.02em; margin-top: 6px; }
+  .lede { max-width: 56ch; color: var(--muted); margin-top: 12px; font-size: 1.05rem; }
+
+  .cards { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 36px; }
+  @media (min-width: 620px) { .cards { grid-template-columns: 1fr 1fr; } }
+  .card {
+    display: block; text-decoration: none; color: inherit;
+    background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
+    padding: 24px; box-shadow: var(--shadow);
+    transition: transform .15s ease, border-color .15s ease;
+  }
+  .card:hover { border-color: var(--card-accent); transform: translateY(-2px); }
+  .card:focus-visible { outline: 3px solid var(--card-accent); outline-offset: 2px; }
+  .card .icon {
+    width: 42px; height: 42px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    background: color-mix(in srgb, var(--card-accent) 16%, var(--surface));
+    color: var(--card-accent); font-family: var(--display); font-weight: 700; font-size: 18px;
+  }
+  .card h2 { font-size: 1.3rem; margin-top: 16px; }
+  .card .subject { color: var(--card-accent); }
+  .card p.desc { color: var(--muted); font-size: 14.5px; margin-top: 8px; }
+  .card .go { margin-top: 16px; font-size: 14px; font-weight: 600; color: var(--card-accent); display: flex; align-items: center; gap: 4px; }
+  .card.math { --card-accent: var(--math); }
+  .card.science { --card-accent: var(--science); }
+
+  footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Primary 6 leaving exam prep</p>
+  <h1>PSLE Cheat Sheets</h1>
+  <p class="lede">Quick-reference pages for exam topics: formulas and worked examples for Maths, key facts and diagrams for Science.</p>
+
+  <div class="cards">
+    <a class="card math" href="/math">
+      <div class="icon">M</div>
+      <h2><span class="subject">Math</span> · Map Maths</h2>
+      <p class="desc">Map scale, journeys and speed, weather graphs, land and water, compass turns.</p>
+      <div class="go">Open the cheat sheet →</div>
+    </a>
+    <a class="card science" href="/science">
+      <div class="icon">S</div>
+      <h2><span class="subject">Science</span> · Science Sense</h2>
+      <p class="desc">Plant &amp; animal reproduction, the water cycle, body systems, electrical circuits.</p>
+      <div class="go">Open the cheat sheet →</div>
+    </a>
+  </div>
+
+  <footer>Built for one family's PSLE revision. Not affiliated with MOE or SEAB.</footer>
+</div>
+</body>
+</html>
