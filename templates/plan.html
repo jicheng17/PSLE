@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Science Review Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Lexend:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #FBF1EA;
+    --surface: #FFFFFF;
+    --ink: #33261D;
+    --muted: #7A6355;
+    --line: #EAD9CB;
+    --accent: #D9622B;
+    --on-accent: #FFFFFF;
+    --tint: #FCE3D3;
+    --done-bg: #E9F3E9;
+    --done-ink: #2C6B3F;
+    --done-line: #BFDCC4;
+    --shadow: 0 1px 0 rgba(51,38,29,.06), 0 8px 24px -12px rgba(51,38,29,.22);
+    --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Lexend", "Segoe UI", system-ui, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1F1611; --surface: #2B1F18; --ink: #F5E9E0; --muted: #C9AB99;
+      --line: #4A362A; --accent: #F0824A; --on-accent: #1F1611; --tint: #3A2418;
+      --done-bg: #1D3323; --done-ink: #8FD19D; --done-line: #2E5138;
+      --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1F1611; --surface: #2B1F18; --ink: #F5E9E0; --muted: #C9AB99;
+    --line: #4A362A; --accent: #F0824A; --on-accent: #1F1611; --tint: #3A2418;
+    --done-bg: #1D3323; --done-ink: #8FD19D; --done-line: #2E5138;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+  }
+
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.55; padding-inline: 16px; }
+  .wrap { max-width: 900px; margin-inline: auto; padding-block: 28px 56px; }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.12; margin: 0; }
+  p { margin: 0; }
+  a { color: var(--accent); }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(2rem, 6.5vw, 3rem); font-weight: 700; letter-spacing: -.02em; margin-top: 6px; }
+  .lede { max-width: 62ch; color: var(--muted); margin-top: 12px; font-size: 1.05rem; }
+
+  .hero { display: flex; flex-wrap: wrap; gap: 22px; align-items: center; justify-content: space-between; margin-top: 26px; }
+  .countdown { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 22px; box-shadow: var(--shadow); text-align: center; min-width: 150px; }
+  .countdown .num { font-family: var(--display); font-size: 2.6rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .countdown .lbl { font-size: 12.5px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: .08em; }
+  .progress-pill { background: var(--tint); border-radius: 999px; padding: 8px 16px; font-size: 14px; font-weight: 500; color: var(--ink); }
+  .progress-pill b { color: var(--accent); }
+
+  .nav { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--bg); padding-block: 12px; margin-top: 22px; border-bottom: 1px solid var(--line); display: flex; gap: 8px; flex-wrap: wrap; }
+  .nav a { text-decoration: none; color: var(--ink); font-size: 14px; font-weight: 500; padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface); }
+  .nav a:hover { border-color: var(--accent); color: var(--accent); }
+
+  .sec { margin-top: 40px; scroll-margin-top: 80px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 6px; }
+  .sec-head h2 { font-size: clamp(1.4rem, 4vw, 1.9rem); font-weight: 700; letter-spacing: -.01em; }
+  .sec-when { font-size: 13px; color: var(--muted); font-weight: 500; }
+  .sec-blurb { color: var(--muted); font-size: 14.5px; margin-top: 6px; max-width: 68ch; }
+
+  .days { list-style: none; margin: 18px 0 0; padding: 0; display: grid; gap: 10px; }
+  .day { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; box-shadow: var(--shadow); display: flex; align-items: flex-start; gap: 12px; }
+  .day.done { background: var(--done-bg); border-color: var(--done-line); }
+  .day input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; cursor: pointer; }
+  .day .info { flex: 1; min-width: 0; }
+  .day .date { font-size: 12.5px; color: var(--muted); font-weight: 500; }
+  .day.done .date { color: var(--done-ink); }
+  .day .task { font-size: 15px; font-weight: 500; margin-top: 2px; }
+  .day.done .task { text-decoration: line-through; color: var(--done-ink); text-decoration-color: var(--done-line); }
+  .day .task a { font-weight: 600; text-decoration: none; }
+  .day .task a:hover { text-decoration: underline; }
+  .day .note { font-size: 13.5px; color: var(--muted); margin-top: 3px; }
+
+  .examday { margin-top: 40px; background: var(--tint); border: 1px solid var(--line); border-radius: 16px; padding: 22px; }
+  .examday h2 { font-size: 1.4rem; }
+  .examday ul { margin: 12px 0 0; padding-left: 20px; }
+  .examday li { margin-top: 6px; font-size: 14.5px; }
+
+  .checklist { margin-top: 40px; }
+  .checklist ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .checklist li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 14.5px; }
+  .checklist li b { display: block; font-family: var(--display); font-size: 1rem; margin-bottom: 2px; }
+
+  footer { margin-top: 36px; font-size: 13px; color: var(--muted); }
+
+  .sitebar { display:flex; gap:14px; align-items:center; padding:12px 16px; max-width:1040px; margin:0 auto; font-size:13px; color:var(--muted); }
+  .sitebar a { color:var(--muted); text-decoration:none; }
+  .sitebar a:hover { color:var(--accent); }
+  .sitebar a.current { color:var(--ink); font-weight:600; }
+  .sitebar .sep { opacity:.4; }
+
+  @media print {
+    body { background: #fff; padding-inline: 0; }
+    .nav, .sitebar { display: none; }
+    .day input[type="checkbox"] { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="sitebar"><a href="/">All subjects</a><span class="sep">/</span><a href="/math">Math</a><span class="sep">/</span><a href="/science">Science</a><span class="sep">/</span><a href="/plan" class="current">Review plan</a></div>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Primary 5 Science &middot; End-of-year exam</p>
+    <h1>Science Review Plan</h1>
+    <p class="lede">An 18-day countdown to the exam on <b>Thursday, 15 October</b>, built around the six topics in <a href="/science">Science Sense</a>. Three phases: rebuild the foundations, practise under pressure, then taper off before the big day.</p>
+  </header>
+
+  <div class="hero">
+    <div class="countdown">
+      <div class="num" id="daysLeft">–</div>
+      <div class="lbl">days to go</div>
+    </div>
+    <div class="progress-pill">Progress: <b id="doneCount">0</b> / <span id="totalCount">18</span> days checked off</div>
+  </div>
+
+  <nav class="nav" aria-label="Plan sections">
+    <a href="#phase1">Phase 1 · Foundations</a>
+    <a href="#phase2">Phase 2 · Practice</a>
+    <a href="#phase3">Phase 3 · Final countdown</a>
+    <a href="#examday">Exam day</a>
+    <a href="#kit">Exam-day kit</a>
+  </nav>
+
+  <!-- PHASE 1 -->
+  <section class="sec" id="phase1" aria-labelledby="phase1-h">
+    <div class="sec-head"><h2 id="phase1-h">Phase 1 &middot; Rebuild the foundations</h2><span class="sec-when">Mon 28 Sep – Sun 4 Oct</span></div>
+    <p class="sec-blurb">One topic a day. For each: reread the topic on Science Sense, redo every "Your turn" question without peeking, then check your answers against the reveal.</p>
+    <ul class="days" id="days-phase1">
+      <li class="day" data-id="d1"><input type="checkbox" id="c-d1"><label for="c-d1" class="info"><div class="date">Mon 28 Sep</div><div class="task"><a href="/science#plants">Plant reproduction</a></div><div class="note">Parts of a flower, pollination, seed dispersal.</div></label></li>
+      <li class="day" data-id="d2"><input type="checkbox" id="c-d2"><label for="c-d2" class="info"><div class="date">Tue 29 Sep</div><div class="task"><a href="/science#animals">Animal &amp; human life cycles</a></div><div class="note">No metamorphosis, incomplete and complete metamorphosis.</div></label></li>
+      <li class="day" data-id="d3"><input type="checkbox" id="c-d3"><label for="c-d3" class="info"><div class="date">Wed 30 Sep</div><div class="task"><a href="/science#matter">Matter &amp; the water cycle</a></div><div class="note">States of matter, evaporation, condensation, the water cycle loop.</div></label></li>
+      <li class="day" data-id="d4"><input type="checkbox" id="c-d4"><label for="c-d4" class="info"><div class="date">Thu 1 Oct</div><div class="task"><a href="/science#lungs">Respiratory system</a></div><div class="note">Path of air, gas exchange, why we breathe faster when active.</div></label></li>
+      <li class="day" data-id="d5"><input type="checkbox" id="c-d5"><label for="c-d5" class="info"><div class="date">Fri 2 Oct</div><div class="task"><a href="/science#heart">Circulatory system</a></div><div class="note">Heart chambers, arteries vs veins, the double loop.</div></label></li>
+      <li class="day" data-id="d6"><input type="checkbox" id="c-d6"><label for="c-d6" class="info"><div class="date">Sat 3 Oct</div><div class="task"><a href="/science#circuits">Electrical circuits</a></div><div class="note">Closed vs open circuits, series circuits, conductors and insulators.</div></label></li>
+      <li class="day" data-id="d7"><input type="checkbox" id="c-d7"><label for="c-d7" class="info"><div class="date">Sun 4 Oct</div><div class="task">Review day</div><div class="note">Flip back through all six topics. Redo any question from this week you weren't fully sure of.</div></label></li>
+    </ul>
+  </section>
+
+  <!-- PHASE 2 -->
+  <section class="sec" id="phase2" aria-labelledby="phase2-h">
+    <div class="sec-head"><h2 id="phase2-h">Phase 2 &middot; Strengthen and practise</h2><span class="sec-when">Mon 5 Oct – Sun 11 Oct</span></div>
+    <p class="sec-blurb">Mixed practice by cluster, no more page-flipping while answering &mdash; check answers only after finishing each set. Midweek: one timed paper, then a full mistake review.</p>
+    <ul class="days" id="days-phase2">
+      <li class="day" data-id="d8"><input type="checkbox" id="c-d8"><label for="c-d8" class="info"><div class="date">Mon 5 Oct</div><div class="task">Practice &middot; <a href="/science#plants">Plants</a> &amp; <a href="/science#animals">animals</a></div><div class="note">Mixed questions on reproduction and life cycles, from memory.</div></label></li>
+      <li class="day" data-id="d9"><input type="checkbox" id="c-d9"><label for="c-d9" class="info"><div class="date">Tue 6 Oct</div><div class="task">Practice &middot; <a href="/science#matter">Matter &amp; water cycle</a></div><div class="note">States of matter and water-cycle diagram, labelled from memory.</div></label></li>
+      <li class="day" data-id="d10"><input type="checkbox" id="c-d10"><label for="c-d10" class="info"><div class="date">Wed 7 Oct</div><div class="task">Practice &middot; <a href="/science#lungs">Lungs</a> &amp; <a href="/science#heart">heart</a></div><div class="note">Body systems: compare how air and blood each travel their circuit.</div></label></li>
+      <li class="day" data-id="d11"><input type="checkbox" id="c-d11"><label for="c-d11" class="info"><div class="date">Thu 8 Oct</div><div class="task">Practice &middot; <a href="/science#circuits">Electrical circuits</a></div><div class="note">Draw and troubleshoot simple series circuits.</div></label></li>
+      <li class="day" data-id="d12"><input type="checkbox" id="c-d12"><label for="c-d12" class="info"><div class="date">Fri 9 Oct</div><div class="task">Timed mini paper</div><div class="note">30&ndash;40 minutes, mixed topics, exam conditions &mdash; no notes.</div></label></li>
+      <li class="day" data-id="d13"><input type="checkbox" id="c-d13"><label for="c-d13" class="info"><div class="date">Sat 10 Oct</div><div class="task">Mistake review</div><div class="note">Redo every question you got wrong on Friday's paper until it's clear why.</div></label></li>
+      <li class="day" data-id="d14"><input type="checkbox" id="c-d14"><label for="c-d14" class="info"><div class="date">Sun 11 Oct</div><div class="task">Rest / light skim</div><div class="note">A short 15-minute flip through all six topics. No new practice today.</div></label></li>
+    </ul>
+  </section>
+
+  <!-- PHASE 3 -->
+  <section class="sec" id="phase3" aria-labelledby="phase3-h">
+    <div class="sec-head"><h2 id="phase3-h">Phase 3 &middot; Final countdown</h2><span class="sec-when">Mon 12 Oct – Wed 14 Oct</span></div>
+    <p class="sec-blurb">Intensity tapers down as the exam nears &mdash; one more full paper, then lighter and lighter days.</p>
+    <ul class="days" id="days-phase3">
+      <li class="day" data-id="d15"><input type="checkbox" id="c-d15"><label for="c-d15" class="info"><div class="date">Mon 12 Oct</div><div class="task">Full timed practice paper</div><div class="note">A complete paper under exam conditions.</div></label></li>
+      <li class="day" data-id="d16"><input type="checkbox" id="c-d16"><label for="c-d16" class="info"><div class="date">Tue 13 Oct</div><div class="task">Mistake review + weak-topic touch-up</div><div class="note">Fix Monday's mistakes, then re-read whichever topic has tripped you up most.</div></label></li>
+      <li class="day" data-id="d17"><input type="checkbox" id="c-d17"><label for="c-d17" class="info"><div class="date">Wed 14 Oct</div><div class="task">Light final pass</div><div class="note">Skim all six topics once. Pack the exam kit tonight. Early night &mdash; no late cramming.</div></label></li>
+    </ul>
+  </section>
+
+  <!-- EXAM DAY -->
+  <div class="examday" id="examday" aria-labelledby="examday-h">
+    <p class="eyebrow">Thursday, 15 October</p>
+    <h2 id="examday-h">Exam day</h2>
+    <ul>
+      <li>No new content this morning &mdash; a fresh brain beats a crammed one.</li>
+      <li>A quick 10-minute skim: just the labelled diagrams (flower, life cycles, water cycle, lungs, heart, circuits).</li>
+      <li>Eat a proper breakfast and leave early enough to arrive relaxed.</li>
+    </ul>
+  </div>
+
+  <!-- KIT CHECKLIST -->
+  <section class="checklist" id="kit" aria-labelledby="kit-h">
+    <h2 id="kit-h">Exam-day kit</h2>
+    <ul>
+      <li><b>Stationery</b>2B pencils, eraser, ruler, sharpener &mdash; spares of each.</li>
+      <li><b>ID</b>Whatever your school requires you to bring.</li>
+      <li><b>Water &amp; a light snack</b>For the break, if allowed.</li>
+      <li><b>Watch</b>To pace yourself without relying on a wall clock.</li>
+    </ul>
+  </section>
+
+  <footer>Built for one family's PSLE revision. Not affiliated with MOE or SEAB. Tick off each day as you go &mdash; progress is saved on this device.</footer>
+</div>
+
+<script>
+(function () {
+  var EXAM = new Date(2026, 9, 15); // 15 Oct 2026, local midnight
+  var dayMs = 24 * 60 * 60 * 1000;
+
+  function updateCountdown() {
+    var today = new Date();
+    today = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+    var diff = Math.round((EXAM - today) / dayMs);
+    var el = document.getElementById('daysLeft');
+    if (!el) return;
+    if (diff > 0) { el.textContent = diff; }
+    else if (diff === 0) { el.textContent = 'Today'; }
+    else { el.textContent = 'Done'; }
+  }
+
+  var STORAGE_KEY = 'psle-science-plan-progress';
+
+  function loadDone() {
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+
+  function saveDone(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+  }
+
+  function updateProgressCount() {
+    var total = document.querySelectorAll('.day').length;
+    var done = document.querySelectorAll('.day.done').length;
+    var totalEl = document.getElementById('totalCount');
+    var doneEl = document.getElementById('doneCount');
+    if (totalEl) totalEl.textContent = total;
+    if (doneEl) doneEl.textContent = done;
+  }
+
+  function init() {
+    updateCountdown();
+    var state = loadDone();
+    var items = document.querySelectorAll('.day');
+    items.forEach(function (item) {
+      var id = item.getAttribute('data-id');
+      var checkbox = item.querySelector('input[type="checkbox"]');
+      if (!checkbox) return;
+      if (state[id]) {
+        checkbox.checked = true;
+        item.classList.add('done');
+      }
+      checkbox.addEventListener('change', function () {
+        if (checkbox.checked) {
+          item.classList.add('done');
+          state[id] = true;
+        } else {
+          item.classList.remove('done');
+          delete state[id];
+        }
+        saveDone(state);
+        updateProgressCount();
+      });
+    });
+    updateProgressCount();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
+</body>
+</html>

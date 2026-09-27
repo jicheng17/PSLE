@@ -18,5 +18,10 @@ def science_page():
     return render_template("science.html")
 
 
+@app.route("/plan")
+def plan_page():
+    return render_template("plan.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True)
