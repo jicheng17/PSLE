@@ -117,6 +117,7 @@
   svg .shape { fill: var(--tint); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
   svg .dash { fill: none; stroke: var(--muted); stroke-width: 1.3; stroke-dasharray: 3 3; }
   svg .ray { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+  svg .arc { fill: none; stroke: var(--accent); stroke-width: 2; }
   svg .lbl { font-weight: 600; }
   svg .mut { fill: var(--muted); font-size: 11px; }
   .fig-note { font-size: 13px; color: var(--muted); margin-top: 6px; }
@@ -198,7 +199,7 @@
     </a>
     <a class="cat-pill cat-p5" href="#p5-math">
       <span class="cat-tag">P5</span>
-      <span><span class="cat-label">P5 Math</span><span class="cat-sub">Volume, decimals, rate, percentage</span></span>
+      <span><span class="cat-label">P5 Math</span><span class="cat-sub">Angles, volume, decimals, rate, percentage</span></span>
     </a>
   </nav>
 
@@ -520,18 +521,115 @@
   <!-- ============ P5 MATH ============ -->
   <div id="p5-math" class="p5-scope" aria-labelledby="p5-math-h">
     <header style="margin-top:56px">
-      <p class="eyebrow">Primary 5 Mathematics · Number and measurement</p>
+      <p class="eyebrow">Primary 5 Mathematics · Geometry, number and measurement</p>
       <h1 id="p5-math-h" style="font-size:clamp(2rem,6vw,2.8rem)">P5 Math</h1>
-      <p class="lede">The four topics new at Primary 5: volume of cubes and cuboids, decimals, rate, and percentage. Rules, one diagram, worked examples, and the slip to avoid — for each.</p>
+      <p class="lede">The topics new at Primary 5: angles, volume of cubes and cuboids, decimals, rate, and percentage. Rules, one diagram, worked examples, and the slip to avoid — for each.</p>
     </header>
 
     <nav class="nav" aria-label="P5 topics">
+      <a href="#p5-angles">Angles</a>
       <a href="#p5-volume">Volume</a>
       <a href="#p5-decimals">Decimals</a>
       <a href="#p5-rate">Rate</a>
       <a href="#p5-percentage">Percentage</a>
       <a href="#p5-habits">Exam habits</a>
     </nav>
+
+    <!-- P5 ANGLES -->
+    <section class="sec" id="p5-angles" aria-labelledby="p5-angles-h">
+      <div class="sec-head"><h2 id="p5-angles-h">Angles</h2><span class="strand">Geometry</span></div>
+      <div class="panel">
+        <h3>Angle facts at a glance</h3>
+        <div class="figs">
+          <figure>
+            <svg viewBox="0 0 200 130" role="img" aria-label="A ray standing on a straight line makes two angles, a and b, that add up to 180 degrees.">
+              <line class="ray" x1="15" y1="100" x2="185" y2="100"/>
+              <line class="ray" x1="100" y1="100" x2="140" y2="30"/>
+              <path class="arc" d="M 128 100 A 28 28 0 0 0 113.9 75.7"/>
+              <path class="arc" d="M 72 100 A 28 28 0 0 1 113.9 75.7"/>
+              <text class="lbl" x="139" y="88" text-anchor="middle">a</text>
+              <text class="lbl" x="78" y="70" text-anchor="middle">b</text>
+            </svg>
+            <figcaption><b>a + b = 180°</b>on a straight line</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 200 130" role="img" aria-label="Two straight lines cross. Opposite angles marked a are equal, and opposite angles marked b are equal.">
+              <line class="ray" x1="30" y1="30" x2="170" y2="110"/>
+              <line class="ray" x1="30" y1="110" x2="170" y2="30"/>
+              <text class="lbl" x="66" y="75" text-anchor="middle">a</text>
+              <text class="lbl" x="134" y="75" text-anchor="middle">a</text>
+              <text class="lbl" x="100" y="49" text-anchor="middle">b</text>
+              <text class="lbl" x="100" y="101" text-anchor="middle">b</text>
+            </svg>
+            <figcaption><b>vertically opposite</b>angles are equal</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 200 130" role="img" aria-label="A triangle with interior angles a, b and c. They add up to 180 degrees.">
+              <polygon class="shape" points="30,110 170,110 120,30"/>
+              <text class="lbl" x="52" y="103" text-anchor="middle">a</text>
+              <text class="lbl" x="152" y="103" text-anchor="middle">b</text>
+              <text class="lbl" x="120" y="56" text-anchor="middle">c</text>
+            </svg>
+            <figcaption><b>a + b + c = 180°</b>angles in a triangle</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 200 130" role="img" aria-label="A parallelogram. One angle is a, and the angle next to it is 180 degrees minus a.">
+              <polygon class="shape" points="30,110 140,110 180,30 70,30"/>
+              <text class="lbl" x="60" y="101" text-anchor="middle">a</text>
+              <text class="lbl" x="104" y="54" text-anchor="middle">180° − a</text>
+            </svg>
+            <figcaption><b>neighbours add to 180°</b>parallelogram, rhombus</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="panel">
+          <h3>Key rules</h3>
+          <ul class="rules">
+            <li><b>Angles on a straight line = 180°</b><span>A half turn.</span></li>
+            <li><b>Angles at a point = 360°</b><span>A full turn.</span></li>
+            <li><b>Vertically opposite angles are equal</b><span>Where two straight lines cross.</span></li>
+            <li><b>Angles in a triangle = 180°</b><span>Every triangle, any shape.</span></li>
+            <li><b>Isosceles: base angles equal. Equilateral: all 60°.</b><span>Mark the equal sides first, then the equal angles.</span></li>
+            <li><b>Parallelogram, rhombus: opposite angles equal; neighbours add to 180°</b><span>Learn these — questions won't remind you.</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="panel">
+            <h3>Worked example: angles at a point</h3>
+            <p class="q">Three angles meet at a point: 130°, 95° and x. Find x.</p>
+            <ul class="steps">
+              <li>x = 360° − 130° − 95°</li>
+              <li>= 135°</li>
+            </ul>
+            <span class="ans">135°</span>
+            <hr class="sep">
+            <h3>Worked example: isosceles triangle</h3>
+            <p class="q">An isosceles triangle has an apex angle of 52°. Find each base angle.</p>
+            <ul class="steps">
+              <li>Two base angles = 180° − 52° = 128°</li>
+              <li>One base angle = 128° ÷ 2 = 64°</li>
+            </ul>
+            <span class="ans">64°</span>
+            <hr class="sep">
+            <h3>Worked example: parallelogram</h3>
+            <p class="q">In parallelogram PQRS, angle P is 72°. Find angle Q.</p>
+            <ul class="steps">
+              <li>P and Q are neighbours (they share a side)</li>
+              <li>Q = 180° − 72° = 108°</li>
+            </ul>
+            <span class="ans">108°</span>
+          </div>
+          <div class="warn"><b>Watch out:</b> the question usually won't tell you a triangle is isosceles or a shape is a rhombus — you're expected to spot it from tick marks or the name given. Learn the shape properties by heart.</div>
+          <details class="try">
+            <summary>Your turn</summary>
+            <p>Angles a, 50° and 75° sit together on a straight line. Find a.</p>
+            <p class="reveal">a = 180° − 50° − 75° = 55°</p>
+          </details>
+        </div>
+      </div>
+    </section>
 
     <!-- P5 VOLUME -->
     <section class="sec" id="p5-volume" aria-labelledby="p5-volume-h">
@@ -741,8 +839,9 @@
 
     <!-- P5 HABITS -->
     <section class="checklist" id="p5-habits" aria-labelledby="p5-habits-h">
-      <h2 id="p5-habits-h" style="font-size:clamp(1.6rem,4.5vw,2.1rem)">Exam habits for P5 number topics</h2>
+      <h2 id="p5-habits-h" style="font-size:clamp(1.6rem,4.5vw,2.1rem)">Exam habits for P5 topics</h2>
       <ul>
+        <li><b>Mark the figure</b>For angles, write every angle you find straight onto the diagram, with the reason beside it.</li>
         <li><b>Name the whole</b>For percentage and rate questions, be sure what "the whole" or "one unit" refers to.</li>
         <li><b>Keep units consistent</b>cm³ to litres, minutes to hours — convert before you combine numbers.</li>
         <li><b>Line up decimal points</b>For addition and subtraction; for multiplication, count decimal places instead.</li>
