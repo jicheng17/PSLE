@@ -115,9 +115,11 @@
   svg { max-width: 100%; height: auto; display: block; }
   svg text { font-family: var(--body); fill: var(--ink); font-size: 12.5px; }
   svg .shape { fill: var(--tint); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+  svg .plain { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
   svg .dash { fill: none; stroke: var(--muted); stroke-width: 1.3; stroke-dasharray: 3 3; }
   svg .ray { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
   svg .arc { fill: none; stroke: var(--accent); stroke-width: 2; }
+  svg .sq { fill: none; stroke: var(--ink); stroke-width: 1.2; }
   svg .lbl { font-weight: 600; }
   svg .mut { fill: var(--muted); font-size: 11px; }
   .fig-note { font-size: 13px; color: var(--muted); margin-top: 6px; }
@@ -199,7 +201,7 @@
     </a>
     <a class="cat-pill cat-p5" href="#p5-math">
       <span class="cat-tag">P5</span>
-      <span><span class="cat-label">P5 Math</span><span class="cat-sub">Angles, volume, decimals, rate, percentage</span></span>
+      <span><span class="cat-label">P5 Math</span><span class="cat-sub">Angles, area, volume, fractions, decimals, rate, percentage</span></span>
     </a>
   </nav>
 
@@ -523,12 +525,14 @@
     <header style="margin-top:56px">
       <p class="eyebrow">Primary 5 Mathematics · Geometry, number and measurement</p>
       <h1 id="p5-math-h" style="font-size:clamp(2rem,6vw,2.8rem)">P5 Math</h1>
-      <p class="lede">The topics new at Primary 5: angles, volume of cubes and cuboids, decimals, rate, and percentage. Rules, one diagram, worked examples, and the slip to avoid — for each.</p>
+      <p class="lede">The topics new at Primary 5: angles, area of triangles, volume of cubes and cuboids, fractions, decimals, rate, and percentage. Rules, one diagram, worked examples, and the slip to avoid — for each.</p>
     </header>
 
     <nav class="nav" aria-label="P5 topics">
       <a href="#p5-angles">Angles</a>
+      <a href="#p5-area">Area</a>
       <a href="#p5-volume">Volume</a>
+      <a href="#p5-fractions">Fractions</a>
       <a href="#p5-decimals">Decimals</a>
       <a href="#p5-rate">Rate</a>
       <a href="#p5-percentage">Percentage</a>
@@ -631,6 +635,89 @@
       </div>
     </section>
 
+    <!-- P5 AREA -->
+    <section class="sec" id="p5-area" aria-labelledby="p5-area-h">
+      <div class="sec-head"><h2 id="p5-area-h">Area of triangles</h2><span class="strand">Measurement</span></div>
+      <div class="panel">
+        <h3>The height is always perpendicular to the base</h3>
+        <div class="figs">
+          <figure>
+            <svg viewBox="0 0 270 140" role="img" aria-label="A rectangle divided by a diagonal into two triangles. One triangle is shaded to show it is exactly half of the rectangle.">
+              <rect class="plain" x="30" y="20" width="160" height="90"/>
+              <polygon class="shape" points="30,110 190,110 190,20"/>
+              <text class="lbl" x="110" y="128" text-anchor="middle">base</text>
+              <text class="lbl" x="198" y="68">height</text>
+            </svg>
+            <figcaption><b>triangle = ½ of the rectangle</b>same base, same height</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 220 140" role="img" aria-label="Acute triangle with base along the bottom and a dashed perpendicular height from the top vertex.">
+              <polygon class="shape" points="25,110 155,110 105,25"/>
+              <line class="dash" x1="105" y1="25" x2="105" y2="110"/>
+              <polyline class="sq" points="105,102 97,102 97,110"/>
+              <text class="lbl" x="90" y="128" text-anchor="middle">base</text>
+              <text class="lbl" x="112" y="72">height</text>
+            </svg>
+            <figcaption><b>½ × base × height</b>height inside</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 220 140" role="img" aria-label="Obtuse triangle. The height is dashed and falls outside the triangle, meeting an extended dotted base.">
+              <polygon class="shape" points="25,110 120,110 160,25"/>
+              <line class="dash" x1="120" y1="110" x2="160" y2="110"/>
+              <line class="dash" x1="160" y1="25" x2="160" y2="110"/>
+              <polyline class="sq" points="160,102 152,102 152,110"/>
+              <text class="lbl" x="72" y="128" text-anchor="middle">base</text>
+              <text class="lbl" x="166" y="72">height</text>
+            </svg>
+            <figcaption><b>same formula</b>height can fall outside</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="cols">
+        <div class="panel">
+          <h3>Key rules</h3>
+          <ul class="rules">
+            <li><b>Area of triangle = ½ × base × height</b><span>A triangle is always half of the rectangle with the same base and height.</span></li>
+            <li><b>Base and height must meet at a right angle</b><span>The height is never a slanted side.</span></li>
+            <li><b>Working backwards: base = 2 × area ÷ height</b><span>Undo the ½ by doubling first.</span></li>
+            <li><b>Composite figure: split it, or complete it then subtract</b><span>Break the shape into rectangles and triangles you already know how to find.</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="panel">
+            <h3>Worked example: area of a triangle</h3>
+            <p class="q">A triangle has a base of 14 cm and a height of 9 cm. Find its area.</p>
+            <ul class="steps"><li>½ × 14 × 9 = 63</li></ul>
+            <span class="ans">63 cm²</span>
+            <hr class="sep">
+            <h3>Worked example: composite figure</h3>
+            <p class="q">A figure is made of a 10 cm by 6 cm rectangle with a right triangle of base 10 cm and height 4 cm attached to one side. Find the total area.</p>
+            <ul class="steps">
+              <li>Rectangle = 10 × 6 = 60 cm²</li>
+              <li>Triangle = ½ × 10 × 4 = 20 cm²</li>
+              <li>60 + 20 = 80</li>
+            </ul>
+            <span class="ans">80 cm²</span>
+            <hr class="sep">
+            <h3>Worked example: missing height</h3>
+            <p class="q">A triangle has an area of 36 cm² and a base of 8 cm. Find its height.</p>
+            <ul class="steps">
+              <li>Height = 2 × 36 ÷ 8</li>
+              <li>= 72 ÷ 8 = 9</li>
+            </ul>
+            <span class="ans">9 cm</span>
+          </div>
+          <div class="warn"><b>Watch out:</b> never use a slanted side as the height — look for the small square that marks the right angle, or check the height is drawn straight up from the base (even if that means it falls outside the triangle).</div>
+          <details class="try">
+            <summary>Your turn</summary>
+            <p>A triangle has an area of 45 cm² and a height of 10 cm. Find its base.</p>
+            <p class="reveal">Base = 2 × 45 ÷ 10 = 90 ÷ 10 = 9 cm</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
     <!-- P5 VOLUME -->
     <section class="sec" id="p5-volume" aria-labelledby="p5-volume-h">
       <div class="sec-head"><h2 id="p5-volume-h">Volume of cubes and cuboids</h2><span class="strand">Measurement</span></div>
@@ -702,6 +789,73 @@
             <summary>Your turn</summary>
             <p>A cube has edges of 6 cm. Find its volume, and say how many mL of water it can hold.</p>
             <p class="reveal">6 × 6 × 6 = 216 cm³ = 216 mL</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- P5 FRACTIONS -->
+    <section class="sec" id="p5-fractions" aria-labelledby="p5-fractions-h">
+      <div class="sec-head"><h2 id="p5-fractions-h">Fractions</h2><span class="strand">Number</span></div>
+      <div class="panel">
+        <h3>"Of" a quantity means multiply</h3>
+        <div class="figs">
+          <figure>
+            <svg viewBox="0 0 220 90" role="img" aria-label="A bar split into 5 equal parts, with 3 of the parts shaded to show 3 fifths.">
+              <rect class="plain" x="20" y="20" width="180" height="50"/>
+              <rect x="20" y="20" width="108" height="50" style="fill:var(--tint)"/>
+              <line class="dash" x1="56" y1="20" x2="56" y2="70"/>
+              <line class="dash" x1="92" y1="20" x2="92" y2="70"/>
+              <line class="dash" x1="128" y1="20" x2="128" y2="70"/>
+              <line class="dash" x1="164" y1="20" x2="164" y2="70"/>
+            </svg>
+            <figcaption><b>3/5 of 20 = 12</b>3 shaded parts out of 5, each worth 4</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="cols" style="margin-top:16px">
+        <div class="panel">
+          <h3>Key rules</h3>
+          <ul class="rules">
+            <li><b>Adding or subtracting: use a common denominator first</b><span>Convert both fractions before you add or subtract.</span></li>
+            <li><b>Mixed numbers: add/subtract whole parts and fraction parts</b><span>Regroup if the fraction part doesn't have enough to subtract.</span></li>
+            <li><b>Fraction × whole number: multiply the numerator only</b><span>3/5 × 20 = (3 × 20) ÷ 5</span></li>
+            <li><b>Fraction × fraction: multiply straight across</b><span>Numerator × numerator, denominator × denominator, then simplify.</span></li>
+            <li><b>Mixed number × whole number: convert to an improper fraction first</b><span>Then multiply as usual.</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="panel">
+            <h3>Worked example: adding mixed numbers</h3>
+            <p class="q">Find 2 1/4 + 1 5/6.</p>
+            <ul class="steps">
+              <li>Common denominator is 12: 2 3/12 + 1 10/12</li>
+              <li>= 3 13/12</li>
+              <li>= 4 1/12</li>
+            </ul>
+            <span class="ans">4 1/12</span>
+            <hr class="sep">
+            <h3>Worked example: fraction of a quantity</h3>
+            <p class="q">There are 20 sweets in a bag. 3/5 of them are red. How many are red?</p>
+            <ul class="steps">
+              <li>3/5 × 20 = (3 × 20) ÷ 5</li>
+              <li>= 60 ÷ 5 = 12</li>
+            </ul>
+            <span class="ans">12 sweets</span>
+            <hr class="sep">
+            <h3>Worked example: multiplying two fractions</h3>
+            <p class="q">Find 2/3 × 3/8.</p>
+            <ul class="steps">
+              <li>(2 × 3) ÷ (3 × 8) = 6/24</li>
+              <li>= 1/4</li>
+            </ul>
+            <span class="ans">1/4</span>
+          </div>
+          <div class="warn"><b>Watch out:</b> you can only add or subtract fractions once they share a denominator — never add numerators and denominators separately. When multiplying, look for numbers that cancel diagonally first; it keeps the numbers small.</div>
+          <details class="try">
+            <summary>Your turn</summary>
+            <p>Find 3/4 × 2/9.</p>
+            <p class="reveal">(3 × 2) ÷ (4 × 9) = 6/36 = 1/6</p>
           </details>
         </div>
       </div>
