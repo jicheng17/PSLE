@@ -113,8 +113,50 @@
   details.try .reveal { font-family: var(--mono); font-size: 14px; color: var(--muted); }
 
   svg { max-width: 100%; height: auto; display: block; }
-  svg text { font-family: var(--body); fill: var(--ink); }
+  svg text { font-family: var(--body); fill: var(--ink); font-size: 12.5px; }
+  svg .shape { fill: var(--tint); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+  svg .dash { fill: none; stroke: var(--muted); stroke-width: 1.3; stroke-dasharray: 3 3; }
+  svg .ray { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+  svg .lbl { font-weight: 600; }
+  svg .mut { fill: var(--muted); font-size: 11px; }
   .fig-note { font-size: 13px; color: var(--muted); margin-top: 6px; }
+
+  .figs { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); margin-top: 4px; }
+  .figs figure { margin: 0; }
+  .figs svg { max-width: 250px; margin-inline: auto; }
+  .figs figcaption { font-size: 14px; color: var(--muted); margin-top: 4px; text-align: center; }
+  .figs figcaption b { color: var(--ink); font-weight: 600; display: block; font-family: var(--mono); font-size: 13.5px; }
+
+  /* category switcher */
+  .cat-switch { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 26px; }
+  .cat-pill {
+    display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink);
+    background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+    padding: 12px 16px; box-shadow: var(--shadow); flex: 1 1 220px;
+  }
+  .cat-pill:hover { border-color: var(--cat-color, var(--accent)); }
+  .cat-pill .cat-tag {
+    font-family: var(--display); font-weight: 700; font-size: 13px; color: var(--on-accent);
+    background: var(--cat-color, var(--accent)); border-radius: 8px; padding: 4px 8px; line-height: 1;
+  }
+  .cat-pill .cat-label { font-weight: 600; font-size: 15px; }
+  .cat-pill .cat-sub { display: block; font-weight: 400; font-size: 12.5px; color: var(--muted); margin-top: 1px; }
+  .cat-p6 { --cat-color: #0B7C86; }
+  .cat-p5 { --cat-color: #6A3FA0; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .cat-p6 { --cat-color: #4FC3CE; }
+    :root:not([data-theme="light"]) .cat-p5 { --cat-color: #B79AF0; }
+  }
+  :root[data-theme="dark"] .cat-p6 { --cat-color: #4FC3CE; }
+  :root[data-theme="dark"] .cat-p5 { --cat-color: #B79AF0; }
+
+  /* P5 section: scoped accent so it reads as its own category */
+  .p5-scope { --accent: #6A3FA0; --tint: #EDE4FA; --formula: #F1EAFB; --on-accent: #FFFFFF; scroll-margin-top: 80px; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .p5-scope { --accent: #B79AF0; --tint: #2E2050; --formula: #2A1E48; --on-accent: #1D1233; }
+  }
+  :root[data-theme="dark"] .p5-scope { --accent: #B79AF0; --tint: #2E2050; --formula: #2A1E48; --on-accent: #1D1233; }
+  .p5-scope .nav { top: env(safe-area-inset-top, 0px); }
 
   .checklist { margin-top: 44px; }
   .checklist ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
@@ -149,6 +191,18 @@
     <p class="lede">Every geography question that turns into a Maths question: reading maps, planning journeys, weather graphs, land and water, and compass turns. Formulas, one worked example each, and a trap to avoid.</p>
   </header>
 
+  <nav class="cat-switch" aria-label="Choose a level">
+    <a class="cat-pill cat-p6" href="#p6">
+      <span class="cat-tag">P6</span>
+      <span><span class="cat-label">Map Maths</span><span class="cat-sub">Scale, journeys, weather data, compass turns</span></span>
+    </a>
+    <a class="cat-pill cat-p5" href="#p5-math">
+      <span class="cat-tag">P5</span>
+      <span><span class="cat-label">P5 Math</span><span class="cat-sub">Volume, decimals, rate, percentage</span></span>
+    </a>
+  </nav>
+
+  <div id="p6" style="scroll-margin-top:80px"></div>
   <nav class="nav" aria-label="Topics">
     <a href="#scale">Maps and scale</a>
     <a href="#speed">Journeys</a>
@@ -462,6 +516,240 @@
       <li><b>Sense-check</b>Is a 1.2 km walk between stations sensible? Is 6 000 L on a roof sensible?</li>
     </ul>
   </section>
+
+  <!-- ============ P5 MATH ============ -->
+  <div id="p5-math" class="p5-scope" aria-labelledby="p5-math-h">
+    <header style="margin-top:56px">
+      <p class="eyebrow">Primary 5 Mathematics · Number and measurement</p>
+      <h1 id="p5-math-h" style="font-size:clamp(2rem,6vw,2.8rem)">P5 Math</h1>
+      <p class="lede">The four topics new at Primary 5: volume of cubes and cuboids, decimals, rate, and percentage. Rules, one diagram, worked examples, and the slip to avoid — for each.</p>
+    </header>
+
+    <nav class="nav" aria-label="P5 topics">
+      <a href="#p5-volume">Volume</a>
+      <a href="#p5-decimals">Decimals</a>
+      <a href="#p5-rate">Rate</a>
+      <a href="#p5-percentage">Percentage</a>
+      <a href="#p5-habits">Exam habits</a>
+    </nav>
+
+    <!-- P5 VOLUME -->
+    <section class="sec" id="p5-volume" aria-labelledby="p5-volume-h">
+      <div class="sec-head"><h2 id="p5-volume-h">Volume of cubes and cuboids</h2><span class="strand">Measurement</span></div>
+      <div class="panel">
+        <h3>A box packed with unit cubes</h3>
+        <div class="figs">
+          <figure>
+            <svg viewBox="0 0 255 170" role="img" aria-label="A large box shown divided into a grid of unit cubes: 4 across, 3 tall, and 2 deep.">
+              <polygon class="shape" points="50,60 170,60 210,30 90,30"/>
+              <polygon class="shape" points="50,60 170,60 170,140 50,140"/>
+              <polygon class="shape" points="170,60 210,30 210,110 170,140"/>
+              <line class="dash" x1="80.0" y1="60" x2="80.0" y2="140"/>
+              <line class="dash" x1="110.0" y1="60" x2="110.0" y2="140"/>
+              <line class="dash" x1="140.0" y1="60" x2="140.0" y2="140"/>
+              <line class="dash" x1="50" y1="86.7" x2="170" y2="86.7"/>
+              <line class="dash" x1="50" y1="113.3" x2="170" y2="113.3"/>
+              <line class="dash" x1="80.0" y1="60.0" x2="120.0" y2="30.0"/>
+              <line class="dash" x1="110.0" y1="60.0" x2="150.0" y2="30.0"/>
+              <line class="dash" x1="140.0" y1="60.0" x2="180.0" y2="30.0"/>
+              <line class="dash" x1="70.0" y1="45.0" x2="190.0" y2="45.0"/>
+              <line class="dash" x1="190.0" y1="45.0" x2="190.0" y2="125.0"/>
+              <line class="dash" x1="170.0" y1="86.7" x2="210.0" y2="56.7"/>
+              <line class="dash" x1="170.0" y1="113.3" x2="210.0" y2="83.3"/>
+              <text class="lbl" x="110" y="158" text-anchor="middle">4 long</text>
+              <text class="lbl" x="40" y="104" text-anchor="end">3 tall</text>
+              <text class="lbl" x="250" y="48" text-anchor="end">2 deep</text>
+            </svg>
+            <figcaption><b>4 × 3 × 2 = 24 unit cubes</b>count layer by layer</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="cols" style="margin-top:16px">
+        <div class="panel">
+          <h3>Key rules</h3>
+          <ul class="rules">
+            <li><b>Cuboid: V = l × b × h</b><span>Length × breadth × height.</span></li>
+            <li><b>Cube: V = s × s × s</b><span>All edges are equal.</span></li>
+            <li><b>1 L = 1 000 mL = 1 000 cm³</b><span>Divide cm³ by 1 000 to get litres.</span></li>
+            <li><b>Missing edge: h = V ÷ (l × b)</b><span>Divide the volume by the two edges you know.</span></li>
+            <li><b>Number of small cubes = big volume ÷ small volume</b><span>Or count how many fit along each edge and multiply.</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="panel">
+            <h3>Worked example: finding volume</h3>
+            <p class="q">A box is 12 cm long, 8 cm wide and 5 cm tall. Find its volume.</p>
+            <ul class="steps"><li>V = 12 × 8 × 5 = 480</li></ul>
+            <span class="ans">480 cm³</span>
+            <hr class="sep">
+            <h3>Worked example: missing height</h3>
+            <p class="q">A cuboid has a volume of 252 cm³. Its length is 9 cm and its breadth is 7 cm. Find its height.</p>
+            <ul class="steps">
+              <li>h = 252 ÷ (9 × 7)</li>
+              <li>= 252 ÷ 63 = 4</li>
+            </ul>
+            <span class="ans">4 cm</span>
+            <hr class="sep">
+            <h3>Worked example: packing small cubes</h3>
+            <p class="q">A large box measures 40 cm by 30 cm by 20 cm. How many small cubes of edge 10 cm can exactly fill it?</p>
+            <ul class="steps">
+              <li>Large box volume = 40 × 30 × 20 = 24 000 cm³</li>
+              <li>Small cube volume = 10 × 10 × 10 = 1 000 cm³</li>
+              <li>24 000 ÷ 1 000 = 24</li>
+            </ul>
+            <span class="ans">24 small cubes</span>
+          </div>
+          <div class="warn"><b>Watch out:</b> volume is measured in cubic units (cm³), never plain cm. When counting how many small cubes fit, make sure the small cube's edge divides exactly into each of the box's three edges — draw it out if you're not sure.</div>
+          <details class="try">
+            <summary>Your turn</summary>
+            <p>A cube has edges of 6 cm. Find its volume, and say how many mL of water it can hold.</p>
+            <p class="reveal">6 × 6 × 6 = 216 cm³ = 216 mL</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- P5 DECIMALS -->
+    <section class="sec" id="p5-decimals" aria-labelledby="p5-decimals-h">
+      <div class="sec-head"><h2 id="p5-decimals-h">Decimals</h2><span class="strand">Number</span></div>
+      <div class="cols" style="margin-top:0">
+        <div class="panel">
+          <h3>Key rules</h3>
+          <ul class="rules">
+            <li><b>× 10, 100, 1 000: move the point right</b><span>1, 2 or 3 places. 0.6 × 100 = 60</span></li>
+            <li><b>÷ 10, 100, 1 000: move the point left</b><span>4.5 ÷ 100 = 0.045</span></li>
+            <li><b>Multiplying by a whole number: multiply normally, then place the point</b><span>Count the decimal places in the number you started with.</span></li>
+            <li><b>Dividing by a whole number: divide normally, point stays lined up</b><span>Same place value, straight down.</span></li>
+            <li><b>Money: 2 decimal places</b><span>The nearest cent.</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="panel">
+            <h3>Worked example: multiplying decimals</h3>
+            <p class="q">A pencil costs $0.65. Find the cost of 6 pencils.</p>
+            <ul class="steps"><li>0.65 × 6 = 3.90</li></ul>
+            <span class="ans">$3.90</span>
+            <hr class="sep">
+            <h3>Worked example: dividing decimals</h3>
+            <p class="q">A ribbon 9.6 m long is cut equally into 4 pieces. Find the length of each piece.</p>
+            <ul class="steps"><li>9.6 ÷ 4 = 2.4</li></ul>
+            <span class="ans">2.4 m</span>
+            <hr class="sep">
+            <h3>Worked example: × 100 shortcut</h3>
+            <p class="q">A jug holds 1.25 L of juice. Find the total volume of 100 identical jugs, in litres.</p>
+            <ul class="steps"><li>1.25 × 100 = 125</li></ul>
+            <span class="ans">125 L</span>
+          </div>
+          <div class="warn"><b>Watch out:</b> "0.6" and "0.06" are not the same size — line up the decimal point carefully when you write your working. When multiplying two decimals, count the total decimal places in both numbers; when multiplying a decimal by a whole number, only the decimal counts.</div>
+          <details class="try">
+            <summary>Your turn</summary>
+            <p>Apple juice costs $1.85 per bottle. Find the cost of 8 bottles.</p>
+            <p class="reveal">1.85 × 8 = $14.80</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- P5 RATE -->
+    <section class="sec" id="p5-rate" aria-labelledby="p5-rate-h">
+      <div class="sec-head"><h2 id="p5-rate-h">Rate</h2><span class="strand">Number</span></div>
+      <div class="cols" style="margin-top:0">
+        <div class="panel">
+          <h3>Key rules</h3>
+          <ul class="rules">
+            <li><b>Rate = total ÷ time (or ÷ quantity)</b><span>An amount for every one unit — L/min, $/kg, pages/min.</span></li>
+            <li><b>Total = rate × time</b><span>Multiply the rate by however many units you have.</span></li>
+            <li><b>Time = total ÷ rate</b><span>Undo the multiplication.</span></li>
+            <li><b>Better buy: compare the cost for the same unit</b><span>Find the cost per kg (or per item) for each option.</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="panel">
+            <h3>Worked example: basic rate</h3>
+            <p class="q">A tap fills a tank at a rate of 8 litres per minute. How many litres flow in 15 minutes?</p>
+            <ul class="steps"><li>8 × 15 = 120</li></ul>
+            <span class="ans">120 L</span>
+            <hr class="sep">
+            <h3>Worked example: finding the rate, then the time</h3>
+            <p class="q">A printer prints 45 pages in 5 minutes. Find its rate, then find how long it takes to print 180 pages.</p>
+            <ul class="steps">
+              <li>Rate = 45 ÷ 5 = 9 pages per minute</li>
+              <li>Time = 180 ÷ 9 = 20</li>
+            </ul>
+            <span class="ans">9 pages/min; 20 minutes</span>
+            <hr class="sep">
+            <h3>Worked example: better buy</h3>
+            <p class="q">A 2 kg bag of rice costs $5.60. A 5 kg bag costs $13.50. Which is the better buy?</p>
+            <ul class="steps">
+              <li>2 kg bag: 5.60 ÷ 2 = $2.80 per kg</li>
+              <li>5 kg bag: 13.50 ÷ 5 = $2.70 per kg</li>
+            </ul>
+            <span class="ans">The 5 kg bag</span>
+          </div>
+          <div class="warn"><b>Watch out:</b> identify what one "unit" of the rate actually is — per minute, per kg, per item — before you multiply or divide. Keep your answer's unit the same as the rate's unit.</div>
+          <details class="try">
+            <summary>Your turn</summary>
+            <p>A machine packs 240 boxes in 6 hours. Find its rate, then find how long it takes to pack 600 boxes.</p>
+            <p class="reveal">Rate = 240 ÷ 6 = 40 boxes/hour. Time = 600 ÷ 40 = 15 hours</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- P5 PERCENTAGE -->
+    <section class="sec" id="p5-percentage" aria-labelledby="p5-percentage-h">
+      <div class="sec-head"><h2 id="p5-percentage-h">Percentage</h2><span class="strand">Number</span></div>
+      <div class="cols" style="margin-top:0">
+        <div class="panel">
+          <h3>Key rules</h3>
+          <ul class="rules">
+            <li><b>Part = percentage/100 × whole</b><span>Finding a percentage of a quantity.</span></li>
+            <li><b>Percentage = part/whole × 100%</b><span>Expressing one quantity as a percentage of another.</span></li>
+            <li><b>Whole = part ÷ percentage × 100</b><span>Working backwards from a part to the whole.</span></li>
+            <li><b>100% is always the whole thing</b><span>Be sure what the question calls "the whole" before you start.</span></li>
+          </ul>
+        </div>
+        <div class="stack">
+          <div class="panel">
+            <h3>Worked example: percentage of a quantity</h3>
+            <p class="q">Find 40% of 350.</p>
+            <ul class="steps"><li>40/100 × 350 = 140</li></ul>
+            <span class="ans">140</span>
+            <hr class="sep">
+            <h3>Worked example: expressing as a percentage</h3>
+            <p class="q">Ravi answered 18 out of 24 questions correctly. What percentage is that?</p>
+            <ul class="steps"><li>18/24 × 100% = 75%</li></ul>
+            <span class="ans">75%</span>
+            <hr class="sep">
+            <h3>Worked example: finding the whole</h3>
+            <p class="q">45 is 30% of a number. Find the number.</p>
+            <ul class="steps">
+              <li>Whole = 45 ÷ 30 × 100</li>
+              <li>= 150</li>
+            </ul>
+            <span class="ans">150</span>
+          </div>
+          <div class="warn"><b>Watch out:</b> "part/whole × 100%" and "percentage/100 × whole" are the same rule read in opposite directions — write down which one the question is asking for before calculating, not after.</div>
+          <details class="try">
+            <summary>Your turn</summary>
+            <p>36 is 20% of a number. Find the number.</p>
+            <p class="reveal">36 ÷ 20 × 100 = 180</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- P5 HABITS -->
+    <section class="checklist" id="p5-habits" aria-labelledby="p5-habits-h">
+      <h2 id="p5-habits-h" style="font-size:clamp(1.6rem,4.5vw,2.1rem)">Exam habits for P5 number topics</h2>
+      <ul>
+        <li><b>Name the whole</b>For percentage and rate questions, be sure what "the whole" or "one unit" refers to.</li>
+        <li><b>Keep units consistent</b>cm³ to litres, minutes to hours — convert before you combine numbers.</li>
+        <li><b>Line up decimal points</b>For addition and subtraction; for multiplication, count decimal places instead.</li>
+        <li><b>Show every step</b>Method marks are given even if the final answer slips.</li>
+      </ul>
+    </section>
+  </div>
 
   <footer>Contexts are Singapore-flavoured and distances are approximate. Numbers in examples are for practice, not real records.</footer>
 </div>
