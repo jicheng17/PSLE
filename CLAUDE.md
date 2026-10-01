@@ -13,6 +13,16 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
   doesn't belong here (the old Map Maths category was P6 and was removed
   for exactly this reason — see History below). When in doubt about
   whether something is P5 or P6 syllabus, check before adding it.
+  "P5 syllabus" is interpreted as what the son is actually being taught
+  and tested on at the P5 level — including assessment-book/enrichment
+  material his worksheets use — not strictly the official MOE syllabus
+  document. For example, parallelogram and trapezium area formulas
+  aren't officially named in the MOE P5 (or even P6) syllabus — the
+  official approach is to split those shapes into rectangles/triangles —
+  but they were added to the Area topic anyway at the user's explicit
+  request, since they matched what the son's materials cover. Confirm
+  the P5/P6 boundary, surface it if content looks like it's really P6 or
+  beyond, but don't block on "is this the official syllabus" alone.
 - **Purpose**: this is a living cheat sheet, not a one-off Q&A log. When a
   Primary 5 exam question or a piece of relevant syllabus information
   comes up in conversation — the user asks about a topic, shares a

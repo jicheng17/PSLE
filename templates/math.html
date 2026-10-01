@@ -160,7 +160,7 @@
   <header>
     <p class="eyebrow">Primary 5 Mathematics · Geometry, number and measurement</p>
     <h1>P5 Math</h1>
-    <p class="lede">The topics new at Primary 5: angles, area of triangles, volume of cubes and cuboids, fractions, decimals, rate, and percentage. Rules, one diagram, worked examples, and the slip to avoid — for each.</p>
+    <p class="lede">The topics new at Primary 5: angles, area of 2D shapes, volume of cubes and cuboids, fractions, decimals, rate, and percentage. Rules, one diagram, worked examples, and the slip to avoid — for each.</p>
   </header>
 
   <nav class="nav" aria-label="Topics">
@@ -272,10 +272,18 @@
 
     <!-- P5 AREA -->
     <section class="sec" id="p5-area" aria-labelledby="p5-area-h">
-      <div class="sec-head"><h2 id="p5-area-h">Area of triangles</h2><span class="strand">Measurement</span></div>
+      <div class="sec-head"><h2 id="p5-area-h">Area</h2><span class="strand">Measurement</span></div>
       <div class="panel">
-        <h3>The height is always perpendicular to the base</h3>
+        <h3>Four formulas, one picture each</h3>
         <div class="figs">
+          <figure>
+            <svg viewBox="0 0 260 130" role="img" aria-label="A rectangle with the bottom side labelled length and the right side labelled breadth.">
+              <rect class="shape" x="25" y="25" width="130" height="80"/>
+              <text class="lbl" x="90" y="122" text-anchor="middle">length</text>
+              <text class="lbl" x="163" y="68">breadth</text>
+            </svg>
+            <figcaption><b>length × breadth</b>rectangle</figcaption>
+          </figure>
           <figure>
             <svg viewBox="0 0 270 140" role="img" aria-label="A rectangle divided by a diagonal into two triangles. One triangle is shaded to show it is exactly half of the rectangle.">
               <rect class="plain" x="30" y="20" width="160" height="90"/>
@@ -283,8 +291,35 @@
               <text class="lbl" x="110" y="128" text-anchor="middle">base</text>
               <text class="lbl" x="198" y="68">height</text>
             </svg>
-            <figcaption><b>triangle = ½ of the rectangle</b>same base, same height</figcaption>
+            <figcaption><b>½ × base × height</b>triangle = ½ the rectangle</figcaption>
           </figure>
+          <figure>
+            <svg viewBox="0 0 220 140" role="img" aria-label="A parallelogram with its base along the bottom and a dashed perpendicular height from the top-left corner down to the base.">
+              <polygon class="shape" points="30,110 150,110 190,30 70,30"/>
+              <line class="dash" x1="70" y1="30" x2="70" y2="110"/>
+              <polyline class="sq" points="70,102 78,102 78,110"/>
+              <text class="lbl" x="90" y="128" text-anchor="middle">base</text>
+              <text class="lbl" x="62" y="72" text-anchor="end">height</text>
+            </svg>
+            <figcaption><b>base × height</b>parallelogram</figcaption>
+          </figure>
+          <figure>
+            <svg viewBox="0 0 220 140" role="img" aria-label="A trapezium with two parallel sides, the shorter one on top labelled a and the longer one on the bottom labelled b, and a dashed perpendicular height between them.">
+              <polygon class="shape" points="20,110 190,110 140,30 70,30"/>
+              <line class="dash" x1="70" y1="30" x2="70" y2="110"/>
+              <polyline class="sq" points="70,102 78,102 78,110"/>
+              <text class="lbl" x="105" y="24" text-anchor="middle">a</text>
+              <text class="lbl" x="105" y="128" text-anchor="middle">b</text>
+              <text class="lbl" x="62" y="72" text-anchor="end">height</text>
+            </svg>
+            <figcaption><b>½ × (a + b) × height</b>trapezium</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <div class="panel" style="margin-top:16px">
+        <h3>The height is always perpendicular to the base</h3>
+        <div class="figs">
           <figure>
             <svg viewBox="0 0 220 140" role="img" aria-label="Acute triangle with base along the bottom and a dashed perpendicular height from the top vertex.">
               <polygon class="shape" points="25,110 155,110 105,25"/>
@@ -309,18 +344,25 @@
         </div>
       </div>
 
-      <div class="cols">
+      <div class="cols" style="margin-top:16px">
         <div class="panel">
           <h3>Key rules</h3>
           <ul class="rules">
-            <li><b>Area of triangle = ½ × base × height</b><span>A triangle is always half of the rectangle with the same base and height.</span></li>
-            <li><b>Base and height must meet at a right angle</b><span>The height is never a slanted side.</span></li>
-            <li><b>Working backwards: base = 2 × area ÷ height</b><span>Undo the ½ by doubling first.</span></li>
+            <li><b>Rectangle: Area = length × breadth</b><span>The one you already know — the other formulas all build on it.</span></li>
+            <li><b>Triangle: Area = ½ × base × height</b><span>A triangle is always half of the rectangle with the same base and height.</span></li>
+            <li><b>Parallelogram: Area = base × height</b><span>The height is the perpendicular distance between the two parallel sides, not the slanted side.</span></li>
+            <li><b>Trapezium: Area = ½ × (a + b) × height</b><span>a and b are the lengths of the two parallel sides.</span></li>
             <li><b>Composite figure: split it, or complete it then subtract</b><span>Break the shape into rectangles and triangles you already know how to find.</span></li>
+            <li><b>Working backwards: rearrange the formula</b><span>E.g. base = 2 × area ÷ height for a triangle — undo the ½ by doubling first.</span></li>
           </ul>
         </div>
         <div class="stack">
           <div class="panel">
+            <h3>Worked example: area of a rectangle</h3>
+            <p class="q">A rectangle measures 15 cm by 8 cm. Find its area.</p>
+            <ul class="steps"><li>15 × 8 = 120</li></ul>
+            <span class="ans">120 cm²</span>
+            <hr class="sep">
             <h3>Worked example: area of a triangle</h3>
             <p class="q">A triangle has a base of 14 cm and a height of 9 cm. Find its area.</p>
             <ul class="steps"><li>½ × 14 × 9 = 63</li></ul>
@@ -342,12 +384,28 @@
               <li>= 72 ÷ 8 = 9</li>
             </ul>
             <span class="ans">9 cm</span>
+            <hr class="sep">
+            <h3>Worked example: area of a parallelogram</h3>
+            <p class="q">A parallelogram has a base of 16 cm and a height of 9 cm. Its slanted side is 11 cm. Find its area.</p>
+            <ul class="steps">
+              <li>The slanted side (11 cm) is not the height — ignore it</li>
+              <li>16 × 9 = 144</li>
+            </ul>
+            <span class="ans">144 cm²</span>
+            <hr class="sep">
+            <h3>Worked example: area of a trapezium</h3>
+            <p class="q">A trapezium has parallel sides of 12 cm and 8 cm, and a height of 5 cm. Find its area.</p>
+            <ul class="steps">
+              <li>½ × (12 + 8) × 5</li>
+              <li>= ½ × 20 × 5 = 50</li>
+            </ul>
+            <span class="ans">50 cm²</span>
           </div>
-          <div class="warn"><b>Watch out:</b> never use a slanted side as the height — look for the small square that marks the right angle, or check the height is drawn straight up from the base (even if that means it falls outside the triangle).</div>
+          <div class="warn"><b>Watch out:</b> for triangles, parallelograms, and trapeziums, never use a slanted side as the height — look for the small square that marks the right angle, or check the height is drawn straight up from the base (even if that means it falls outside the shape). For a trapezium, make sure a and b are the two <i>parallel</i> sides, not a slanted one.</div>
           <details class="try">
             <summary>Your turn</summary>
-            <p>A triangle has an area of 45 cm² and a height of 10 cm. Find its base.</p>
-            <p class="reveal">Base = 2 × 45 ÷ 10 = 90 ÷ 10 = 9 cm</p>
+            <p>A parallelogram has a base of 9 cm and a height of 6 cm. Find its area.</p>
+            <p class="reveal">9 × 6 = 54 cm²</p>
           </details>
         </div>
       </div>
