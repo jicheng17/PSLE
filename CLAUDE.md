@@ -4,6 +4,27 @@ A small Flask site of exam-prep cheat sheets built for one family's PSLE
 (Singapore Primary 6 Leaving Exam) revision — currently Math and Science,
 plus a countdown review plan. Not affiliated with MOE/SEAB.
 
+## Scope & purpose
+
+- **Scope**: every topic, question, and worked example on this site is
+  Singapore **Primary 5** syllabus. The PSLE itself is sat at the end of
+  P6, but the son is currently in P5, so all content should track what
+  he's being taught and examined on *now* — P5, not P6. P6-scoped content
+  doesn't belong here (the old Map Maths category was P6 and was removed
+  for exactly this reason — see History below). When in doubt about
+  whether something is P5 or P6 syllabus, check before adding it.
+- **Purpose**: this is a living cheat sheet, not a one-off Q&A log. When a
+  Primary 5 exam question or a piece of relevant syllabus information
+  comes up in conversation — the user asks about a topic, shares a
+  question from a worksheet or paper, or it surfaces while researching —
+  the default is to capture it into the appropriate cheat-sheet page (a
+  new topic section, a new worked example, or an addition to an existing
+  rule/example), not just answer it in chat and leave it there. Treat
+  "explain X" or "give me examples of Y" as an implicit "...and add it to
+  the cheat sheet," following the Content workflow below, unless the user
+  is clearly just asking a quick one-off question about something already
+  on the page (e.g. "what does this rule mean?").
+
 ## Structure
 
 - `app.py` — Flask app. Routes: `/` (index), `/math`, `/science`, `/plan`,
@@ -61,8 +82,10 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
 
 ## Content workflow (adding or editing a topic section)
 
-1. If the content is level-specific, confirm the exact syllabus boundary
-   (e.g. what's P5 vs P6) with a web search before writing anything.
+1. Confirm the content is genuinely Primary 5 syllabus (not P6) before
+   writing anything — the site's scope is P5 only (see Scope & purpose
+   above). A web search is worth doing when the P5/P6 boundary on a topic
+   isn't obvious.
 2. Draft the rules list + 2–3 worked examples.
 3. Verify every worked-example calculation with Python (`fractions.Fraction`
    for exact arithmetic) before it goes in the HTML — do not hand-check PSLE
