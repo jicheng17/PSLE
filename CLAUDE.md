@@ -44,10 +44,15 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
 ## Running locally
 
 - Prod-style: `python app.py` (Flask debug server) or `gunicorn app:app`.
-- With live-reload: `python dev_server.py` → http://127.0.0.1:5000, watches
+- With live-reload: `python dev_server.py` → http://127.0.0.1:5001, watches
   `templates/*.html` and `app.py`.
 - `app.config["TEMPLATES_AUTO_RELOAD"] = True` is already set in `app.py`,
   so Jinja template edits show up on refresh even without `dev_server.py`.
+- Both `app.py` and `dev_server.py` run on port **5001**, not Flask's
+  default 5000 — on most Macs, port 5000 is claimed by the system's
+  AirPlay Receiver, and hitting `http://127.0.0.1:5000` lands on that
+  instead of the app, showing a confusing "Access to 127.0.0.1 was
+  denied" in the browser rather than connecting to Flask.
 
 ## Design system (shared conventions across every page)
 

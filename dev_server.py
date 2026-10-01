@@ -25,6 +25,9 @@ if __name__ == "__main__":
     server.watch("templates/*.html")
     server.watch("app.py")
 
-    print("Live-reload dev server running at http://127.0.0.1:5000")
+    # Port 5000 is claimed by macOS's AirPlay Receiver on most Macs, which
+    # causes a confusing "Access to 127.0.0.1 was denied" in the browser
+    # instead of reaching this app. 5001 avoids that.
+    print("Live-reload dev server running at http://127.0.0.1:5001")
     print("Edit a template and save — your browser tab will refresh itself.")
-    server.serve(port=5000, host="127.0.0.1", debug=True)
+    server.serve(port=5001, host="127.0.0.1", debug=True)

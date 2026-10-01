@@ -25,4 +25,7 @@ def plan_page():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Port 5000 is claimed by macOS's AirPlay Receiver on most Macs, which
+    # causes a confusing "Access to 127.0.0.1 was denied" in the browser
+    # instead of reaching this app. 5001 avoids that.
+    app.run(debug=True, port=5001)
