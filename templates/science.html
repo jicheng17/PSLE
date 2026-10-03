@@ -460,27 +460,40 @@
     <div class="cols">
       <div class="panel">
         <h3>Path of air</h3>
-        <svg viewBox="0 0 235 230" role="img" aria-label="Air travels from the nose down the windpipe, splitting into two bronchi that lead to the lungs, ending in clusters of alveoli. The diaphragm below moves down on inhaling and up on exhaling.">
+        <svg viewBox="0 0 300 242" role="img" aria-label="Air travels from the nose down the windpipe, which splits into two bronchi, one to each lung. Inside each lung a bronchus branches into smaller bronchioles that end in clusters of tiny air sacs called alveoli. The diaphragm below moves down on inhaling and up on exhaling.">
           <ellipse cx="100" cy="26" rx="26" ry="22" class="plain"/>
           <path d="M92 30 q8 8 16 0" class="ray" style="stroke-width:1.4"/>
-          <line class="ray" x1="100" y1="46" x2="100" y2="90" style="stroke-width:5;stroke:var(--tint)"/>
+          <line class="ray" x1="100" y1="46" x2="100" y2="90" style="stroke-width:6;stroke:var(--tint)"/>
           <line class="ray" x1="100" y1="46" x2="100" y2="90" style="stroke-width:2"/>
-          <path class="ray" d="M100 90 L66 122" style="stroke-width:3"/>
-          <path class="ray" d="M100 90 L134 122" style="stroke-width:3"/>
+          <g class="ray" style="stroke-width:1.2"><path d="M96 54 h8"/><path d="M96 62 h8"/><path d="M96 70 h8"/><path d="M96 78 h8"/></g>
+          <path class="ray" d="M100 90 L66 122" style="stroke:var(--accent);stroke-width:4.5"/>
+          <path class="ray" d="M100 90 L134 122" style="stroke:var(--accent);stroke-width:4.5"/>
           <path class="shape" d="M66 122 Q40 140 46 175 Q52 205 78 200 Q70 160 66 122 Z"/>
           <path class="shape" d="M134 122 Q160 140 154 175 Q148 205 122 200 Q130 160 134 122 Z"/>
+          <g class="ray" style="stroke-width:1.3">
+            <path d="M134 122 L136 148"/><path d="M136 148 L142 168"/><path d="M136 148 L130 166"/><path d="M130 166 L128 188"/><path d="M142 168 L136 180"/>
+            <path d="M66 122 L64 148"/><path d="M64 148 L58 168"/><path d="M64 148 L70 166"/><path d="M70 166 L72 188"/><path d="M58 168 L64 180"/>
+          </g>
           <g class="dot" opacity=".8">
             <circle cx="58" cy="168" r="3"/><circle cx="64" cy="180" r="3"/><circle cx="70" cy="166" r="3"/><circle cx="72" cy="188" r="3"/>
             <circle cx="142" cy="168" r="3"/><circle cx="136" cy="180" r="3"/><circle cx="130" cy="166" r="3"/><circle cx="128" cy="188" r="3"/>
           </g>
           <path class="dash" d="M40 210 Q100 226 160 210" style="stroke-width:2"/>
           <path class="ray" d="M96 214 v10" marker-end="url(#ah)" style="stroke:var(--accent)"/>
-          <text class="lbl" x="140" y="18" text-anchor="start">nose</text>
-          <text class="lbl" x="112" y="70" text-anchor="start">windpipe</text>
-          <text class="lbl" x="155" y="115" text-anchor="start">bronchus</text>
-          <text class="lbl" x="150" y="150" text-anchor="start">lung</text>
-          <text class="mut" x="100" y="196" text-anchor="middle">alveoli</text>
-          <text class="mut" x="96" y="227" text-anchor="middle">diaphragm (inhaling)</text>
+          <text class="lbl" x="132" y="18" text-anchor="start">nose</text>
+          <text class="lbl" x="88" y="72" text-anchor="end">windpipe</text>
+          <text class="mut" x="88" y="84" text-anchor="end">(trachea)</text>
+          <line class="dash" x1="119" y1="107" x2="176" y2="92" style="stroke-width:1"/>
+          <text class="lbl" x="180" y="92" text-anchor="start" style="fill:var(--accent)">bronchus</text>
+          <text class="mut" x="180" y="104" text-anchor="start">one to each lung</text>
+          <line class="dash" x1="152" y1="140" x2="176" y2="132" style="stroke-width:1"/>
+          <text class="lbl" x="180" y="134" text-anchor="start">lung</text>
+          <line class="dash" x1="138" y1="154" x2="176" y2="156" style="stroke-width:1"/>
+          <text class="lbl" x="180" y="159" text-anchor="start">bronchioles</text>
+          <line class="dash" x1="139" y1="178" x2="176" y2="188" style="stroke-width:1"/>
+          <text class="lbl" x="180" y="191" text-anchor="start">alveoli</text>
+          <text class="mut" x="180" y="203" text-anchor="start">tiny air sacs</text>
+          <text class="mut" x="96" y="238" text-anchor="middle">diaphragm (inhaling)</text>
         </svg>
       </div>
       <div class="stack">
@@ -488,6 +501,9 @@
           <h3>Key facts</h3>
           <ul class="rules">
             <li><b>Path of air in</b><span>Nose → windpipe (trachea) → bronchus → bronchioles → alveoli (tiny air sacs) in the lungs.</span></li>
+            <li><b>Bronchus (plural: bronchi)</b><span>The windpipe splits into two bronchi, one going to each lung. Each bronchus is a tube that carries air into and out of its lung, then branches into smaller and smaller tubes (bronchioles).</span></li>
+            <li><b>Job of the bronchi and windpipe</b><span>Rings of cartilage hold the tubes open so air can always flow. Mucus and tiny hairs lining them trap dust and germs that got past the nose and sweep them up and out.</span></li>
+            <li><b>Bronchioles</b><span>The thinner tubes inside the lung. They spread the air out to millions of alveoli, so every part of the lung gets fresh air.</span></li>
             <li><b>Job of the nose</b><span>Tiny hairs and mucus filter out dust and germs, and warm and moisten the air.</span></li>
             <li><b>Gas exchange</b><span>In the alveoli, oxygen passes into the blood and carbon dioxide passes out, across thin walls surrounded by capillaries.</span></li>
             <li><b>Breathing in</b><span>The diaphragm contracts and moves down; the chest cavity gets bigger; air is drawn into the lungs.</span></li>
@@ -499,6 +515,8 @@
           <summary>Your turn</summary>
           <p>Where exactly does gas exchange take place, and why are its walls so thin?</p>
           <p class="reveal">In the alveoli. Thin walls let oxygen and carbon dioxide pass through quickly and easily.</p>
+          <p>What is the job of a bronchus, and how many are there?</p>
+          <p class="reveal">It carries air between the windpipe and a lung. There are two, one for each lung.</p>
         </details>
       </div>
     </div>
