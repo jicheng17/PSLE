@@ -108,6 +108,9 @@
   .rules li { background: var(--formula); border-radius: 8px; padding: 10px 12px; font-size: 15px; }
   .rules b { font-weight: 600; font-size: 14.5px; display: block; }
   .rules span { color: var(--muted); font-size: 14px; }
+  .rules ul.pts { margin: 4px 0 6px; padding-left: 20px; list-style: disc; display: grid; gap: 3px; }
+  .rules ul.pts li { background: none; padding: 0; font-size: 14px; color: var(--muted); }
+  .rules ul.pts li b { display: inline; font-size: 14px; color: var(--ink); }
   .tag { font-family: var(--body); font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-left: 6px; white-space: nowrap; font-weight: 400; }
 
   .qa { border-left: 3px solid var(--tint); padding-left: 12px; }
@@ -365,7 +368,14 @@
           <h3>Key facts</h3>
           <ul class="rules">
             <li><b>Order of the food path</b><span>Mouth → gullet → stomach → small intestine → large intestine → anus.</span></li>
-            <li><b>Where digestion happens</b><span>It starts in the mouth, carries on in the stomach, and is finished in the small intestine. The gullet only moves the food along, and the large intestine only takes water from what is left.</span></li>
+            <li><b>Where digestion happens (3 places)</b>
+              <ul class="pts">
+                <li><b>Mouth:</b> digestion starts. Teeth break the food into small pieces and saliva starts to break it down.</li>
+                <li><b>Stomach:</b> digestion carries on. The food is churned and mixed with digestive juices into a thick liquid.</li>
+                <li><b>Small intestine:</b> digestion is finished. The digested food passes into the blood.</li>
+              </ul>
+              <span>No digestion in the gullet (it only moves the food along) or the large intestine (it only takes water from what is left).</span>
+            </li>
             <li><b>Working together</b><span>Each part does one job and passes the food on to the next. If one part stops working, the whole system is affected.</span></li>
             <li><b>Where digested food goes</b><span>The blood (circulatory system) carries it to all parts of the body. See the flow chart in <a href="/science#heart" style="color:var(--accent);font-weight:500">Primary 5 Science</a>.</span></li>
           </ul>
