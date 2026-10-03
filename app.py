@@ -24,6 +24,11 @@ def science_p4_page():
     return render_template("science_p4.html")
 
 
+@app.route("/science-p3")
+def science_p3_page():
+    return render_template("science_p3.html")
+
+
 @app.route("/plan")
 def plan_page():
     return render_template("plan.html")

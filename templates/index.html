@@ -19,21 +19,21 @@
     --shadow: 0 1px 0 rgba(32,30,51,.06), 0 10px 28px -14px rgba(32,30,51,.28);
     --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
     --body: "Lexend", "Segoe UI", system-ui, sans-serif;
-    --math: #0B7C86; --science: #1E8A5A; --p4: #1F76A8; --plan: #D9622B;
+    --math: #0B7C86; --science: #1E8A5A; --p4: #1F76A8; --p3: #A8467C; --plan: #D9622B;
   }
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
       --bg: #17151F; --surface: #211E2C; --ink: #EDEBF7; --muted: #ABA7C9;
       --line: #37324A; --accent: #9C93F5; --on-accent: #14122099;
       --shadow: 0 1px 0 rgba(0,0,0,.3), 0 10px 28px -14px rgba(0,0,0,.6);
-      --math: #4FC3CE; --science: #55C88C; --p4: #62BDE3; --plan: #F0824A;
+      --math: #4FC3CE; --science: #55C88C; --p4: #62BDE3; --p3: #E58BBE; --plan: #F0824A;
     }
   }
   :root[data-theme="dark"] {
     --bg: #17151F; --surface: #211E2C; --ink: #EDEBF7; --muted: #ABA7C9;
     --line: #37324A; --accent: #9C93F5; --on-accent: #14122099;
     --shadow: 0 1px 0 rgba(0,0,0,.3), 0 10px 28px -14px rgba(0,0,0,.6);
-    --math: #4FC3CE; --science: #55C88C; --p4: #62BDE3; --plan: #F0824A;
+    --math: #4FC3CE; --science: #55C88C; --p4: #62BDE3; --p3: #E58BBE; --plan: #F0824A;
   }
   * { box-sizing: border-box; }
   body {
@@ -49,8 +49,7 @@
   h1 { font-size: clamp(2.1rem, 6.5vw, 3rem); font-weight: 700; letter-spacing: -.02em; margin-top: 6px; }
   .lede { max-width: 56ch; color: var(--muted); margin-top: 12px; font-size: 1.05rem; }
 
-  .cards { display: grid; gap: 18px; grid-template-columns: 1fr; margin-top: 36px; }
-  @media (min-width: 620px) { .cards { grid-template-columns: 1fr 1fr; } }
+  .cards { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); margin-top: 36px; }
   .card {
     display: block; text-decoration: none; color: inherit;
     background: var(--surface); border: 1px solid var(--line); border-radius: 16px;
@@ -71,6 +70,7 @@
   .card.math { --card-accent: var(--math); }
   .card.science { --card-accent: var(--science); }
   .card.p4 { --card-accent: var(--p4); }
+  .card.p3 { --card-accent: var(--p3); }
   .card.plan { --card-accent: var(--plan); }
 
   footer { margin-top: 32px; font-size: 13px; color: var(--muted); }
@@ -99,6 +99,12 @@
       <div class="icon">S4</div>
       <h2><span class="subject">Science</span> · P4 Science</h2>
       <p class="desc">Last year's chapters: plant and digestive systems, matter, light, shadows, heat and its effects.</p>
+      <div class="go">Open the cheat sheet →</div>
+    </a>
+    <a class="card p3" href="/science-p3">
+      <div class="icon">S3</div>
+      <h2><span class="subject">Science</span> · P3 Science</h2>
+      <p class="desc">Living things, classification, materials, life cycles of plants and animals, and magnets.</p>
       <div class="go">Open the cheat sheet →</div>
     </a>
     <a class="card plan" href="/plan">

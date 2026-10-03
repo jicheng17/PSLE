@@ -29,8 +29,13 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
   blue accent, chapters 1–7). It is last year's revision material and is
   deliberately kept on its own page so the main Math/Science pages stay
   P5-only. Don't mix P4 content into the P5 pages; link between them
-  instead. Apart from this page, P4 and P6 content still doesn't belong
-  here unless the user asks for it.
+  instead. Apart from the P4 and P3 pages, P6 content still doesn't
+  belong here unless the user asks for it.
+- **P3 exception**: on 2026-10-03 the user also asked for a Primary 3
+  Science cheat sheet from a photo of the P3 textbook contents page:
+  `/science-p3` (`templates/science_p3.html`, plum accent, chapters 1–7:
+  living/non-living, classification, materials, plant and animal life
+  cycles, magnets). Same rule as P4: its own page, linked from the others.
 - **Purpose**: this is a living cheat sheet, not a one-off Q&A log. When a
   Primary 5 exam question or a piece of relevant syllabus information
   comes up in conversation — the user asks about a topic, shares a
@@ -46,10 +51,10 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
 ## Structure
 
 - `app.py` — Flask app. Routes: `/` (index), `/math`, `/science`,
-  `/science-p4`, `/plan`,
+  `/science-p4`, `/science-p3`, `/plan`,
   each just `render_template`-ing the matching file in `templates/`.
 - `templates/index.html`, `math.html`, `science.html`,
-  `science_p4.html`, `plan.html` — one
+  `science_p4.html`, `science_p3.html`, `plan.html` — one
   self-contained HTML file per page (styles inline in `<style>`, no shared
   CSS/JS files, no JS at all beyond `<details>` disclosure widgets).
 - `dev_server.py` — run this instead of `app.py` while editing; wraps the
@@ -181,3 +186,13 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
   topic of Ch 7 was cut off in the contents photo, and the Ch 2 overview
   of body systems (skeletal/muscular rows) is a best guess — check against
   the textbook if the user reports gaps.
+- On 2026-10-03 `science_p3.html` was added (P3 chapters: Diversity of
+  Living and Non-living Things, Classification of Living Things,
+  Diversity of Materials, Life Cycles of Plants, Life Cycles of Animals,
+  Properties of Magnets, Making and Using Magnets). The facts were written
+  at P3 level from the textbook's topic questions only (the pages
+  themselves weren't seen), so the classification groups (flowering /
+  non-flowering plants, with / without a backbone, fungi, bacteria) and
+  the list of animal life cycles are best guesses — check against the
+  textbook if the user reports gaps. The home page card grid now uses
+  `auto-fit` columns so more cards can be added.

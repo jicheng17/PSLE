@@ -1,0 +1,625 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Science Sense P3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Lexend:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #F8F0F5;
+    --surface: #FFFFFF;
+    --ink: #331A2A;
+    --muted: #70506A;
+    --line: #E6D0DF;
+    --accent: #A8467C;
+    --on-accent: #FFFFFF;
+    --tint: #F5E3EE;
+    --formula: #F4E4ED;
+    --warn-bg: #FFF1D6;
+    --warn-ink: #6E4300;
+    --warn-line: #E2AD45;
+    --shadow: 0 1px 0 rgba(51,26,42,.06), 0 8px 24px -12px rgba(51,26,42,.2);
+    --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Lexend", "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --anther: #F2C14E; --soil: #A9794C;
+    --artery: #D9594F; --vein: #4E7FBF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1D0F18; --surface: #2C1927; --ink: #F7E6F0; --muted: #D1A5BE;
+      --line: #4B2A41; --accent: #E58BBE; --on-accent: #2A0E1E; --tint: #3C2135;
+      --formula: #39202F; --warn-bg: #362A0E; --warn-ink: #F3CD85; --warn-line: #8A6620;
+      --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+      --anther: #E8BE55; --soil: #B58A5E;
+      --artery: #E27A70; --vein: #6C97D1;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1D0F18; --surface: #2C1927; --ink: #F7E6F0; --muted: #D1A5BE;
+    --line: #4B2A41; --accent: #E58BBE; --on-accent: #2A0E1E; --tint: #3C2135;
+    --formula: #39202F; --warn-bg: #362A0E; --warn-ink: #F3CD85; --warn-line: #8A6620;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    --anther: #E8BE55; --soil: #B58A5E;
+    --artery: #E27A70; --vein: #6C97D1;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.55;
+    padding-inline: 16px;
+  }
+  .wrap { max-width: 1040px; margin-inline: auto; padding-block: 28px 56px; }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.12; margin: 0; }
+  p { margin: 0; }
+
+  .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(2.3rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: -.02em; margin-top: 6px; }
+  .lede { max-width: 62ch; color: var(--muted); margin-top: 12px; font-size: 1.05rem; }
+
+  .nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    background: var(--bg); padding-block: 12px; margin-top: 18px;
+    border-bottom: 1px solid var(--line);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .nav a {
+    text-decoration: none; color: var(--ink); font-size: 14px; font-weight: 500;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+  }
+  .nav a:hover { border-color: var(--accent); color: var(--accent); }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .sec { margin-top: 44px; scroll-margin-top: 80px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .sec-head h2 { font-size: clamp(1.5rem, 4.2vw, 2rem); font-weight: 700; letter-spacing: -.01em; }
+  .rules a { color: var(--accent); font-weight: 500; }
+  .rules a:hover { text-decoration: none; }
+  .chno { display: inline-block; font-family: var(--display); font-size: .55em; font-weight: 700; letter-spacing: .02em; color: var(--on-accent); background: var(--accent); border-radius: 8px; padding: .2em .55em; margin-right: .35em; vertical-align: .18em; white-space: nowrap; }
+  .strand { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .cols { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; margin-top: 16px; }
+  @media (min-width: 820px) { .cols { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; box-shadow: var(--shadow); }
+  .panel h3 { font-size: 1.05rem; margin-bottom: 10px; }
+  .stack { display: grid; gap: 16px; }
+  .cols > *, .stack > * { min-width: 0; }
+
+  .figs { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+  .figs figure { margin: 0; }
+  .figs svg { width: 100%; max-width: 220px; margin-inline: auto; }
+  .figs.wide svg { max-width: 400px; }
+  .flowchart { list-style: none; margin: 0; padding: 0; max-width: 500px; margin-inline: auto; }
+  .flowchart li { position: relative; background: var(--surface); border: 2px solid var(--c, var(--accent)); border-radius: 10px; padding: 9px 14px 11px; margin-bottom: 28px; text-align: center; font-size: 14.5px; line-height: 1.45; }
+  .flowchart li:last-child { margin-bottom: 0; }
+  .flowchart li::before { content: ""; position: absolute; left: calc(50% - 1.5px); bottom: -18px; width: 3px; height: 12px; background: var(--muted); }
+  .flowchart li::after { content: ""; position: absolute; left: calc(50% - 7px); bottom: -28px; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 10px solid var(--muted); }
+  .flowchart li:last-child::before, .flowchart li:last-child::after { display: none; }
+  .flowchart .ftag { display: block; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+
+  .figs figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; text-align: center; }
+  .figs figcaption b { color: var(--ink); font-weight: 600; display: block; font-size: 14px; }
+
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .rules li { background: var(--formula); border-radius: 8px; padding: 10px 12px; font-size: 15px; }
+  .rules b { font-weight: 600; font-size: 14.5px; display: block; }
+  .rules span { color: var(--muted); font-size: 14px; }
+  .rules ul.pts { margin: 4px 0 6px; padding-left: 20px; list-style: disc; display: grid; gap: 3px; }
+  .rules ul.pts li { background: none; padding: 0; font-size: 14px; color: var(--muted); }
+  .rules ul.pts li b { display: inline; font-size: 14px; color: var(--ink); }
+  .tag { font-family: var(--body); font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-left: 6px; white-space: nowrap; font-weight: 400; }
+
+  .qa { border-left: 3px solid var(--tint); padding-left: 12px; }
+  .qa p:first-child { font-weight: 500; }
+  .qa .a { margin-top: 6px; display: inline-block; background: var(--accent); color: var(--on-accent); font-weight: 600; padding: 3px 10px; border-radius: 6px; font-size: 14.5px; }
+  .sep { border: 0; border-top: 1px dashed var(--line); margin: 16px 0; }
+
+  .warn { background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); border-radius: 10px; padding: 12px 14px; font-size: 14.5px; }
+  .warn b { font-weight: 600; }
+
+  details.try { border: 1px dashed var(--accent); border-radius: 10px; padding: 12px 14px; }
+  details.try summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+  details.try p { margin-top: 8px; }
+  details.try .reveal { font-size: 14.5px; color: var(--muted); }
+
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child th, tr:last-child td { border-bottom: 0; }
+  thead th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  tbody th { font-family: var(--display); font-weight: 600; white-space: nowrap; color: var(--accent); font-size: 15px; }
+
+  svg { max-width: 100%; height: auto; display: block; margin-inline: auto; }
+  svg text { font-family: var(--body); fill: var(--ink); font-size: 10.5px; }
+  svg .lbl { font-weight: 600; font-size: 11px; }
+  svg .mut { fill: var(--muted); font-size: 9.5px; }
+  svg .shape { fill: var(--tint); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+  svg .plain { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+  svg .ray { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+  svg .arc { fill: none; stroke: var(--accent); stroke-width: 2; }
+  svg .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  svg .dot { fill: var(--ink); }
+  svg .node { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+
+  .checklist { margin-top: 44px; }
+  .checklist ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .checklist li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+  .checklist li b { display: block; font-family: var(--display); font-size: 1.05rem; margin-bottom: 2px; }
+  footer { margin-top: 36px; font-size: 13px; color: var(--muted); }
+
+  @media print {
+    body { background: #fff; padding-inline: 0; font-size: 12px; }
+    .nav { display: none; }
+    .panel, .warn, .checklist li { box-shadow: none; break-inside: avoid; }
+    .sec { break-inside: avoid-page; }
+    details.try:not([open]) > *:not(summary) { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+  .sitebar { display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; padding:12px 16px; max-width:1040px; margin:0 auto; font-size:13px; color:var(--muted); }
+  .sitebar a { color:var(--muted); text-decoration:none; }
+  .sitebar a:hover { color:var(--accent); }
+  .sitebar a.current { color:var(--ink); font-weight:600; }
+  .sitebar .sep { opacity:.4; }
+
+  .tree, .tree ul { list-style: none; margin: 0; padding: 0; }
+  .tree ul { margin-left: 14px; padding-left: 18px; border-left: 2px solid var(--line); }
+  .tree li { position: relative; padding: 5px 0; }
+  .tree ul li::before { content: ""; position: absolute; left: -18px; top: 17px; width: 14px; border-top: 2px solid var(--line); }
+  .chip { display: inline-block; background: var(--tint); border: 1.5px solid var(--accent); border-radius: 8px; padding: 3px 10px; font-weight: 600; font-size: 14.5px; }
+  .tree .eg { color: var(--muted); font-size: 13.5px; margin-left: 6px; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false"><defs><marker id="ah" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" style="fill:var(--ink)"/></marker></defs></svg>
+<div class="sitebar"><a href="/">All subjects</a><span class="sep">/</span><a href="/math">Math</a><span class="sep">/</span><a href="/science">Science P5</a><span class="sep">/</span><a href="/science-p4">Science P4</a><span class="sep">/</span><a href="/science-p3" class="current">Science P3</a><span class="sep">/</span><a href="/plan">Review plan</a></div>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Primary 3 Science · Chapters 1–7</p>
+    <h1>Science Sense P3</h1>
+    <p class="lede">Revision from two years ago: living and non-living things, how living things are grouped, materials, life cycles, and magnets. Key facts, diagrams and a quick check for each chapter.</p>
+  </header>
+
+  <nav class="nav" aria-label="Topics">
+    <a href="#p3-living">Ch 1 · Living and Non-living</a>
+    <a href="#p3-classify">Ch 2 · Classification</a>
+    <a href="#p3-materials">Ch 3 · Materials</a>
+    <a href="#p3-plantlife">Ch 4 · Plant life cycles</a>
+    <a href="#p3-animallife">Ch 5 · Animal life cycles</a>
+    <a href="#p3-magnets">Ch 6 · Properties of Magnets</a>
+    <a href="#p3-making">Ch 7 · Making and Using Magnets</a>
+    <a href="#habits">Exam habits</a>
+  </nav>
+
+  <section class="sec" id="chapters" aria-labelledby="chapters-h" style="margin-top:28px">
+    <div class="panel">
+      <h3 id="chapters-h">Textbook chapters at a glance</h3>
+      <ul class="rules">
+        <li><b>Theme – Diversity</b><span>Theme opener p. 2 · closes at p. 71</span></li>
+        <li><b>Chapter 1 · Diversity of Living and Non-living Things</b><span>Textbook p. 4 · What can we observe around us? What do living things need? What can living things do? · <a href="#p3-living">open</a></span></li>
+        <li><b>Chapter 2 · Classification of Living Things</b><span>Textbook p. 19 · What are the similarities and differences between plants and animals? What other groups of living things are there? · <a href="#p3-classify">open</a></span></li>
+        <li><b>Chapter 3 · Diversity of Materials</b><span>Textbook p. 45 · What are the different types of materials around us? What are the physical properties of materials? How are materials with different properties used? · <a href="#p3-materials">open</a></span></li>
+        <li><b>Theme – Cycles</b><span>Theme opener p. 73</span></li>
+        <li><b>Chapter 4 · Life Cycles of Plants</b><span>Textbook p. 74 · What is a life cycle? What are the stages in the life cycle of a plant? · <a href="#p3-plantlife">open</a></span></li>
+        <li><b>Chapter 5 · Life Cycles of Animals</b><span>Textbook p. 80 · What are the stages in the life cycles of different animals? How are the life cycles of animals similar or different? · <a href="#p3-animallife">open</a></span></li>
+        <li><b>Theme – Interactions</b><span>Theme opener p. 99</span></li>
+        <li><b>Chapter 6 · Properties of Magnets</b><span>Textbook p. 100 · What is a magnet? Which parts of a magnet have the strongest pull? How do magnets interact with one another? What direction does a freely suspended magnet point in? · <a href="#p3-magnets">open</a></span></li>
+        <li><b>Chapter 7 · Making and Using Magnets</b><span>Textbook p. 113 · How can we make a magnet? How are magnets used in our everyday life? · <a href="#p3-making">open</a></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CH 1 -->
+  <section class="sec" id="p3-living" aria-labelledby="p3-living-h">
+    <div class="sec-head"><h2 id="p3-living-h"><span class="chno">Ch 1</span>Diversity of Living and Non-living Things</h2><span class="strand">Diversity · Living things</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Living or non-living?</h3>
+        <div class="scroll"><table style="min-width:0">
+          <thead><tr><th></th><th>Living things</th><th>Non-living things</th></tr></thead>
+          <tbody>
+            <tr><th>Examples</th><td>Plants, animals, humans, mushrooms</td><td>Rocks, water, a car, a toy, a pencil</td></tr>
+            <tr><th>Need food, water and air</th><td>Yes</td><td>No</td></tr>
+            <tr><th>Grow</th><td>Yes</td><td>No (they may change size, but not by growing)</td></tr>
+            <tr><th>Reproduce</th><td>Yes</td><td>No</td></tr>
+            <tr><th>Respond to changes</th><td>Yes</td><td>No</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts</h3>
+          <ul class="rules">
+            <li><b>Observing</b><span>We use our senses (sight, hearing, smell, touch, taste) to observe things around us. Never taste or smell unknown things; they may be harmful.</span></li>
+            <li><b>What living things need</b><span>Food, water and air. Plants make their own food (using light, water and air). Animals get food by eating plants or other animals.</span></li>
+            <li><b>What living things can do</b><span>Grow, reproduce (make young like themselves), respond to changes around them, and move (animals move from place to place; plants move only parts, e.g. leaves turning to the light).</span></li>
+            <li><b>Non-living things</b><span>Do not need food, water or air, and cannot grow, reproduce or respond.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> moving is not enough to be alive. A car, a river and clouds all move but they are non-living. And a plant that does not seem to move is alive: it grows, makes food and responds to light.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>A toy robot walks and talks. Is it living? Give a reason.</p>
+          <p class="reveal">No. It does not need food, water or air, and it cannot grow or reproduce.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 2 -->
+  <section class="sec" id="p3-classify" aria-labelledby="p3-classify-h">
+    <div class="sec-head"><h2 id="p3-classify-h"><span class="chno">Ch 2</span>Classification of Living Things</h2><span class="strand">Diversity · Groups of living things</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Groups of living things</h3>
+        <ul class="tree">
+          <li><span class="chip">Living things</span>
+            <ul>
+              <li><span class="chip">Plants</span>
+                <ul>
+                  <li><span class="chip">Flowering plants</span><span class="eg">rose, hibiscus, mango tree</span></li>
+                  <li><span class="chip">Non-flowering plants</span><span class="eg">ferns, mosses</span></li>
+                </ul>
+              </li>
+              <li><span class="chip">Animals</span>
+                <ul>
+                  <li><span class="chip">With a backbone</span><span class="eg">fish, frog, lizard, bird, cat</span></li>
+                  <li><span class="chip">Without a backbone</span><span class="eg">butterfly, spider, snail, worm</span></li>
+                </ul>
+              </li>
+              <li><span class="chip">Fungi</span><span class="eg">mushroom, mould, yeast</span></li>
+              <li><span class="chip">Bacteria</span><span class="eg">too small to see without a microscope</span></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Plants and animals: similar and different</h3>
+          <ul class="rules">
+            <li><b>Both</b><span>Need food, water and air; grow; reproduce; respond to changes.</span></li>
+            <li><b>Plants</b><span>Make their own food. Usually cannot move from place to place. Have roots, stems and leaves.</span></li>
+            <li><b>Animals</b><span>Cannot make their own food, so they eat plants or other animals. Most can move from place to place.</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Other groups</h3>
+          <ul class="rules">
+            <li><b>Fungi</b><span>Cannot make their own food. They take food from other living or dead things. Mushrooms, mould and yeast are fungi.</span></li>
+            <li><b>Bacteria</b><span>Very tiny living things; we need a microscope to see them. Some are harmful and cause illness. Some are helpful, e.g. used to make yoghurt.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> a mushroom looks like a plant but it is a fungus. It does not make its own food. Use how a living thing gets its food, not just how it looks.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Name one way plants and animals are different.</p>
+          <p class="reveal">Plants make their own food, but animals cannot; animals must eat other living things.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 3 -->
+  <section class="sec" id="p3-materials" aria-labelledby="p3-materials-h">
+    <div class="sec-head"><h2 id="p3-materials-h"><span class="chno">Ch 3</span>Diversity of Materials</h2><span class="strand">Diversity · Materials</span></div>
+    <div class="panel">
+      <h3>Does light pass through the material?</h3>
+      <div class="figs wide" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))">
+        <figure><svg viewBox="0 0 200 90" role="img" aria-label="A lamp shines light at a transparent material."><circle cx="28" cy="45" r="10" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.5"/><line class="ray" x1="38" y1="45" x2="88" y2="22" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="38" y1="45" x2="88" y2="45" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="38" y1="45" x2="88" y2="68" style="stroke:var(--anther);stroke-width:2"/><rect x="90" y="14" width="12" height="62" style="fill:var(--tint);stroke:var(--accent);stroke-width:2;opacity:.8"/><line class="ray" x1="104" y1="22" x2="190" y2="12" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="104" y1="45" x2="190" y2="45" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="104" y1="68" x2="190" y2="78" style="stroke:var(--anther);stroke-width:2"/></svg><figcaption><b>Transparent</b>Lets all light through, e.g. clear glass</figcaption></figure>
+        <figure><svg viewBox="0 0 200 90" role="img" aria-label="A lamp shines light at a translucent material."><circle cx="28" cy="45" r="10" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.5"/><line class="ray" x1="38" y1="45" x2="88" y2="22" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="38" y1="45" x2="88" y2="45" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="38" y1="45" x2="88" y2="68" style="stroke:var(--anther);stroke-width:2"/><rect x="90" y="14" width="12" height="62" style="fill:var(--muted);stroke:var(--ink);stroke-width:1.5;opacity:.45"/><line class="ray" x1="104" y1="22" x2="190" y2="12" style="stroke:var(--anther);stroke-width:2;stroke-dasharray:3 4;opacity:.7"/><line class="ray" x1="104" y1="45" x2="190" y2="45" style="stroke:var(--anther);stroke-width:2;stroke-dasharray:3 4;opacity:.7"/><line class="ray" x1="104" y1="68" x2="190" y2="78" style="stroke:var(--anther);stroke-width:2;stroke-dasharray:3 4;opacity:.7"/></svg><figcaption><b>Translucent</b>Lets some light through, e.g. tracing paper</figcaption></figure>
+        <figure><svg viewBox="0 0 200 90" role="img" aria-label="A lamp shines light at a opaque material."><circle cx="28" cy="45" r="10" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.5"/><line class="ray" x1="38" y1="45" x2="88" y2="22" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="38" y1="45" x2="88" y2="45" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="38" y1="45" x2="88" y2="68" style="stroke:var(--anther);stroke-width:2"/><rect x="90" y="14" width="12" height="62" style="fill:var(--soil);stroke:var(--ink);stroke-width:1.5"/><text class="mut" x="150" y="49" text-anchor="middle">dark</text></svg><figcaption><b>Opaque</b>Lets no light through, e.g. wood</figcaption></figure>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts</h3>
+        <ul class="rules">
+          <li><b>Materials</b><span>What objects are made of. Common materials: plastic, metal, wood, glass, rubber, fabric (cloth), paper, ceramic.</span></li>
+          <li><b>Physical properties</b><span>How a material looks, feels or behaves. We choose a material for an object by its properties.</span></li>
+          <li><b>Strength</b><span>A strong material does not break easily when pushed or pulled, e.g. steel. A weak one breaks easily, e.g. paper.</span></li>
+          <li><b>Flexibility</b><span>A flexible material bends easily without breaking, e.g. rubber, cloth. A stiff one does not, e.g. wood.</span></li>
+          <li><b>Waterproof or absorbent</b><span>A waterproof material does not let water through, e.g. plastic. An absorbent material soaks water up, e.g. cloth, paper towel.</span></li>
+          <li><b>Float or sink</b><span>Some materials float on water, e.g. wood. Others sink, e.g. metal coin.</span></li>
+          <li><b>Transparency</b><span>Transparent, translucent or opaque (see the diagrams above).</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>How are different materials used?</h3>
+          <div class="scroll"><table style="min-width:0">
+            <thead><tr><th>Material</th><th>Property</th><th>Used for</th></tr></thead>
+            <tbody>
+              <tr><th>Glass</th><td>Transparent</td><td>Windows, spectacles</td></tr>
+              <tr><th>Rubber</th><td>Flexible, waterproof</td><td>Tyres, boots</td></tr>
+              <tr><th>Plastic</th><td>Waterproof, light</td><td>Raincoats, bottles</td></tr>
+              <tr><th>Metal</th><td>Strong, hard</td><td>Bridges, pots, tools</td></tr>
+              <tr><th>Cloth</th><td>Flexible, absorbent</td><td>Clothes, towels</td></tr>
+              <tr><th>Wood</th><td>Strong, stiff</td><td>Furniture</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="warn"><b>Watch out:</b> give the property, then the use. "Rubber is used for boots because it is waterproof" is a full answer; "rubber is used for boots" is not.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Why is a window made of glass and not wood?</p>
+          <p class="reveal">Glass is transparent, so light passes through and we can see through it. Wood is opaque.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 4 -->
+  <section class="sec" id="p3-plantlife" aria-labelledby="p3-plantlife-h">
+    <div class="sec-head"><h2 id="p3-plantlife-h"><span class="chno">Ch 4</span>Life Cycles of Plants</h2><span class="strand">Cycles · Plants</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Life cycle of a plant</h3>
+        <div class="figs wide" style="grid-template-columns:minmax(0,1fr)">
+        <svg viewBox="0 0 260 232" role="img" aria-label="Life cycle of a plant: a seed grows into a seedling, then a young plant, then an adult plant that makes flowers, fruits and new seeds. The cycle then repeats.">
+          <rect class="node" x="86" y="8" width="88" height="44" rx="9"/>
+          <text class="lbl" x="130" y="28" text-anchor="middle">Seed</text>
+          <text class="mut" x="130" y="41" text-anchor="middle">grows if warm, wet</text>
+          <rect class="node" x="168" y="94" width="88" height="44" rx="9"/>
+          <text class="lbl" x="212" y="114" text-anchor="middle">Seedling</text>
+          <text class="mut" x="212" y="127" text-anchor="middle">first roots, shoot</text>
+          <rect class="node" x="86" y="180" width="88" height="44" rx="9"/>
+          <text class="lbl" x="130" y="200" text-anchor="middle">Young plant</text>
+          <text class="mut" x="130" y="213" text-anchor="middle">more leaves</text>
+          <rect class="node" x="4" y="94" width="88" height="44" rx="9"/>
+          <text class="lbl" x="48" y="114" text-anchor="middle">Adult plant</text>
+          <text class="mut" x="48" y="127" text-anchor="middle">flowers, fruits, seeds</text>
+          <path class="ray" d="M154.4 55.6 L187.6 90.4" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M187.6 141.6 L154.4 176.4" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M105.6 176.4 L72.4 141.6" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M72.4 90.4 L105.6 55.6" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          </svg>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts</h3>
+          <ul class="rules">
+            <li><b>Life cycle</b><span>The series of stages in the life of a living thing, from the start of its life until it can make young like itself, which starts the cycle again.</span></li>
+            <li><b>Seed</b><span>A seed can grow into a new plant. Many seeds are made in fruits.</span></li>
+            <li><b>Germination</b><span>When a seed starts to grow. It needs water, air and warmth (it does not need light or soil to start).</span></li>
+            <li><b>Seedling</b><span>The tiny young plant that comes out of the seed: a root grows down and a shoot grows up.</span></li>
+            <li><b>Young plant</b><span>The seedling grows taller and grows more leaves.</span></li>
+            <li><b>Adult plant</b><span>Makes flowers. The flowers make fruits that hold new seeds, so the cycle starts again.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> a seed needs water, air and warmth to germinate, but not sunlight. Light is needed later, once the leaves can make food.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>List the stages in the life cycle of a plant in order.</p>
+          <p class="reveal">Seed → seedling → young plant → adult plant (which makes flowers, fruits and new seeds).</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 5 -->
+  <section class="sec" id="p3-animallife" aria-labelledby="p3-animallife-h">
+    <div class="sec-head"><h2 id="p3-animallife-h"><span class="chno">Ch 5</span>Life Cycles of Animals</h2><span class="strand">Cycles · Animals</span></div>
+    <div class="panel">
+      <h3>Four stages or three stages</h3>
+      <div class="figs wide" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <figure>
+          <svg viewBox="0 0 260 232" role="img" aria-label="Life cycle of a butterfly with four stages: egg, larva (caterpillar), pupa, then adult butterfly, which lays new eggs.">
+          <rect class="node" x="86" y="8" width="88" height="44" rx="9"/>
+          <text class="lbl" x="130" y="28" text-anchor="middle">Egg</text>
+          <text class="mut" x="130" y="41" text-anchor="middle">on a leaf</text>
+          <rect class="node" x="168" y="94" width="88" height="44" rx="9"/>
+          <text class="lbl" x="212" y="114" text-anchor="middle">Larva</text>
+          <text class="mut" x="212" y="127" text-anchor="middle">caterpillar, eats</text>
+          <rect class="node" x="86" y="180" width="88" height="44" rx="9"/>
+          <text class="lbl" x="130" y="200" text-anchor="middle">Pupa</text>
+          <text class="mut" x="130" y="213" text-anchor="middle">not feeding</text>
+          <rect class="node" x="4" y="94" width="88" height="44" rx="9"/>
+          <text class="lbl" x="48" y="114" text-anchor="middle">Adult</text>
+          <text class="mut" x="48" y="127" text-anchor="middle">butterfly, flies</text>
+          <path class="ray" d="M154.4 55.6 L187.6 90.4" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M187.6 141.6 L154.4 176.4" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M105.6 176.4 L72.4 141.6" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M72.4 90.4 L105.6 55.6" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          </svg>
+          <figcaption><b>Butterfly: 4 stages</b>The larva (caterpillar) looks very different from the adult</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 260 232" role="img" aria-label="Life cycle of a cockroach with three stages: egg, nymph, adult. The adult lays new eggs.">
+          <rect class="node" x="86" y="8" width="88" height="44" rx="9"/>
+          <text class="lbl" x="130" y="28" text-anchor="middle">Egg</text>
+          <text class="mut" x="130" y="41" text-anchor="middle">in an egg case</text>
+          <rect class="node" x="168" y="168" width="88" height="44" rx="9"/>
+          <text class="lbl" x="212" y="188" text-anchor="middle">Nymph</text>
+          <text class="mut" x="212" y="201" text-anchor="middle">small, no wings</text>
+          <rect class="node" x="4" y="168" width="88" height="44" rx="9"/>
+          <text class="lbl" x="48" y="188" text-anchor="middle">Adult</text>
+          <text class="mut" x="48" y="201" text-anchor="middle">has wings</text>
+          <path class="ray" d="M143.6 56.4 L198.4 163.6" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M163.0 190.0 L97.0 190.0" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M61.6 163.6 L116.4 56.4" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          </svg>
+          <figcaption><b>Cockroach: 3 stages</b>The nymph looks like a small adult without wings</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Life cycles of different animals</h3>
+        <div class="scroll"><table style="min-width:0">
+          <thead><tr><th>Animal</th><th>Stages</th></tr></thead>
+          <tbody>
+            <tr><th>Butterfly</th><td>Egg → larva → pupa → adult</td></tr>
+            <tr><th>Mosquito</th><td>Egg → larva → pupa → adult (the first three stages live in water)</td></tr>
+            <tr><th>Cockroach</th><td>Egg → nymph → adult</td></tr>
+            <tr><th>Frog</th><td>Egg → tadpole → froglet → adult frog</td></tr>
+            <tr><th>Chicken</th><td>Egg → chick → adult</td></tr>
+            <tr><th>Cat, dog, human</th><td>Baby (born alive) → young → adult</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Similar or different?</h3>
+          <ul class="rules">
+            <li><b>Similar</b><span>Every animal starts as an egg or a baby, grows, becomes an adult, and the adult makes young so the cycle repeats.</span></li>
+            <li><b>Different: number of stages</b><span>Some have 4 stages (butterfly, mosquito, frog), some have 3 (cockroach, chicken), and mammals have no egg stage.</span></li>
+            <li><b>Different: look of the young</b><span>A caterpillar or tadpole looks very different from its adult. A nymph, chick or kitten looks like a smaller adult.</span></li>
+            <li><b>Different: where it starts</b><span>Most insects, birds and frogs lay eggs. Mammals such as cats and humans give birth to live young.</span></li>
+          </ul>
+        </div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Name one way the life cycle of a butterfly is different from that of a cockroach.</p>
+          <p class="reveal">A butterfly has 4 stages, including a pupa, but a cockroach has only 3 stages (egg, nymph, adult). A caterpillar looks very different from the adult, but a nymph looks like a small adult.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 6 -->
+  <section class="sec" id="p3-magnets" aria-labelledby="p3-magnets-h">
+    <div class="sec-head"><h2 id="p3-magnets-h"><span class="chno">Ch 6</span>Properties of Magnets</h2><span class="strand">Interactions · Magnets</span></div>
+    <div class="panel">
+      <h3>Poles, pull and direction</h3>
+      <div class="figs wide" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
+        <figure><svg viewBox="0 0 260 130" role="img" aria-label="A bar magnet with a north pole at one end and a south pole at the other. Paper clips cling to both ends, but few cling to the middle, showing the pull is strongest at the poles.">
+          <rect x="60" y="52" width="70.0" height="34" style="fill:var(--artery)"/><rect x="130.0" y="52" width="70.0" height="34" style="fill:var(--vein)"/><rect x="60" y="52" width="140" height="34" style="fill:none;stroke:var(--ink);stroke-width:1.5"/><text x="95.0" y="74.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">N</text><text x="165.0" y="74.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">S</text>
+          <rect x="60" y="41.5" width="12" height="5" rx="2.5" transform="rotate(10 66 44)" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><rect x="72" y="39.5" width="12" height="5" rx="2.5" transform="rotate(-8 78 42)" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><rect x="56" y="91.5" width="12" height="5" rx="2.5" transform="rotate(-10 62 94)" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><rect x="70" y="93.5" width="12" height="5" rx="2.5" transform="rotate(8 76 96)" style="fill:none;stroke:var(--muted);stroke-width:1.6"/>
+          <rect x="188" y="41.5" width="12" height="5" rx="2.5" transform="rotate(-10 194 44)" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><rect x="176" y="39.5" width="12" height="5" rx="2.5" transform="rotate(8 182 42)" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><rect x="192" y="91.5" width="12" height="5" rx="2.5" transform="rotate(10 198 94)" style="fill:none;stroke:var(--muted);stroke-width:1.6"/><rect x="178" y="93.5" width="12" height="5" rx="2.5" transform="rotate(-8 184 96)" style="fill:none;stroke:var(--muted);stroke-width:1.6"/>
+          <text class="lbl" x="64" y="24" text-anchor="middle">strongest</text>
+          <text class="lbl" x="196" y="24" text-anchor="middle">strongest</text>
+          <text class="mut" x="130" y="118" text-anchor="middle">weakest in the middle</text>
+          <path class="dash" d="M130 90 V104" style="stroke-width:1.2"/>
+        </svg><figcaption><b>Strongest pull at the poles</b>Most paper clips cling to the ends of a bar magnet</figcaption></figure>
+        <figure><svg viewBox="0 0 260 150" role="img" aria-label="Top: two bar magnets with a north and a south pole facing each other, with arrows pointing towards each other, so they attract. Bottom: two bar magnets with the same poles facing each other, with arrows pointing apart, so they repel.">
+          <rect x="14" y="14" width="38.0" height="26" style="fill:var(--artery)"/><rect x="52.0" y="14" width="38.0" height="26" style="fill:var(--vein)"/><rect x="14" y="14" width="76" height="26" style="fill:none;stroke:var(--ink);stroke-width:1.5"/><text x="33.0" y="32.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">N</text><text x="71.0" y="32.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">S</text>
+          <rect x="170" y="14" width="38.0" height="26" style="fill:var(--artery)"/><rect x="208.0" y="14" width="38.0" height="26" style="fill:var(--vein)"/><rect x="170" y="14" width="76" height="26" style="fill:none;stroke:var(--ink);stroke-width:1.5"/><text x="189.0" y="32.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">N</text><text x="227.0" y="32.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">S</text>
+          <path class="ray" d="M96 27 H122" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <path class="ray" d="M164 27 H138" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <text class="lbl" x="130" y="58" text-anchor="middle">unlike poles attract</text>
+          <rect x="14" y="84" width="38.0" height="26" style="fill:var(--artery)"/><rect x="52.0" y="84" width="38.0" height="26" style="fill:var(--vein)"/><rect x="14" y="84" width="76" height="26" style="fill:none;stroke:var(--ink);stroke-width:1.5"/><text x="33.0" y="102.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">N</text><text x="71.0" y="102.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">S</text>
+          <rect x="170" y="84" width="38.0" height="26" style="fill:var(--vein)"/><rect x="208.0" y="84" width="38.0" height="26" style="fill:var(--artery)"/><rect x="170" y="84" width="76" height="26" style="fill:none;stroke:var(--ink);stroke-width:1.5"/><text x="189.0" y="102.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">S</text><text x="227.0" y="102.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">N</text>
+          <path class="ray" d="M124 97 H98" marker-end="url(#ah)" style="stroke:var(--artery);stroke-width:2.5"/>
+          <path class="ray" d="M136 97 H162" marker-end="url(#ah)" style="stroke:var(--artery);stroke-width:2.5"/>
+          <text class="lbl" x="130" y="130" text-anchor="middle">like poles repel</text>
+        </svg><figcaption><b>Magnets interact</b>Unlike poles attract; like poles repel</figcaption></figure>
+        <figure style="max-width:200px;margin-inline:auto"><svg viewBox="0 0 150 170" role="img" aria-label="A bar magnet hanging freely from a string. It settles with its north pole pointing north and its south pole pointing south.">
+          <line class="ray" x1="75" y1="4" x2="75" y2="42" style="stroke-width:1.5;stroke:var(--muted)"/>
+          <text class="mut" x="82" y="16" text-anchor="start">string</text>
+          <rect x="62" y="44" width="26" height="40" style="fill:var(--artery)"/>
+          <rect x="62" y="84" width="26" height="40" style="fill:var(--vein)"/>
+          <rect x="62" y="44" width="26" height="80" style="fill:none;stroke:var(--ink);stroke-width:1.5"/>
+          <text x="75" y="70" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">N</text>
+          <text x="75" y="110" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">S</text>
+          <path class="ray" d="M120 100 V50" marker-end="url(#ah)" style="stroke-width:2.5"/>
+          <text class="lbl" x="120" y="42" text-anchor="middle">north</text>
+          <text class="lbl" x="120" y="118" text-anchor="middle">south</text>
+        </svg><figcaption><b>Freely hanging magnet</b>Its N pole points north</figcaption></figure>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts</h3>
+        <ul class="rules">
+          <li><b>Magnet</b><span>An object that attracts (pulls) certain materials and can repel (push away) or attract other magnets.</span></li>
+          <li><b>Magnetic materials</b><span>Iron, steel, nickel and cobalt are attracted to a magnet. Examples: paper clips, nails, steel cans.</span></li>
+          <li><b>Non-magnetic materials</b><span>Plastic, wood, glass, paper, cloth, rubber, and metals like copper and aluminium are not attracted.</span></li>
+          <li><b>Poles</b><span>Every magnet has two poles: a north pole (N) and a south pole (S). The pull is strongest at the poles and weakest in the middle.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Magnets together and on their own</h3>
+          <ul class="rules">
+            <li><b>Unlike poles attract</b><span>A north pole and a south pole pull towards each other.</span></li>
+            <li><b>Like poles repel</b><span>Two north poles, or two south poles, push each other away.</span></li>
+            <li><b>Freely suspended magnet</b><span>A magnet that can swing freely always settles pointing north–south, with its north pole pointing north. This is how a compass works.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> not all metals are magnetic. Copper and aluminium are metals but a magnet does not attract them. Only iron, steel, nickel and cobalt do.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Two magnets are pushed together and they push apart. What does this tell you about the poles that were facing each other?</p>
+          <p class="reveal">They were like poles (north–north or south–south), because like poles repel.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 7 -->
+  <section class="sec" id="p3-making" aria-labelledby="p3-making-h">
+    <div class="sec-head"><h2 id="p3-making-h"><span class="chno">Ch 7</span>Making and Using Magnets</h2><span class="strand">Interactions · Magnets</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Making a magnet by stroking</h3>
+        <div class="figs wide" style="grid-template-columns:minmax(0,1fr)">
+          <figure><svg viewBox="0 0 280 120" role="img" aria-label="Making a magnet: a steel bar is stroked from one end to the other with a magnet, always in the same direction. The magnet is lifted away and returned to the start between strokes.">
+          <rect x="40" y="70" width="200" height="22" rx="3" style="fill:#9AA5B1;stroke:var(--ink);stroke-width:1.5"/>
+          <text class="mut" x="140" y="106" text-anchor="middle">iron or steel bar</text>
+          <rect x="50" y="36" width="22.0" height="20" style="fill:var(--artery)"/><rect x="72.0" y="36" width="22.0" height="20" style="fill:var(--vein)"/><rect x="50" y="36" width="44" height="20" style="fill:none;stroke:var(--ink);stroke-width:1.5"/><text x="61.0" y="51.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">N</text><text x="83.0" y="51.0" text-anchor="middle" style="fill:#fff;font-weight:700;font-size:14px">S</text>
+          <path class="ray" d="M104 46 H232" marker-end="url(#ah)" style="stroke:var(--accent);stroke-width:2.5"/>
+          <text class="lbl" x="168" y="36" text-anchor="middle">stroke this way</text>
+          <path class="dash" d="M236 40 C230 10 70 10 66 28" marker-end="url(#ah)" style="stroke-width:1.5"/>
+          <text class="mut" x="150" y="14" text-anchor="middle">lift away and go back to the start</text>
+        </svg><figcaption><b>Stroke in one direction only</b>Use one pole of a magnet; lift it away between strokes</figcaption></figure>
+        </div>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>How can we make a magnet?</h3>
+          <ul class="rules">
+            <li><b>What to use</b><span>A bar of a magnetic material such as iron or steel, and a magnet.</span></li>
+            <li><b>Method</b><span>Stroke the bar from one end to the other with one pole of the magnet. Always stroke in the same direction. Lift the magnet well away from the bar and bring it back to the start. Repeat many times.</span></li>
+            <li><b>Test it</b><span>The bar is now a magnet if it can attract paper clips or other magnetic objects.</span></li>
+            <li><b>Keep magnets strong</b><span>Magnets can lose their strength if they are dropped, hit or heated, so handle them with care.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>How are magnets used in everyday life?</h3>
+        <ul class="rules">
+          <li><b>Fridge magnets</b><span>Hold notes and pictures on a steel fridge door.</span></li>
+          <li><b>Door catches</b><span>A magnet in the door or cupboard holds it shut.</span></li>
+          <li><b>Pencil cases and bag flaps</b><span>Magnetic fasteners keep them closed without a zip.</span></li>
+          <li><b>Compasses</b><span>A small magnetic needle points north, to show direction.</span></li>
+          <li><b>Scrap yards and recycling</b><span>Large magnets pick up iron and steel and separate them from other rubbish.</span></li>
+          <li><b>Toys and games</b><span>Magnetic toys, building sets and boards.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="warn"><b>Watch out:</b> to separate a mixture, say which material the magnet picks up and why: "a magnet attracts the steel nails because steel is a magnetic material". It will not pick up plastic or aluminium.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>A pile of paper clips (steel), plastic beads and wooden sticks are mixed up. How can you quickly pick out the paper clips?</p>
+          <p class="reveal">Move a magnet over the mixture. It attracts the steel paper clips only, because steel is a magnetic material. Plastic and wood are not.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- HABITS -->
+  <section class="checklist" id="habits" aria-labelledby="habits-h">
+    <h2 id="habits-h" style="font-size:clamp(1.5rem,4.2vw,2rem)">Exam habits for P3 science</h2>
+    <ul>
+      <li><b>Give a reason</b>Say "because…". "It is living" is not enough; "it grows and needs food" is.</li>
+      <li><b>Use the right word for the stage</b>Seedling, larva, pupa, nymph, tadpole: each belongs to one particular life cycle.</li>
+      <li><b>Property, then use</b>Name the property that makes a material suitable, then say what it is used for.</li>
+      <li><b>Poles, not ends</b>Say "like poles repel" and "unlike poles attract". Say which poles faced each other.</li>
+      <li><b>Magnetic is not the same as metal</b>Only iron, steel, nickel and cobalt are attracted by a magnet.</li>
+      <li><b>Observe, don't guess</b>Use your senses safely and write what you saw, not what you expected.</li>
+    </ul>
+  </section>
+
+  <footer>Chapter titles, topic questions and page numbers follow the contents page of the Primary 3 Science textbook (Theme – Diversity: Chapters 1–3; Theme – Cycles: Chapters 4–5; Theme – Interactions: Chapters 6–7). The facts are written at Primary 3 level from the topic questions, so check them against the textbook and tell me about anything that differs.</footer>
+</div>
+
+</body>
+</html>
