@@ -77,6 +77,9 @@
   .sec { margin-top: 44px; scroll-margin-top: 80px; }
   .sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
   .sec-head h2 { font-size: clamp(1.5rem, 4.2vw, 2rem); font-weight: 700; letter-spacing: -.01em; }
+  .rules a { color: var(--accent); font-weight: 500; }
+  .rules a:hover { text-decoration: none; }
+  .chno { display: inline-block; font-family: var(--display); font-size: .55em; font-weight: 700; letter-spacing: .02em; color: var(--on-accent); background: var(--accent); border-radius: 8px; padding: .2em .55em; margin-right: .35em; vertical-align: .18em; white-space: nowrap; }
   .strand { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
   .cols { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; margin-top: 16px; }
   @media (min-width: 820px) { .cols { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
@@ -163,18 +166,34 @@
   </header>
 
   <nav class="nav" aria-label="Topics">
-    <a href="#plants">Plant reproduction</a>
-    <a href="#animals">Animal &amp; human reproduction</a>
-    <a href="#matter">Matter &amp; water cycle</a>
-    <a href="#lungs">Respiratory system</a>
-    <a href="#heart">Circulatory system</a>
-    <a href="#circuits">Electrical circuits</a>
+    <a href="#plants">Ch 1 · Plants</a>
+    <a href="#animals">Ch 1 · Animals &amp; humans</a>
+    <a href="#matter">Ch 2 · Cycles in Water</a>
+    <a href="#lungs">Ch 4 · Respiratory</a>
+    <a href="#heart">Ch 4 · Circulatory</a>
+    <a href="#circuits">Ch 5 · Electrical Systems</a>
     <a href="#habits">Exam habits</a>
   </nav>
 
+  <section class="sec" id="chapters" aria-labelledby="chapters-h" style="margin-top:28px">
+    <div class="panel">
+      <h3 id="chapters-h">Textbook chapters at a glance</h3>
+      <ul class="rules">
+        <li><b>Theme – Cycles</b><span>Chapters 1–2 · closes at p. 60</span></li>
+        <li><b>Chapter 1 · Reproduction in Animals and Plants</b><span>Textbook p. 2 · on this page: <a href="#plants">plants</a> and <a href="#animals">animals and humans</a></span></li>
+        <li><b>Chapter 2 · Cycles in Water</b><span>Textbook p. 30 · on this page: <a href="#matter">states of matter and the water cycle</a></span></li>
+        <li><b>Theme – Systems</b><span>Chapters 3–6 · closes at p. 140</span></li>
+        <li><b>Chapter 3 · Plant Transport System</b><span>Textbook p. 62 · not on this page yet</span></li>
+        <li><b>Chapter 4 · The Human Respiratory and Circulatory Systems</b><span>Textbook p. 75 · on this page: <a href="#lungs">respiratory</a> and <a href="#heart">circulatory</a></span></li>
+        <li><b>Chapter 5 · Electrical Systems</b><span>Textbook p. 104 · on this page: <a href="#circuits">electrical circuits</a></span></li>
+        <li><b>Chapter 6 · Simple Series and Parallel Electric Circuits</b><span>Textbook p. 121 · series circuits are in the <a href="#circuits">circuits section</a>; parallel circuits not added yet</span></li>
+      </ul>
+    </div>
+  </section>
+
   <!-- 1. PLANT REPRODUCTION -->
   <section class="sec" id="plants" aria-labelledby="plants-h">
-    <div class="sec-head"><h2 id="plants-h">Plant reproduction</h2><span class="strand">Diversity</span></div>
+    <div class="sec-head"><h2 id="plants-h"><span class="chno">Ch 1</span>Reproduction in Animals and Plants</h2><span class="strand">Cycles · Plants</span></div>
     <div class="cols">
       <div class="panel">
         <h3>Parts of a flower</h3>
@@ -277,7 +296,7 @@
 
   <!-- 2. ANIMAL/HUMAN REPRODUCTION -->
   <section class="sec" id="animals" aria-labelledby="animals-h">
-    <div class="sec-head"><h2 id="animals-h">Animal and human reproduction</h2><span class="strand">Diversity</span></div>
+    <div class="sec-head"><h2 id="animals-h"><span class="chno">Ch 1</span>Reproduction in Animals and Plants</h2><span class="strand">Cycles · Animals and humans</span></div>
     <div class="panel">
       <h3>Three kinds of life cycle</h3>
       <div class="figs">
@@ -347,7 +366,7 @@
 
   <!-- 3. MATTER & WATER CYCLE -->
   <section class="sec" id="matter" aria-labelledby="matter-h">
-    <div class="sec-head"><h2 id="matter-h">States of matter and the water cycle</h2><span class="strand">Cycles</span></div>
+    <div class="sec-head"><h2 id="matter-h"><span class="chno">Ch 2</span>Cycles in Water</h2><span class="strand">Cycles · States of matter and the water cycle</span></div>
     <div class="panel">
       <h3>Changing state</h3>
       <svg viewBox="0 0 480 170" role="img" aria-label="Solid, liquid and gas particle diagrams. Melting turns solid to liquid and freezing turns liquid to solid; evaporation or boiling turns liquid to gas and condensation turns gas to liquid.">
@@ -435,7 +454,7 @@
 
   <!-- 4. RESPIRATORY -->
   <section class="sec" id="lungs" aria-labelledby="lungs-h">
-    <div class="sec-head"><h2 id="lungs-h">The respiratory system</h2><span class="strand">Systems</span></div>
+    <div class="sec-head"><h2 id="lungs-h"><span class="chno">Ch 4</span>The Human Respiratory and Circulatory Systems</h2><span class="strand">Systems · Respiratory</span></div>
     <div class="cols">
       <div class="panel">
         <h3>Path of air</h3>
@@ -485,7 +504,7 @@
 
   <!-- 5. CIRCULATORY -->
   <section class="sec" id="heart" aria-labelledby="heart-h">
-    <div class="sec-head"><h2 id="heart-h">The circulatory system</h2><span class="strand">Systems</span></div>
+    <div class="sec-head"><h2 id="heart-h"><span class="chno">Ch 4</span>The Human Respiratory and Circulatory Systems</h2><span class="strand">Systems · Circulatory</span></div>
     <div class="cols">
       <div class="panel">
         <h3>Heart and blood vessels</h3>
@@ -539,7 +558,7 @@
 
   <!-- 6. CIRCUITS -->
   <section class="sec" id="circuits" aria-labelledby="circuits-h">
-    <div class="sec-head"><h2 id="circuits-h">Electrical circuits</h2><span class="strand">Systems</span></div>
+    <div class="sec-head"><h2 id="circuits-h"><span class="chno">Ch 5</span>Electrical Systems</h2><span class="strand">Systems · includes series circuits from Ch 6</span></div>
     <div class="panel">
       <h3>Closed circuit vs open circuit</h3>
       <div class="figs" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">
@@ -621,7 +640,7 @@
     </ul>
   </section>
 
-  <footer>Content follows the general MOE Primary 5 Science themes (Diversity, Cycles, Systems). Check your son's own textbook for the exact chapter order and any school-specific detail.</footer>
+  <footer>Chapter numbers, titles and page numbers follow the contents page of your son's Primary 5 Science textbook (Theme – Cycles: Chapters 1–2; Theme – Systems: Chapters 3–6). Chapters not yet written up are marked above.</footer>
 </div>
 
 </body>
