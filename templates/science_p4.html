@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Science Sense P4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;700&family=Lexend:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #EEF4F9;
+    --surface: #FFFFFF;
+    --ink: #14293B;
+    --muted: #46627A;
+    --line: #CBDCE8;
+    --accent: #1F76A8;
+    --on-accent: #FFFFFF;
+    --tint: #DCEBF5;
+    --formula: #E3EFF7;
+    --warn-bg: #FFF1D6;
+    --warn-ink: #6E4300;
+    --warn-line: #E2AD45;
+    --shadow: 0 1px 0 rgba(20,41,59,.06), 0 8px 24px -12px rgba(20,41,59,.2);
+    --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+    --body: "Lexend", "Segoe UI", system-ui, sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --petal: #E38BB9; --sepal: #6FA96B; --anther: #F2C14E; --soil: #A9794C;
+    --artery: #D9694F; --vein: #4E7FBF;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0D1A24; --surface: #152A3A; --ink: #E2EEF7; --muted: #9BB9CE;
+      --line: #264559; --accent: #62BDE3; --on-accent: #06202E; --tint: #1A3548;
+      --formula: #193548; --warn-bg: #362A0E; --warn-ink: #F3CD85; --warn-line: #8A6620;
+      --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+      --petal: #D888B3; --sepal: #7BB878; --anther: #E8BE55; --soil: #B58A5E;
+      --artery: #E08268; --vein: #6C97D1;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0D1A24; --surface: #152A3A; --ink: #E2EEF7; --muted: #9BB9CE;
+    --line: #264559; --accent: #62BDE3; --on-accent: #06202E; --tint: #1A3548;
+    --formula: #193548; --warn-bg: #362A0E; --warn-ink: #F3CD85; --warn-line: #8A6620;
+    --shadow: 0 1px 0 rgba(0,0,0,.3), 0 8px 24px -12px rgba(0,0,0,.6);
+    --petal: #D888B3; --sepal: #7BB878; --anther: #E8BE55; --soil: #B58A5E;
+    --artery: #E08268; --vein: #6C97D1;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: var(--body); font-size: 16px; line-height: 1.55;
+    padding-inline: 16px;
+  }
+  .wrap { max-width: 1040px; margin-inline: auto; padding-block: 28px 56px; }
+  h1, h2, h3 { font-family: var(--display); text-wrap: balance; line-height: 1.12; margin: 0; }
+  p { margin: 0; }
+
+  .eyebrow { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  h1 { font-size: clamp(2.3rem, 7vw, 3.6rem); font-weight: 700; letter-spacing: -.02em; margin-top: 6px; }
+  .lede { max-width: 62ch; color: var(--muted); margin-top: 12px; font-size: 1.05rem; }
+
+  .nav {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5;
+    background: var(--bg); padding-block: 12px; margin-top: 18px;
+    border-bottom: 1px solid var(--line);
+    display: flex; gap: 8px; flex-wrap: wrap;
+  }
+  .nav a {
+    text-decoration: none; color: var(--ink); font-size: 14px; font-weight: 500;
+    padding: 6px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--surface);
+  }
+  .nav a:hover { border-color: var(--accent); color: var(--accent); }
+  a:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+  .sec { margin-top: 44px; scroll-margin-top: 80px; }
+  .sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 14px; }
+  .sec-head h2 { font-size: clamp(1.5rem, 4.2vw, 2rem); font-weight: 700; letter-spacing: -.01em; }
+  .rules a { color: var(--accent); font-weight: 500; }
+  .rules a:hover { text-decoration: none; }
+  .chno { display: inline-block; font-family: var(--display); font-size: .55em; font-weight: 700; letter-spacing: .02em; color: var(--on-accent); background: var(--accent); border-radius: 8px; padding: .2em .55em; margin-right: .35em; vertical-align: .18em; white-space: nowrap; }
+  .strand { font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  .cols { display: grid; gap: 16px; grid-template-columns: minmax(0, 1fr); align-items: start; margin-top: 16px; }
+  @media (min-width: 820px) { .cols { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); } }
+
+  .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 18px; box-shadow: var(--shadow); }
+  .panel h3 { font-size: 1.05rem; margin-bottom: 10px; }
+  .stack { display: grid; gap: 16px; }
+  .cols > *, .stack > * { min-width: 0; }
+
+  .figs { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+  .figs figure { margin: 0; }
+  .figs svg { width: 100%; max-width: 220px; margin-inline: auto; }
+  .figs.wide svg { max-width: 400px; }
+  .flowchart { list-style: none; margin: 0; padding: 0; max-width: 500px; margin-inline: auto; }
+  .flowchart li { position: relative; background: var(--surface); border: 2px solid var(--c, var(--accent)); border-radius: 10px; padding: 9px 14px 11px; margin-bottom: 28px; text-align: center; font-size: 14.5px; line-height: 1.45; }
+  .flowchart li:last-child { margin-bottom: 0; }
+  .flowchart li::before { content: ""; position: absolute; left: calc(50% - 1.5px); bottom: -18px; width: 3px; height: 12px; background: var(--muted); }
+  .flowchart li::after { content: ""; position: absolute; left: calc(50% - 7px); bottom: -28px; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 10px solid var(--muted); }
+  .flowchart li:last-child::before, .flowchart li:last-child::after { display: none; }
+  .flowchart .ftag { display: block; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+
+  .figs figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; text-align: center; }
+  .figs figcaption b { color: var(--ink); font-weight: 600; display: block; font-size: 14px; }
+
+  .rules { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .rules li { background: var(--formula); border-radius: 8px; padding: 10px 12px; font-size: 15px; }
+  .rules b { font-weight: 600; font-size: 14.5px; display: block; }
+  .rules span { color: var(--muted); font-size: 14px; }
+  .tag { font-family: var(--body); font-size: 11px; color: var(--muted); border: 1px solid var(--line); border-radius: 4px; padding: 0 5px; margin-left: 6px; white-space: nowrap; font-weight: 400; }
+
+  .qa { border-left: 3px solid var(--tint); padding-left: 12px; }
+  .qa p:first-child { font-weight: 500; }
+  .qa .a { margin-top: 6px; display: inline-block; background: var(--accent); color: var(--on-accent); font-weight: 600; padding: 3px 10px; border-radius: 6px; font-size: 14.5px; }
+  .sep { border: 0; border-top: 1px dashed var(--line); margin: 16px 0; }
+
+  .warn { background: var(--warn-bg); color: var(--warn-ink); border: 1px solid var(--warn-line); border-radius: 10px; padding: 12px 14px; font-size: 14.5px; }
+  .warn b { font-weight: 600; }
+
+  details.try { border: 1px dashed var(--accent); border-radius: 10px; padding: 12px 14px; }
+  details.try summary { cursor: pointer; font-weight: 600; color: var(--accent); }
+  details.try p { margin-top: 8px; }
+  details.try .reveal { font-size: 14.5px; color: var(--muted); }
+
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+  table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child th, tr:last-child td { border-bottom: 0; }
+  thead th { font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 500; }
+  tbody th { font-family: var(--display); font-weight: 600; white-space: nowrap; color: var(--accent); font-size: 15px; }
+
+  svg { max-width: 100%; height: auto; display: block; margin-inline: auto; }
+  svg text { font-family: var(--body); fill: var(--ink); font-size: 10.5px; }
+  svg .lbl { font-weight: 600; font-size: 11px; }
+  svg .mut { fill: var(--muted); font-size: 9.5px; }
+  svg .shape { fill: var(--tint); stroke: var(--accent); stroke-width: 2; stroke-linejoin: round; }
+  svg .plain { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+  svg .ray { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linecap: round; }
+  svg .arc { fill: none; stroke: var(--accent); stroke-width: 2; }
+  svg .dash { fill: none; stroke: var(--muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+  svg .dot { fill: var(--ink); }
+  svg .node { fill: var(--surface); stroke: var(--accent); stroke-width: 2; }
+
+  .checklist { margin-top: 44px; }
+  .checklist ul { margin: 12px 0 0; padding: 0; list-style: none; display: grid; gap: 8px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .checklist li { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; font-size: 15px; }
+  .checklist li b { display: block; font-family: var(--display); font-size: 1.05rem; margin-bottom: 2px; }
+  footer { margin-top: 36px; font-size: 13px; color: var(--muted); }
+
+  @media print {
+    body { background: #fff; padding-inline: 0; font-size: 12px; }
+    .nav { display: none; }
+    .panel, .warn, .checklist li { box-shadow: none; break-inside: avoid; }
+    .sec { break-inside: avoid-page; }
+    details.try:not([open]) > *:not(summary) { display: none; }
+  }
+  @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+  .sitebar { display:flex; flex-wrap:wrap; gap:6px 14px; align-items:center; padding:12px 16px; max-width:1040px; margin:0 auto; font-size:13px; color:var(--muted); }
+  .sitebar a { color:var(--muted); text-decoration:none; }
+  .sitebar a:hover { color:var(--accent); }
+  .sitebar a.current { color:var(--ink); font-weight:600; }
+  .sitebar .sep { opacity:.4; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute;width:0;height:0" aria-hidden="true" focusable="false"><defs><marker id="ah" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" style="fill:var(--ink)"/></marker></defs></svg>
+<div class="sitebar"><a href="/">All subjects</a><span class="sep">/</span><a href="/math">Math</a><span class="sep">/</span><a href="/science">Science P5</a><span class="sep">/</span><a href="/science-p4" class="current">Science P4</a><span class="sep">/</span><a href="/plan">Review plan</a></div>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">Primary 4 Science · Chapters 1–7</p>
+    <h1>Science Sense P4</h1>
+    <p class="lede">Revision from last year: how plants and the digestive system work, the states of matter, light and shadows, and heat. Key facts, diagrams and a quick check for each chapter.</p>
+  </header>
+
+  <nav class="nav" aria-label="Topics">
+    <a href="#p4-plants">Ch 1 · Plant System</a>
+    <a href="#p4-human">Ch 2 · Human Systems</a>
+    <a href="#p4-matter">Ch 3 · Matter</a>
+    <a href="#p4-light">Ch 4 · Light</a>
+    <a href="#p4-shadows">Ch 5 · Shadows</a>
+    <a href="#p4-heat">Ch 6 · Heat</a>
+    <a href="#p4-effects">Ch 7 · Effects of Heat</a>
+    <a href="#habits">Exam habits</a>
+  </nav>
+
+  <section class="sec" id="chapters" aria-labelledby="chapters-h" style="margin-top:28px">
+    <div class="panel">
+      <h3 id="chapters-h">Textbook chapters at a glance</h3>
+      <ul class="rules">
+        <li><b>Theme – Systems</b><span>Theme opener p. 2</span></li>
+        <li><b>Chapter 1 · Plant System</b><span>Textbook p. 4 · What are the parts of a plant and their functions? How do the plant parts look in different plants? · <a href="#p4-plants">open</a></span></li>
+        <li><b>Chapter 2 · Human Systems</b><span>Textbook p. 22 · What are the systems that make up the human body and their functions? What are the parts of the digestive system and their functions? How do the different parts of the digestive system work together? · <a href="#p4-human">open</a></span></li>
+        <li><b>Theme – Cycles</b><span>Chapter 3</span></li>
+        <li><b>Chapter 3 · Matter</b><span>Textbook p. 42 · What is matter? What are the different states of matter around us? How are mass and volume of different states of matter measured? · <a href="#p4-matter">open</a></span></li>
+        <li><b>Theme – Energy</b><span>Theme opener p. 80</span></li>
+        <li><b>Chapter 4 · Light</b><span>Textbook p. 82 · Where does light come from? How does light help us see things around us? · <a href="#p4-light">open</a></span></li>
+        <li><b>Chapter 5 · Shadows</b><span>Textbook p. 94 · What are shadows? What are the properties of light that explain why a shadow is formed? How are shadows formed? What factors affect the size and shape of shadows formed? · <a href="#p4-shadows">open</a></span></li>
+        <li><b>Chapter 6 · Heat</b><span>Textbook p. 120 · What is temperature? How is temperature measured? What causes temperature to change? What is the difference between temperature and heat? · <a href="#p4-heat">open</a></span></li>
+        <li><b>Chapter 7 · Effects of Heat</b><span>Textbook p. 134 · How does heat flow? What is a source of heat? How fast does heat flow in different materials? What are the effects of heat gain or heat loss? · <a href="#p4-effects">open</a></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CH 1 PLANT SYSTEM -->
+  <section class="sec" id="p4-plants" aria-labelledby="p4-plants-h">
+    <div class="sec-head"><h2 id="p4-plants-h"><span class="chno">Ch 1</span>Plant System</h2><span class="strand">Systems · Plants</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Parts of a plant</h3>
+        <svg viewBox="0 0 240 262" style="max-width:300px" role="img" aria-label="A flowering plant: roots in the soil, a stem, two leaves and a flower at the top.">
+          <rect x="0" y="200" width="240" height="62" style="fill:var(--soil);opacity:.28"/>
+          <line class="dash" x1="0" y1="200" x2="240" y2="200"/>
+          <g fill="none" stroke-linecap="round" style="stroke:var(--soil);stroke-width:3">
+            <path d="M120 200 V252"/><path d="M120 214 L98 232"/><path d="M120 224 L144 242"/><path d="M120 236 L104 250"/>
+          </g>
+          <line class="ray" x1="120" y1="200" x2="120" y2="74" style="stroke:var(--sepal);stroke-width:6"/>
+          <ellipse cx="95" cy="118" rx="28" ry="11" transform="rotate(29 95 118)" class="shape" style="fill:var(--sepal)"/>
+          <ellipse cx="145" cy="96" rx="28" ry="11" transform="rotate(-29 145 96)" class="shape" style="fill:var(--sepal)"/>
+          <g transform="translate(120 56)">
+            <ellipse cx="0" cy="-15" rx="8" ry="13" class="shape" style="fill:var(--petal)"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(72)" class="shape" style="fill:var(--petal)"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(144)" class="shape" style="fill:var(--petal)"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(216)" class="shape" style="fill:var(--petal)"/>
+            <ellipse cx="0" cy="-15" rx="8" ry="13" transform="rotate(288)" class="shape" style="fill:var(--petal)"/>
+            <circle r="7" style="fill:var(--anther);stroke:var(--ink);stroke-width:1"/>
+          </g>
+          <line class="dash" x1="142" y1="46" x2="170" y2="34" style="stroke-width:1"/>
+          <text class="lbl" x="174" y="37" text-anchor="start">flower</text>
+          <line class="dash" x1="162" y1="90" x2="182" y2="102" style="stroke-width:1"/>
+          <text class="lbl" x="186" y="106" text-anchor="start">leaf</text>
+          <line class="dash" x1="116" y1="165" x2="92" y2="165" style="stroke-width:1"/>
+          <text class="lbl" x="88" y="169" text-anchor="end">stem</text>
+          <line class="dash" x1="142" y1="240" x2="166" y2="238" style="stroke-width:1"/>
+          <text class="lbl" x="170" y="242" text-anchor="start">roots</text>
+          <text class="mut" x="8" y="216" text-anchor="start">soil</text>
+        </svg>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts: parts and their functions</h3>
+          <ul class="rules">
+            <li><b>Roots</b><span>Hold the plant firmly in the soil. Take in water and mineral salts from the soil.</span></li>
+            <li><b>Stem</b><span>Holds the leaves and flowers up towards the light. Carries water and mineral salts from the roots to the other parts, and carries food made in the leaves to all parts.</span></li>
+            <li><b>Leaves</b><span>Make food for the plant, using light, water and carbon dioxide from the air.</span></li>
+            <li><b>Flowers</b><span>Make the seeds, so the plant can reproduce. A flower that is pollinated develops into a fruit.</span></li>
+            <li><b>Fruits</b><span>Protect the seeds, and may help to spread them away from the parent plant.</span></li>
+            <li><b>Seeds</b><span>Can grow into new plants.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> a plant makes its own food in the leaves; it does not "eat" the soil. The roots take in water and mineral salts, not food. Say "makes food", not "takes in food".</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Which part of the plant takes in water from the soil, and which part carries it up to the leaves?</p>
+          <p class="reveal">The roots take in water; the stem carries it up to the leaves.</p>
+        </details>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h3>How do plant parts look in different plants?</h3>
+      <div class="figs" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+        <figure>
+          <svg viewBox="0 0 110 120" role="img" aria-label="A tap root: one thick main root going straight down with a few thin side roots.">
+            <rect x="0" y="32" width="110" height="88" style="fill:var(--soil);opacity:.25"/>
+            <line class="dash" x1="0" y1="32" x2="110" y2="32"/>
+            <line class="ray" x1="55" y1="32" x2="55" y2="8" style="stroke:var(--sepal);stroke-width:4"/>
+            <path d="M47 32 L63 32 L55 112 Z" style="fill:var(--soil);stroke:var(--ink);stroke-width:1"/>
+            <g fill="none" stroke-linecap="round" style="stroke:var(--soil);stroke-width:2"><path d="M52 56 L34 68"/><path d="M58 66 L76 78"/><path d="M54 82 L40 94"/></g>
+          </svg>
+          <figcaption><b>Tap root</b>One thick main root with thin side roots, e.g. carrot</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 110 120" role="img" aria-label="Fibrous roots: many thin roots of about the same size spreading out from the base of the stem.">
+            <rect x="0" y="32" width="110" height="88" style="fill:var(--soil);opacity:.25"/>
+            <line class="dash" x1="0" y1="32" x2="110" y2="32"/>
+            <line class="ray" x1="55" y1="32" x2="55" y2="8" style="stroke:var(--sepal);stroke-width:4"/>
+            <g fill="none" stroke-linecap="round" style="stroke:var(--soil);stroke-width:2">
+              <path d="M55 32 Q40 62 20 96"/><path d="M55 32 Q46 66 36 108"/><path d="M55 32 Q52 70 52 112"/><path d="M55 32 Q60 70 68 108"/><path d="M55 32 Q70 62 90 96"/><path d="M55 32 Q34 50 14 66"/><path d="M55 32 Q76 50 96 66"/>
+            </g>
+          </svg>
+          <figcaption><b>Fibrous roots</b>Many thin roots of similar size, e.g. grass</figcaption>
+        </figure>
+      </div>
+      <ul class="rules" style="margin-top:14px">
+        <li><b>Same job, different look</b><span>Plants differ in the size, shape and colour of their roots, stems, leaves and flowers, but each part does the same main job in every plant.</span></li>
+        <li><b>Stems</b><span>A tree has a thick, hard (woody) stem called a trunk. Many small plants have thin, soft stems. Climbing plants have weak stems that twist round or cling to something for support.</span></li>
+        <li><b>Leaves</b><span>Leaves can be broad and flat to catch light, long and narrow, or small and needle-like. Some water plants have leaves that float on the surface.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- CH 2 HUMAN SYSTEMS -->
+  <section class="sec" id="p4-human" aria-labelledby="p4-human-h">
+    <div class="sec-head"><h2 id="p4-human-h"><span class="chno">Ch 2</span>Human Systems</h2><span class="strand">Systems · Human body</span></div>
+    <div class="panel">
+      <h3>Systems that make up the human body</h3>
+      <div class="scroll"><table>
+        <thead><tr><th>System</th><th>Main parts</th><th>Main function</th></tr></thead>
+        <tbody>
+          <tr><th>Digestive</th><td>Mouth, oesophagus, stomach, small intestine, large intestine</td><td>Breaks down food and takes the digested food into the blood</td></tr>
+          <tr><th>Respiratory</th><td>Nose, windpipe, air tubes, lungs</td><td>Takes in oxygen from the air and gets rid of carbon dioxide</td></tr>
+          <tr><th>Circulatory</th><td>Heart, blood, blood vessels</td><td>Carries oxygen, digested food and waste around the body</td></tr>
+          <tr><th>Skeletal</th><td>Bones</td><td>Supports the body and protects organs inside it</td></tr>
+          <tr><th>Muscular</th><td>Muscles</td><td>Work with the bones to move the body</td></tr>
+        </tbody>
+      </table></div>
+      <p style="margin-top:10px;font-size:14px;color:var(--muted)">Respiratory and circulatory systems are covered in more detail in the <a href="/science#lungs" style="color:var(--accent);font-weight:500">Primary 5 Science page</a>.</p>
+    </div>
+
+    <div class="cols">
+      <div class="panel">
+        <h3>The digestive system</h3>
+        <svg viewBox="-10 0 290 302" style="max-width:340px" role="img" aria-label="The digestive system from top to bottom: mouth, oesophagus, stomach, small intestine coiled in the middle, large intestine framing it, then rectum and anus.">
+          <ellipse cx="130" cy="18" rx="24" ry="13" class="plain"/>
+          <path d="M118 20 q12 9 24 0" class="ray" style="stroke-width:1.5"/>
+          <rect class="shape" x="125" y="31" width="10" height="66" rx="5"/>
+          <path class="shape" d="M125 95 C100 95 92 122 108 142 C124 160 160 154 162 132 C163 112 148 100 135 100 Z"/>
+          <rect class="shape" x="125" y="146" width="10" height="34" rx="5"/>
+          <path d="M86 254 V172 H174 V254" fill="none" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--muted);stroke-width:13;opacity:.55"/>
+          <path d="M86 254 V172 H174 V254" fill="none" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--surface);stroke-width:7"/>
+          <path d="M130 178 C165 182 165 194 130 196 C95 198 95 210 130 212 C165 214 165 226 130 228 C112 230 110 238 124 244" fill="none" stroke-linecap="round" style="stroke:var(--accent);stroke-width:9"/>
+          <path d="M130 178 C165 182 165 194 130 196 C95 198 95 210 130 212 C165 214 165 226 130 228 C112 230 110 238 124 244" fill="none" stroke-linecap="round" style="stroke:var(--tint);stroke-width:5"/>
+          <rect class="shape" x="125" y="146" width="10" height="34" rx="5"/>
+          <path d="M174 254 Q172 268 140 268" fill="none" stroke-linecap="round" style="stroke:var(--muted);stroke-width:13;opacity:.55"/>
+          <path d="M174 254 Q172 268 140 268" fill="none" stroke-linecap="round" style="stroke:var(--surface);stroke-width:7"/>
+          <rect class="shape" x="122" y="262" width="16" height="22" rx="5"/>
+          <text class="lbl" x="160" y="22" text-anchor="start">mouth</text>
+          <text class="lbl" x="146" y="68" text-anchor="start">oesophagus</text>
+          <text class="lbl" x="92" y="116" text-anchor="end">stomach</text>
+          <line class="dash" x1="162" y1="196" x2="192" y2="196" style="stroke-width:1"/>
+          <text class="lbl" x="196" y="194" text-anchor="start">small</text>
+          <text class="lbl" x="196" y="206" text-anchor="start">intestine</text>
+          <line class="dash" x1="80" y1="205" x2="58" y2="205" style="stroke-width:1"/>
+          <text class="lbl" x="54" y="196" text-anchor="end">large</text>
+          <text class="lbl" x="54" y="208" text-anchor="end">intestine</text>
+          <text class="lbl" x="116" y="278" text-anchor="end">rectum</text>
+          <text class="lbl" x="146" y="292" text-anchor="start">anus</text>
+        </svg>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Parts and their functions</h3>
+          <ul class="rules">
+            <li><b>Digestion</b><span>The process of breaking food down into tiny pieces that can be taken into the blood.</span></li>
+            <li><b>Mouth</b><span>Teeth cut, tear and grind food into small pieces. Saliva wets the food and starts to break it down. The tongue helps to mix and swallow it.</span></li>
+            <li><b>Oesophagus</b><span>A tube that pushes food down to the stomach. Its muscles squeeze the food along.</span></li>
+            <li><b>Stomach</b><span>Muscles churn the food while digestive juices break it down into a thick liquid.</span></li>
+            <li><b>Small intestine</b><span>Digestion is finished here. The digested food passes through the wall into the blood.</span></li>
+            <li><b>Large intestine</b><span>Takes water from the food that cannot be digested. What is left becomes solid waste (faeces).</span></li>
+            <li><b>Rectum and anus</b><span>The rectum stores the faeces. They leave the body through the anus.</span></li>
+          </ul>
+        </div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>In which part of the digestive system does digested food pass into the blood?</p>
+          <p class="reveal">The small intestine.</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="cols">
+      <div class="panel">
+        <h3>How the parts work together</h3>
+        <ol class="flowchart" aria-label="Flow chart of food moving through the digestive system">
+          <li style="--c:var(--accent)"><span class="ftag">1 · Mouth</span>Food is <b>chewed</b> into small pieces and mixed with <b>saliva</b>.</li>
+          <li style="--c:var(--accent)"><span class="ftag">2 · Oesophagus</span>Muscles <b>push</b> the food down to the stomach.</li>
+          <li style="--c:var(--accent)"><span class="ftag">3 · Stomach</span>Food is <b>churned</b> and mixed with digestive juices into a thick liquid.</li>
+          <li style="--c:var(--accent)"><span class="ftag">4 · Small intestine</span>Digestion is <b>completed</b>. <b>Digested food</b> passes into the <b>blood</b>.</li>
+          <li style="--c:var(--accent)"><span class="ftag">5 · Large intestine</span><b>Water</b> is taken from the undigested food. The rest becomes <b>faeces</b>.</li>
+          <li style="--c:var(--accent)"><span class="ftag">6 · Rectum and anus</span>Faeces are <b>stored</b>, then pushed out of the body.</li>
+        </ol>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts</h3>
+          <ul class="rules">
+            <li><b>Order of the food path</b><span>Mouth → oesophagus → stomach → small intestine → large intestine → rectum → anus.</span></li>
+            <li><b>Working together</b><span>Each part does one job and passes the food on to the next. If one part stops working, the whole system is affected.</span></li>
+            <li><b>Where digested food goes</b><span>The blood (circulatory system) carries it to all parts of the body. See the flow chart in <a href="/science#heart" style="color:var(--accent);font-weight:500">Primary 5 Science</a>.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> food does not go through the lungs, and air does not go through the stomach. The oesophagus is the food pipe; the windpipe is for air. Do not mix them up.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 3 MATTER -->
+  <section class="sec" id="p4-matter" aria-labelledby="p4-matter-h">
+    <div class="sec-head"><h2 id="p4-matter-h"><span class="chno">Ch 3</span>Matter</h2><span class="strand">Cycles · Matter</span></div>
+    <div class="panel">
+      <h3>The three states of matter</h3>
+      <div class="figs" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+        <figure>
+          <svg viewBox="0 0 110 120" role="img" aria-label="A jar with a solid block sitting at the bottom.">
+            <path class="arc" d="M20 20 V102 H90 V20" style="fill:none;stroke-linejoin:round"/>
+            <rect class="shape" x="34" y="72" width="40" height="28"/>
+          </svg>
+          <figcaption><b>Solid</b>Fixed shape and fixed volume</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 110 120" role="img" aria-label="A jar half filled with liquid that is flat on top and takes the shape of the bottom of the jar.">
+            <rect x="21" y="62" width="68" height="39" style="fill:var(--vein);opacity:.4"/>
+            <line class="ray" x1="21" y1="62" x2="89" y2="62" style="stroke:var(--vein);stroke-width:2"/>
+            <path class="arc" d="M20 20 V102 H90 V20" style="fill:none;stroke-linejoin:round"/>
+          </svg>
+          <figcaption><b>Liquid</b>Takes the shape of its container; fixed volume</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 110 120" role="img" aria-label="A closed jar with small dots spread out through all of it, showing a gas filling the whole space.">
+            <path class="arc" d="M20 20 V102 H90 V20 Z" style="fill:none;stroke-linejoin:round"/>
+            <g class="dot" opacity=".55">
+              <circle cx="32" cy="34" r="3"/><circle cx="58" cy="30" r="3"/><circle cx="78" cy="40" r="3"/><circle cx="44" cy="52" r="3"/><circle cx="68" cy="58" r="3"/>
+              <circle cx="30" cy="70" r="3"/><circle cx="52" cy="76" r="3"/><circle cx="78" cy="82" r="3"/><circle cx="38" cy="92" r="3"/><circle cx="64" cy="94" r="3"/><circle cx="84" cy="62" r="3"/><circle cx="24" cy="52" r="3"/>
+            </g>
+          </svg>
+          <figcaption><b>Gas</b>Spreads to fill the whole container; no fixed shape or volume</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts</h3>
+        <ul class="rules">
+          <li><b>Matter</b><span>Anything that has mass and takes up space (has volume). Solids, liquids and gases are all matter, including the air around us.</span></li>
+          <li><b>Solid</b><span>Has a fixed shape and a fixed volume, e.g. a stone, a wooden block.</span></li>
+          <li><b>Liquid</b><span>Has no fixed shape: it takes the shape of the container it is in. Has a fixed volume, e.g. water, milk.</span></li>
+          <li><b>Gas</b><span>Has no fixed shape and no fixed volume: it spreads out to fill the whole container, e.g. air, steam. Gases are often colourless and cannot be seen, but they have mass and take up space.</span></li>
+          <li><b>Mass</b><span>The amount of matter in an object. Measured with a balance, in grams (g) or kilograms (kg).</span></li>
+          <li><b>Volume</b><span>The amount of space that matter takes up. Units: cubic centimetres (cm³), millilitres (mL) or litres (L). 1 mL = 1 cm³.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>How are mass and volume measured?</h3>
+          <ul class="rules">
+            <li><b>Mass of a solid or liquid</b><span>Use a balance. For a liquid, find the mass of the container with the liquid, then subtract the mass of the empty container.</span></li>
+            <li><b>Volume of a liquid</b><span>Pour it into a measuring cylinder. Place the cylinder on a flat surface and read the scale with your eye level with the bottom of the curved surface.</span></li>
+            <li><b>Volume of an irregular solid</b><span>Put it in water in a measuring cylinder (the solid must sink and not dissolve). Volume = final water level − starting water level.</span></li>
+            <li><b>Volume of a gas</b><span>A gas fills its container, so its volume is the volume of the container.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> "mass" is not "volume". A big balloon of air takes up lots of space but has very little mass, and a small metal ball takes up little space but has more mass.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>A stone is placed in a measuring cylinder with 40 mL of water. The water level rises to 55 mL. What is the volume of the stone?</p>
+          <p class="reveal">55 mL − 40 mL = 15 mL (15 cm³).</p>
+        </details>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h3>Finding the volume of an irregular solid</h3>
+      <div class="figs wide" style="grid-template-columns:minmax(0,1fr)">
+        <figure>
+          <svg viewBox="0 0 280 170" role="img" aria-label="Two measuring cylinders. The first holds 40 millilitres of water. After a stone is dropped in, the second reads 55 millilitres, so the stone has a volume of 15 millilitres.">
+            <rect x="44" y="102" width="32" height="48" style="fill:var(--vein);opacity:.4"/>
+            <line x1="44" y1="102" x2="76" y2="102" style="stroke:var(--vein);stroke-width:2"/>
+            <rect x="44" y="30" width="32" height="120" rx="3" class="plain" style="fill:none"/>
+            <line class="ray" x1="76" y1="150" x2="84" y2="150" style="stroke-width:1"/>
+            <text class="mut" x="87" y="153" text-anchor="start">0</text>
+            <line class="ray" x1="76" y1="138" x2="81" y2="138" style="stroke-width:1"/>
+            <line class="ray" x1="76" y1="126" x2="84" y2="126" style="stroke-width:1"/>
+            <text class="mut" x="87" y="129" text-anchor="start">20</text>
+            <line class="ray" x1="76" y1="114" x2="81" y2="114" style="stroke-width:1"/>
+            <line class="ray" x1="76" y1="102" x2="84" y2="102" style="stroke-width:1"/>
+            <text class="mut" x="87" y="105" text-anchor="start">40</text>
+            <line class="ray" x1="76" y1="90" x2="81" y2="90" style="stroke-width:1"/>
+            <line class="ray" x1="76" y1="78" x2="84" y2="78" style="stroke-width:1"/>
+            <text class="mut" x="87" y="81" text-anchor="start">60</text>
+            <line class="ray" x1="76" y1="66" x2="81" y2="66" style="stroke-width:1"/>
+            <line class="ray" x1="76" y1="54" x2="84" y2="54" style="stroke-width:1"/>
+            <text class="mut" x="87" y="57" text-anchor="start">80</text>
+            <line class="ray" x1="76" y1="42" x2="81" y2="42" style="stroke-width:1"/>
+            <line class="ray" x1="76" y1="30" x2="84" y2="30" style="stroke-width:1"/>
+            <text class="mut" x="87" y="33" text-anchor="start">100</text>
+            <text class="lbl" x="38" y="106" text-anchor="end">40 mL</text>
+            <rect x="184" y="84" width="32" height="66" style="fill:var(--vein);opacity:.4"/>
+            <line x1="184" y1="84" x2="216" y2="84" style="stroke:var(--vein);stroke-width:2"/>
+            <ellipse cx="200" cy="141" rx="11" ry="8" style="fill:var(--muted);stroke:var(--ink);stroke-width:1"/>
+            <rect x="184" y="30" width="32" height="120" rx="3" class="plain" style="fill:none"/>
+            <line class="ray" x1="216" y1="150" x2="224" y2="150" style="stroke-width:1"/>
+            <text class="mut" x="227" y="153" text-anchor="start">0</text>
+            <line class="ray" x1="216" y1="138" x2="221" y2="138" style="stroke-width:1"/>
+            <line class="ray" x1="216" y1="126" x2="224" y2="126" style="stroke-width:1"/>
+            <text class="mut" x="227" y="129" text-anchor="start">20</text>
+            <line class="ray" x1="216" y1="114" x2="221" y2="114" style="stroke-width:1"/>
+            <line class="ray" x1="216" y1="102" x2="224" y2="102" style="stroke-width:1"/>
+            <text class="mut" x="227" y="105" text-anchor="start">40</text>
+            <line class="ray" x1="216" y1="90" x2="221" y2="90" style="stroke-width:1"/>
+            <line class="ray" x1="216" y1="78" x2="224" y2="78" style="stroke-width:1"/>
+            <text class="mut" x="227" y="81" text-anchor="start">60</text>
+            <line class="ray" x1="216" y1="66" x2="221" y2="66" style="stroke-width:1"/>
+            <line class="ray" x1="216" y1="54" x2="224" y2="54" style="stroke-width:1"/>
+            <text class="mut" x="227" y="57" text-anchor="start">80</text>
+            <line class="ray" x1="216" y1="42" x2="221" y2="42" style="stroke-width:1"/>
+            <line class="ray" x1="216" y1="30" x2="224" y2="30" style="stroke-width:1"/>
+            <text class="mut" x="227" y="33" text-anchor="start">100</text>
+            <text class="lbl" x="178" y="88" text-anchor="end">55 mL</text>
+            <path class="ray" d="M110 128 H150" marker-end="url(#ah)" style="stroke-width:2"/>
+            <text class="mut" x="130" y="118" text-anchor="middle">add the stone</text>
+            <text class="mut" x="60" y="14" text-anchor="middle">before</text>
+            <text class="mut" x="200" y="14" text-anchor="middle">after</text>
+            <text class="mut" x="60" y="166" text-anchor="middle">mL</text>
+          </svg>
+          <figcaption><b>Water displacement</b>Volume of stone = 55 mL − 40 mL = 15 mL (15 cm³)</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 4 LIGHT -->
+  <section class="sec" id="p4-light" aria-labelledby="p4-light-h">
+    <div class="sec-head"><h2 id="p4-light-h"><span class="chno">Ch 4</span>Light</h2><span class="strand">Energy · Light</span></div>
+    <div class="panel">
+      <h3>How do we see?</h3>
+      <div class="figs wide" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <figure>
+          <svg viewBox="0 0 260 120" role="img" aria-label="A lamp on the left gives out light. A straight arrow carries the light from the lamp to an eye on the right.">
+            <circle cx="36" cy="56" r="13" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.5"/><line class="ray" x1="53.0" y1="56.0" x2="59.0" y2="56.0" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="48.0" y1="68.0" x2="52.3" y2="72.3" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="36.0" y1="73.0" x2="36.0" y2="79.0" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="24.0" y1="68.0" x2="19.7" y2="72.3" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="19.0" y1="56.0" x2="13.0" y2="56.0" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="24.0" y1="44.0" x2="19.7" y2="39.7" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="36.0" y1="39.0" x2="36.0" y2="33.0" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="48.0" y1="44.0" x2="52.3" y2="39.7" style="stroke:var(--anther);stroke-width:2"/>
+            <text class="lbl" x="36" y="96" text-anchor="middle">lamp</text>
+            <path class="ray" d="M62 56 H196" marker-end="url(#ah)" style="stroke-width:2.5"/>
+            <text class="mut" x="128" y="46" text-anchor="middle">light</text>
+            <ellipse cx="224" cy="56" rx="17" ry="10" class="plain"/><circle cx="227" cy="56" r="5" style="fill:var(--ink)"/><text class="lbl" x="224" y="82" text-anchor="middle">eye</text>
+          </svg>
+          <figcaption><b>Seeing a source of light</b>Light from the source goes straight into the eye</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 260 134" role="img" aria-label="A lamp gives out light that hits a ball. The light bounces off the ball and travels in a straight line into an eye.">
+            <circle cx="30" cy="26" r="11" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.5"/><line class="ray" x1="45.0" y1="26.0" x2="51.0" y2="26.0" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="40.6" y1="36.6" x2="44.8" y2="40.8" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="30.0" y1="41.0" x2="30.0" y2="47.0" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="19.4" y1="36.6" x2="15.2" y2="40.8" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="15.0" y1="26.0" x2="9.0" y2="26.0" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="19.4" y1="15.4" x2="15.2" y2="11.2" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="30.0" y1="11.0" x2="30.0" y2="5.0" style="stroke:var(--anther);stroke-width:2"/><line class="ray" x1="40.6" y1="15.4" x2="44.8" y2="11.2" style="stroke:var(--anther);stroke-width:2"/>
+            <text class="lbl" x="30" y="60" text-anchor="middle">lamp</text>
+            <circle cx="128" cy="72" r="20" class="shape"/>
+            <text class="lbl" x="128" y="108" text-anchor="middle">ball</text>
+            <path class="ray" d="M46 34 L106 62" marker-end="url(#ah)" style="stroke-width:2.5"/>
+            <path class="ray" d="M150 80 L204 92" marker-end="url(#ah)" style="stroke-width:2.5"/>
+            <text class="mut" x="62" y="38" text-anchor="start">light</text>
+            <text class="mut" x="170" y="74" text-anchor="start">reflected</text>
+            <ellipse cx="226" cy="96" rx="17" ry="10" class="plain"/><circle cx="229" cy="96" r="5" style="fill:var(--ink)"/><text class="lbl" x="226" y="122" text-anchor="middle">eye</text>
+          </svg>
+          <figcaption><b>Seeing an object that is not a source</b>Light bounces off the object and into the eye</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts: where does light come from?</h3>
+        <ul class="rules">
+          <li><b>Source of light</b><span>Something that gives out its own light. Natural sources: the Sun, stars, fire, lightning, fireflies. Man-made sources: a lamp, a torch, a candle flame, a TV screen.</span></li>
+          <li><b>The Sun</b><span>The main natural source of light for Earth.</span></li>
+          <li><b>Not a source</b><span>The Moon, a mirror and a book do not make their own light. We see them because they reflect light from a source.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts: how light helps us see</h3>
+          <ul class="rules">
+            <li><b>Seeing a source</b><span>Light from the source travels straight into our eyes.</span></li>
+            <li><b>Seeing other objects</b><span>Light from a source hits the object and is reflected (bounces off) into our eyes. This is why we cannot see in a completely dark room.</span></li>
+            <li><b>Light travels in straight lines</b><span>This is why we cannot see around a corner.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> the Moon looks bright but is not a source of light. It reflects light from the Sun. Our eyes do not send out light to see things either: the light has to come into our eyes.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Explain how you are able to see a book on a table in a bright room.</p>
+          <p class="reveal">Light from a source (e.g. a lamp) hits the book and is reflected into my eyes, so I see the book.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 5 SHADOWS -->
+  <section class="sec" id="p4-shadows" aria-labelledby="p4-shadows-h">
+    <div class="sec-head"><h2 id="p4-shadows-h"><span class="chno">Ch 5</span>Shadows</h2><span class="strand">Energy · Light and shadows</span></div>
+    <div class="panel">
+      <h3>How does the distance of the object change the shadow?</h3>
+      <div class="figs wide" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <figure>
+          <svg viewBox="0 0 320 150" role="img" aria-label="A light source on the left, an object close to it, and a screen on the right. The rays spread out, so the shadow on the screen is tall.">
+            <line class="dash" x1="30" y1="75" x2="250" y2="9.0" style="stroke-width:1.2"/><line class="dash" x1="30" y1="75" x2="250" y2="141.0" style="stroke-width:1.2"/><line x1="250" y1="4" x2="250" y2="146" style="stroke:var(--muted);stroke-width:3;opacity:.5"/><line x1="250" y1="9.0" x2="250" y2="141.0" style="stroke:var(--ink);stroke-width:6"/><rect x="77" y="60" width="6" height="30" style="fill:var(--soil);stroke:var(--ink);stroke-width:1"/><circle cx="30" cy="75" r="8" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.5"/><text class="lbl" x="30" y="102" text-anchor="middle">light</text><text class="lbl" x="30" y="114" text-anchor="middle">source</text><text class="lbl" x="80" y="52" text-anchor="middle">object</text><text class="lbl" x="258" y="79" text-anchor="start">shadow</text>
+          </svg>
+          <figcaption><b>Object close to the light source</b>Bigger shadow</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 320 150" role="img" aria-label="The same light source, object and screen, but the object is now far from the source and close to the screen. The shadow on the screen is much shorter.">
+            <line class="dash" x1="30" y1="75" x2="250" y2="51.4" style="stroke-width:1.2"/><line class="dash" x1="30" y1="75" x2="250" y2="98.6" style="stroke-width:1.2"/><line x1="250" y1="4" x2="250" y2="146" style="stroke:var(--muted);stroke-width:3;opacity:.5"/><line x1="250" y1="51.4" x2="250" y2="98.6" style="stroke:var(--ink);stroke-width:6"/><rect x="167" y="60" width="6" height="30" style="fill:var(--soil);stroke:var(--ink);stroke-width:1"/><circle cx="30" cy="75" r="8" style="fill:var(--anther);stroke:var(--ink);stroke-width:1.5"/><text class="lbl" x="30" y="102" text-anchor="middle">light</text><text class="lbl" x="30" y="114" text-anchor="middle">source</text><text class="lbl" x="170" y="52" text-anchor="middle">object</text><text class="lbl" x="258" y="79" text-anchor="start">shadow</text>
+          </svg>
+          <figcaption><b>Object far from the light source</b>Smaller shadow</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts: how shadows form</h3>
+        <ul class="rules">
+          <li><b>Shadow</b><span>A dark area that forms behind an object when the object blocks light.</span></li>
+          <li><b>You need three things</b><span>A source of light, an object that blocks light, and a screen or surface for the shadow to fall on.</span></li>
+          <li><b>Light travels in straight lines</b><span>Light cannot bend round the object, so there is a dark area behind it where light cannot reach.</span></li>
+          <li><b>Opaque</b><span>Blocks all the light, so it forms a dark shadow, e.g. wood, metal, cardboard.</span></li>
+          <li><b>Translucent</b><span>Lets some light through, so it forms a light shadow, e.g. tracing paper, frosted glass.</span></li>
+          <li><b>Transparent</b><span>Lets almost all light through, so it forms hardly any shadow, e.g. clear glass, clear plastic.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>What changes the size and shape of a shadow?</h3>
+          <ul class="rules">
+            <li><b>Distance from the light source</b><span>The closer the object is to the light source, the bigger its shadow. The farther away, the smaller the shadow.</span></li>
+            <li><b>Position of the light source</b><span>A light source high above gives a short shadow; a low one gives a long shadow. The shadow falls on the opposite side to the light source.</span></li>
+            <li><b>Shape and angle of the object</b><span>The shadow has the same outline as the object as seen from the light. Turn the object and the shape of the shadow changes.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> a shadow can be much bigger than the object. Moving the object closer to the light source makes its shadow bigger. Say "closer to the <i>light source</i>", not "closer to the screen".</div>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h3>Shadows of an object outdoors during the day</h3>
+      <div class="scroll"><table>
+        <thead><tr><th>Time</th><th>Sun's position</th><th>Shadow length</th><th>Shadow direction</th></tr></thead>
+        <tbody>
+          <tr><th>Early morning</th><td>Low in the east</td><td>Long</td><td>Points west</td></tr>
+          <tr><th>Noon</th><td>High overhead</td><td>Shortest</td><td>Short, close to the object</td></tr>
+          <tr><th>Late afternoon</th><td>Low in the west</td><td>Long</td><td>Points east</td></tr>
+        </tbody>
+      </table></div>
+      <details class="try" style="margin-top:14px">
+        <summary>Your turn</summary>
+        <p>A boy stands in the sunlight. At what time of day is his shadow the shortest, and why?</p>
+        <p class="reveal">At noon, because the Sun is highest in the sky then, so the shadow is the shortest.</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- CH 6 HEAT -->
+  <section class="sec" id="p4-heat" aria-labelledby="p4-heat-h">
+    <div class="sec-head"><h2 id="p4-heat-h"><span class="chno">Ch 6</span>Heat</h2><span class="strand">Energy · Heat and temperature</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>A laboratory thermometer</h3>
+        <svg viewBox="0 0 170 232" style="max-width:240px" role="img" aria-label="A thermometer with a bulb at the bottom, a thin tube with red liquid rising to 60 degrees Celsius, and a scale from 0 to 100 degrees Celsius.">
+          <rect x="62" y="14" width="16" height="172" rx="8" class="plain"/>
+          <rect x="66" y="92" width="8" height="100" style="fill:var(--artery)"/>
+          <circle cx="70" cy="200" r="17" style="fill:var(--artery);stroke:var(--accent);stroke-width:2"/>
+          <rect x="66" y="92" width="8" height="40" style="fill:var(--artery)"/>
+          <line class="ray" x1="84" y1="176" x2="96" y2="176" style="stroke-width:1.2"/>
+          <text class="mut" x="100" y="179" text-anchor="start">0</text>
+          <line class="ray" x1="84" y1="162" x2="90" y2="162" style="stroke-width:1.2"/>
+          <line class="ray" x1="84" y1="148" x2="96" y2="148" style="stroke-width:1.2"/>
+          <text class="mut" x="100" y="151" text-anchor="start">20</text>
+          <line class="ray" x1="84" y1="134" x2="90" y2="134" style="stroke-width:1.2"/>
+          <line class="ray" x1="84" y1="120" x2="96" y2="120" style="stroke-width:1.2"/>
+          <text class="mut" x="100" y="123" text-anchor="start">40</text>
+          <line class="ray" x1="84" y1="106" x2="90" y2="106" style="stroke-width:1.2"/>
+          <line class="ray" x1="84" y1="92" x2="96" y2="92" style="stroke-width:1.2"/>
+          <text class="mut" x="100" y="95" text-anchor="start">60</text>
+          <line class="ray" x1="84" y1="78" x2="90" y2="78" style="stroke-width:1.2"/>
+          <line class="ray" x1="84" y1="64" x2="96" y2="64" style="stroke-width:1.2"/>
+          <text class="mut" x="100" y="67" text-anchor="start">80</text>
+          <line class="ray" x1="84" y1="50" x2="90" y2="50" style="stroke-width:1.2"/>
+          <line class="ray" x1="84" y1="36" x2="96" y2="36" style="stroke-width:1.2"/>
+          <text class="mut" x="100" y="39" text-anchor="start">100</text>
+          <text class="lbl" x="130" y="20" text-anchor="start">°C</text>
+          <line class="dash" x1="60" y1="44" x2="38" y2="44" style="stroke-width:1"/><text class="lbl" x="34" y="48" text-anchor="end">stem</text>
+          <line class="dash" x1="66" y1="134" x2="38" y2="134" style="stroke-width:1"/><text class="lbl" x="34" y="138" text-anchor="end">liquid</text>
+          <line class="dash" x1="52" y1="204" x2="34" y2="212" style="stroke-width:1"/><text class="lbl" x="30" y="216" text-anchor="end">bulb</text>
+        </svg>
+        <p style="text-align:center;font-size:14px;color:var(--muted);margin-top:6px"><b style="color:var(--ink)">Reading: 60 °C</b><br>Read the scale with your eye level with the top of the liquid.</p>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Key facts</h3>
+          <ul class="rules">
+            <li><b>Temperature</b><span>How hot or cold something is. Measured with a thermometer in degrees Celsius (°C).</span></li>
+            <li><b>Heat</b><span>A form of energy. Heat flows from a hotter object to a colder one.</span></li>
+            <li><b>Heat gain</b><span>When an object gains heat, its temperature rises.</span></li>
+            <li><b>Heat loss</b><span>When an object loses heat, its temperature falls.</span></li>
+            <li><b>Using a thermometer</b><span>The bulb must be in the substance and not touch the sides or bottom of the container. Wait for the liquid to stop moving before reading. Read the scale at eye level.</span></li>
+            <li><b>Touch is not reliable</b><span>Our hands only tell us how hot or cold something feels, not its exact temperature. Use a thermometer.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Temperature or heat?</h3>
+        <ul class="rules">
+          <li><b>Temperature</b><span>How hot or cold something is. Shown by a thermometer reading in °C, e.g. the water is 80 °C.</span></li>
+          <li><b>Heat</b><span>A form of energy that flows. Heat gain makes the temperature rise and heat loss makes it fall, e.g. a hot drink loses heat to the air, so it cools down.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>What causes temperature to change?</h3>
+          <ul class="rules">
+            <li><b>Heat gain</b><span>The object is heated by a hotter object or heat source, e.g. a pot on a stove. Its temperature rises.</span></li>
+            <li><b>Heat loss</b><span>The object loses heat to colder surroundings, e.g. a cup of tea left on the table. Its temperature falls until it matches its surroundings.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> do not say "the cold goes into the object". Cold is not something that flows. The object loses heat, and its temperature falls.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>What is the difference between heat and temperature?</p>
+          <p class="reveal">Temperature tells us how hot or cold something is and is measured with a thermometer. Heat is a form of energy that flows from a hotter object to a colder one.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CH 7 EFFECTS OF HEAT -->
+  <section class="sec" id="p4-effects" aria-labelledby="p4-effects-h">
+    <div class="sec-head"><h2 id="p4-effects-h"><span class="chno">Ch 7</span>Effects of Heat</h2><span class="strand">Energy · Heat flow</span></div>
+    <div class="panel">
+      <h3>How does heat flow?</h3>
+      <div class="figs wide" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <figure>
+          <svg viewBox="0 0 280 120" role="img" aria-label="A metal rod heated by a flame at its left end. Heat flows along the rod from the hot end to the cooler end, shown by an arrow and a colour that changes from red to blue.">
+            <defs><linearGradient id="hg" x1="0" x2="1" y1="0" y2="0"><stop offset="0" style="stop-color:var(--artery)"/><stop offset="1" style="stop-color:var(--vein)"/></linearGradient></defs>
+            <rect x="60" y="62" width="190" height="20" rx="4" style="fill:url(#hg);stroke:var(--ink);stroke-width:1"/>
+            <path d="M24 98 C14 80 30 70 30 56 C44 68 50 82 46 98 C42 108 28 108 24 98 Z" style="fill:#F2A33A;stroke:var(--ink);stroke-width:1"/>
+            <path d="M32 100 C28 90 36 86 38 78 C44 86 46 94 42 100 Z" style="fill:var(--anther)"/>
+            <path class="ray" d="M72 44 H236" marker-end="url(#ah)" style="stroke-width:2.5"/>
+            <text class="mut" x="154" y="36" text-anchor="middle">heat flows this way</text>
+            <text class="lbl" x="66" y="104" text-anchor="start">hot end</text>
+            <text class="lbl" x="244" y="104" text-anchor="end">cooler end</text>
+          </svg>
+          <figcaption><b>Heat flows from hot to cold</b>Along the rod, from the heated end to the cooler end</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 300 150" role="img" aria-label="A metal pot on a flame with a wooden handle. Heat passes easily through the metal but not through the wooden handle.">
+            <rect x="50" y="60" width="80" height="48" rx="6" style="fill:#9AA5B1;stroke:var(--ink);stroke-width:1.5"/>
+            <rect x="130" y="74" width="72" height="12" rx="3" style="fill:var(--soil);stroke:var(--ink);stroke-width:1.5"/>
+            <g style="fill:#F2A33A;stroke:var(--ink);stroke-width:1">
+              <path d="M62 140 C56 130 68 126 68 118 C76 124 80 132 76 140 Z"/><path d="M96 140 C90 130 102 126 102 118 C110 124 114 132 110 140 Z"/>
+            </g>
+            <path class="ray" d="M90 102 V72" marker-end="url(#ah)" style="stroke:var(--artery);stroke-width:3"/>
+            <path class="ray" d="M138 80 H158" marker-end="url(#ah)" style="stroke:var(--vein);stroke-width:2;stroke-dasharray:3 3"/>
+            <text class="lbl" x="90" y="34" text-anchor="middle">metal pot</text>
+            <text class="mut" x="90" y="48" text-anchor="middle">good conductor</text>
+            <text class="lbl" x="204" y="62" text-anchor="middle">wooden handle</text>
+            <text class="mut" x="204" y="104" text-anchor="middle">poor conductor</text>
+            <text class="mut" x="204" y="116" text-anchor="middle">(insulator)</text>
+          </svg>
+          <figcaption><b>Conductor and insulator</b>Metal pot: heat passes quickly. Wooden handle: it does not</figcaption>
+        </figure>
+      </div>
+    </div>
+    <div class="cols">
+      <div class="panel">
+        <h3>Key facts: heat flow and sources</h3>
+        <ul class="rules">
+          <li><b>Direction of heat flow</b><span>From a hotter object or place to a colder one. It keeps flowing until both are at the same temperature.</span></li>
+          <li><b>Sources of heat</b><span>The Sun (the main natural source), burning fuel (fire, a candle, gas), electricity (a heater, an iron, a toaster), and rubbing things together (friction, e.g. rubbing your hands).</span></li>
+          <li><b>Good conductors of heat</b><span>Let heat pass through quickly. Metals such as copper, aluminium and iron.</span></li>
+          <li><b>Poor conductors (insulators)</b><span>Let heat pass through slowly. Wood, plastic, rubber, cloth, polystyrene and air.</span></li>
+          <li><b>Uses</b><span>Cooking pots are metal so heat reaches the food quickly, with plastic or wooden handles so we can hold them. A jacket or a thermos flask is made of insulators to slow heat loss.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Conductors and insulators</h3>
+          <div class="scroll"><table style="min-width:0">
+            <thead><tr><th>Heat flows...</th><th>Materials</th></tr></thead>
+            <tbody>
+              <tr><th>Quickly</th><td>Copper, aluminium, iron, steel (metals)</td></tr>
+              <tr><th>Slowly</th><td>Wood, plastic, rubber, cloth, polystyrene, air</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div class="warn"><b>Watch out:</b> a metal spoon feels colder than a wooden one at room temperature because metal conducts heat away from your hand faster. They are at the same temperature. Say "heat flows away from the hand faster".</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>A metal spoon and a plastic spoon are left in a cup of hot soup. After a minute, which handle feels hotter and why?</p>
+          <p class="reveal">The metal spoon, because metal is a good conductor of heat, so heat flows along it quickly. Plastic is a poor conductor.</p>
+        </details>
+      </div>
+    </div>
+    <div class="panel" style="margin-top:16px">
+      <h3>Effects of heat gain and heat loss</h3>
+      <div class="scroll"><table>
+        <thead><tr><th>Effect</th><th>Heat gain</th><th>Heat loss</th></tr></thead>
+        <tbody>
+          <tr><th>Temperature</th><td>Rises</td><td>Falls</td></tr>
+          <tr><th>Size</th><td>Expands (gets bigger): solids, liquids and gases</td><td>Contracts (gets smaller)</td></tr>
+          <tr><th>Solid ⇄ liquid</th><td>Melting (solid → liquid)</td><td>Freezing (liquid → solid)</td></tr>
+          <tr><th>Liquid ⇄ gas</th><td>Boiling or evaporation (liquid → gas)</td><td>Condensation (gas → liquid)</td></tr>
+        </tbody>
+      </table></div>
+      <ul class="rules" style="margin-top:14px">
+        <li><b>Expansion in everyday life</b><span>The red liquid in a thermometer rises when heated because it expands. A balloon left in the sun gets bigger because the air inside expands.</span></li>
+        <li><b>Water in the cycle</b><span>Melting, evaporation, condensation and freezing are the changes of state of water. See Cycles in Water in <a href="/science#matter" style="color:var(--accent);font-weight:500">Primary 5 Science</a>.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- HABITS -->
+  <section class="checklist" id="habits" aria-labelledby="habits-h">
+    <h2 id="habits-h" style="font-size:clamp(1.5rem,4.2vw,2rem)">Exam habits for P4 science</h2>
+    <ul>
+      <li><b>Name the part, then its job</b>"Roots take in water and mineral salts." Pair each part with its function.</li>
+      <li><b>Light must reach the eye</b>To see anything, light must go into the eye, either straight from a source or reflected from an object.</li>
+      <li><b>Say heat gain or heat loss</b>Avoid "cold goes in". Temperature changes because heat is gained or lost.</li>
+      <li><b>Compare with a reason</b>"Metal is a good conductor, so heat flows quickly" earns more than "metal is hot".</li>
+      <li><b>Read scales carefully</b>Eye level, and check what each small division is worth before reading.</li>
+      <li><b>Mass is not volume</b>Mass is the amount of matter (g, kg). Volume is the space it takes up (mL, cm³).</li>
+    </ul>
+  </section>
+
+  <footer>Chapter titles, topic questions and page numbers follow the contents page of the Primary 4 Science textbook (Theme – Systems: Chapters 1–2; Theme – Cycles: Chapter 3; Theme – Energy: Chapters 4–7). The last topic listed for Chapter 7 was cut off in the photo, so check that chapter for anything missing.</footer>
+</div>
+
+</body>
+</html>

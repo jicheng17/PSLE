@@ -23,6 +23,14 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
   request, since they matched what the son's materials cover. Confirm
   the P5/P6 boundary, surface it if content looks like it's really P6 or
   beyond, but don't block on "is this the official syllabus" alone.
+- **P4 exception**: on 2026-10-03 the user asked for a Primary 4 Science
+  cheat sheet built from a photo of the P4 textbook contents page, so
+  there is now a separate `/science-p4` page (`templates/science_p4.html`,
+  blue accent, chapters 1–7). It is last year's revision material and is
+  deliberately kept on its own page so the main Math/Science pages stay
+  P5-only. Don't mix P4 content into the P5 pages; link between them
+  instead. Apart from this page, P4 and P6 content still doesn't belong
+  here unless the user asks for it.
 - **Purpose**: this is a living cheat sheet, not a one-off Q&A log. When a
   Primary 5 exam question or a piece of relevant syllabus information
   comes up in conversation — the user asks about a topic, shares a
@@ -37,9 +45,11 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
 
 ## Structure
 
-- `app.py` — Flask app. Routes: `/` (index), `/math`, `/science`, `/plan`,
+- `app.py` — Flask app. Routes: `/` (index), `/math`, `/science`,
+  `/science-p4`, `/plan`,
   each just `render_template`-ing the matching file in `templates/`.
-- `templates/index.html`, `math.html`, `science.html`, `plan.html` — one
+- `templates/index.html`, `math.html`, `science.html`,
+  `science_p4.html`, `plan.html` — one
   self-contained HTML file per page (styles inline in `<style>`, no shared
   CSS/JS files, no JS at all beyond `<details>` disclosure widgets).
 - `dev_server.py` — run this instead of `app.py` while editing; wraps the
@@ -159,3 +169,15 @@ plus a countdown review plan. Not affiliated with MOE/SEAB.
   P5 Math only (Angles, Area, Volume, Fractions, Decimals, Rate,
   Percentage, Exam habits), and its root `:root` palette was promoted to
   the violet accent that P5 content used to get via scoping.
+- The P5 Science page follows the textbook chapter numbers and titles
+  (Ch 1 Reproduction in Animals and Plants, Ch 2 Cycles in Water, Ch 4
+  Human Respiratory and Circulatory Systems, Ch 5 Electrical Systems).
+  Not yet written up: Ch 3 Plant Transport System and Ch 6 parallel
+  circuits. The Ch 4 "Humans vs fish" section is an extension that isn't
+  in the textbook contents; the textbook's own blood-flow chart is the
+  nine-step flow chart in the circulatory section.
+- On 2026-10-03 `science_p4.html` was added (P4 chapters: Plant System,
+  Human Systems, Matter, Light, Shadows, Heat, Effects of Heat). The last
+  topic of Ch 7 was cut off in the contents photo, and the Ch 2 overview
+  of body systems (skeletal/muscular rows) is a best guess — check against
+  the textbook if the user reports gaps.
