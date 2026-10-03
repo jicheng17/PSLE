@@ -92,6 +92,14 @@
   .figs figure { margin: 0; }
   .figs svg { width: 100%; max-width: 220px; margin-inline: auto; }
   .figs.wide svg { max-width: 400px; }
+  .flowchart { list-style: none; margin: 0; padding: 0; max-width: 500px; margin-inline: auto; }
+  .flowchart li { position: relative; background: var(--surface); border: 2px solid var(--c, var(--accent)); border-radius: 10px; padding: 9px 14px 11px; margin-bottom: 28px; text-align: center; font-size: 14.5px; line-height: 1.45; }
+  .flowchart li:last-child { margin-bottom: 0; }
+  .flowchart li::before { content: ""; position: absolute; left: calc(50% - 1.5px); bottom: -18px; width: 3px; height: 12px; background: var(--muted); }
+  .flowchart li::after { content: ""; position: absolute; left: calc(50% - 7px); bottom: -28px; border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 10px solid var(--muted); }
+  .flowchart li:last-child::before, .flowchart li:last-child::after { display: none; }
+  .flowchart .ftag { display: block; font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin-bottom: 2px; }
+
   .figs figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; text-align: center; }
   .figs figcaption b { color: var(--ink); font-weight: 600; display: block; font-size: 14px; }
 
@@ -575,6 +583,40 @@
         </details>
       </div>
     </div>
+
+    <div class="cols" style="margin-top:16px">
+      <div class="panel">
+        <h3>How blood flows around the body</h3>
+        <ol class="flowchart" aria-label="Flow chart of how blood travels around the body, step by step">
+          <li style="--c:var(--artery)"><span class="ftag">1 · Heart and arteries</span>The <b>heart</b> pumps <b>oxygen-rich blood</b> to all parts of the body through the <b>arteries</b>.</li>
+          <li style="--c:var(--artery)"><span class="ftag">2 · Carried by the blood</span>Blood also carries <b>digested food</b> and <b>water</b> from the <b>digestive system</b> to all parts of the body.</li>
+          <li style="--c:var(--artery)"><span class="ftag">3 · Arteries to capillaries</span>The arteries <b>branch out</b> into fine <b>capillaries</b>.</li>
+          <li style="--c:var(--accent)"><span class="ftag">4 · Capillaries to cells</span>Digested food, oxygen and water pass through the <b>thin walls</b> of the capillaries into the <b>cells</b> of the body.</li>
+          <li style="--c:var(--accent)"><span class="ftag">5 · In the cells</span>The cells use digested food, oxygen and water to produce <b>energy</b>. In the process, <b>carbon dioxide</b> and other <b>waste materials</b> are also produced.</li>
+          <li style="--c:var(--accent)"><span class="ftag">6 · Cells to capillaries</span>Carbon dioxide and waste materials pass from the cells of the body into the <b>capillaries</b>.</li>
+          <li style="--c:var(--vein)"><span class="ftag">7 · Capillaries to veins</span>The capillaries <b>merge</b> to form <b>veins</b>.</li>
+          <li style="--c:var(--vein)"><span class="ftag">8 · Along the veins</span>The veins transport waste materials to the <b>organs</b> that can remove them from the body, such as the <b>kidneys</b>.</li>
+          <li style="--c:var(--vein)"><span class="ftag">9 · Back to the heart</span><b>Carbon dioxide-rich blood</b> is returned to the heart and sent to the <b>lungs</b>.</li>
+        </ol>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Remember the flow</h3>
+          <ul class="rules">
+            <li><b>Order of the vessels</b><span>Heart → arteries → capillaries → veins → heart. Exchange with the cells happens only in the capillaries.</span></li>
+            <li><b>What blood delivers</b><span>Oxygen, digested food and water, from the lungs and the digestive system to the cells.</span></li>
+            <li><b>What blood collects</b><span>Carbon dioxide and other waste materials from the cells.</span></li>
+            <li><b>Where the waste goes</b><span>Carbon dioxide is sent to the lungs to be breathed out. Other waste materials go to organs such as the kidneys, which remove them from the body.</span></li>
+            <li><b>Why capillaries are thin</b><span>Their thin walls let food, oxygen, water, carbon dioxide and waste pass through quickly between blood and cells.</span></li>
+          </ul>
+        </div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Name three things that pass from the capillaries into the cells, and two things that pass from the cells back into the capillaries.</p>
+          <p class="reveal">Into the cells: digested food, oxygen and water. Back into the capillaries: carbon dioxide and other waste materials.</p>
+        </details>
+      </div>
+    </div>
   </section>
 
   <!-- 5a. HUMAN BREATHING + CIRCULATION FLOW -->
@@ -640,13 +682,13 @@
             <li><b>2 · Oxygen enters the blood</b><span>In the alveoli, oxygen passes through the thin walls into the blood in the capillaries around them.</span></li>
             <li><b>3 · Back to the heart</b><span>Oxygen-rich blood flows from the lungs to the heart.</span></li>
             <li><b>4 · Pumped to the body</b><span>The heart pumps the oxygen-rich blood through arteries to every part of the body.</span></li>
-            <li><b>5 · Oxygen enters the cells</b><span>In the capillaries beside the cells, oxygen passes out of the blood into the cells. The cells use it, with food, to release energy.</span></li>
+            <li><b>5 · Oxygen enters the cells</b><span>In the capillaries beside the cells, oxygen, digested food and water pass out of the blood into the cells. The cells use them to produce energy.</span></li>
           </ul>
         </div>
         <div class="panel">
           <h3>Follow the carbon dioxide</h3>
           <ul class="rules">
-            <li><b>6 · Cells make it</b><span>Carbon dioxide is a waste made when cells release energy. It passes from the cells into the blood in the capillaries.</span></li>
+            <li><b>6 · Cells make it</b><span>Carbon dioxide and other waste materials are made when cells produce energy. They pass from the cells into the blood in the capillaries.</span></li>
             <li><b>7 · Back to the lungs</b><span>Oxygen-poor blood flows through veins to the heart, and the heart pumps it to the lungs.</span></li>
             <li><b>8 · Breathed out</b><span>In the alveoli, carbon dioxide passes from the blood into the air, and you breathe it out.</span></li>
             <li><b>Why exercise makes you breathe faster</b><span>Muscles need more energy, so they need more oxygen and make more carbon dioxide. Breathing and heart rate speed up to deliver the oxygen and remove the carbon dioxide faster.</span></li>
