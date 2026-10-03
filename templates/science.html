@@ -91,6 +91,7 @@
   .figs { display: grid; gap: 14px 18px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
   .figs figure { margin: 0; }
   .figs svg { width: 100%; max-width: 220px; margin-inline: auto; }
+  .figs.wide svg { max-width: 400px; }
   .figs figcaption { font-size: 14px; color: var(--muted); margin-top: 6px; text-align: center; }
   .figs figcaption b { color: var(--ink); font-weight: 600; display: block; font-size: 14px; }
 
@@ -171,6 +172,7 @@
     <a href="#matter">Ch 2 · Cycles in Water</a>
     <a href="#lungs">Ch 4 · Respiratory</a>
     <a href="#heart">Ch 4 · Circulatory</a>
+    <a href="#fish">Ch 4 · Humans vs fish</a>
     <a href="#circuits">Ch 5 · Electrical Systems</a>
     <a href="#habits">Exam habits</a>
   </nav>
@@ -184,7 +186,7 @@
         <li><b>Chapter 2 · Cycles in Water</b><span>Textbook p. 30 · on this page: <a href="#matter">states of matter and the water cycle</a></span></li>
         <li><b>Theme – Systems</b><span>Chapters 3–6 · closes at p. 140</span></li>
         <li><b>Chapter 3 · Plant Transport System</b><span>Textbook p. 62 · not on this page yet</span></li>
-        <li><b>Chapter 4 · The Human Respiratory and Circulatory Systems</b><span>Textbook p. 75 · on this page: <a href="#lungs">respiratory</a> and <a href="#heart">circulatory</a></span></li>
+        <li><b>Chapter 4 · The Human Respiratory and Circulatory Systems</b><span>Textbook p. 75 · on this page: <a href="#lungs">respiratory</a>, <a href="#heart">circulatory</a> and an extension on <a href="#fish">fish</a></span></li>
         <li><b>Chapter 5 · Electrical Systems</b><span>Textbook p. 104 · on this page: <a href="#circuits">electrical circuits</a></span></li>
         <li><b>Chapter 6 · Simple Series and Parallel Electric Circuits</b><span>Textbook p. 121 · series circuits are in the <a href="#circuits">circuits section</a>; parallel circuits not added yet</span></li>
       </ul>
@@ -551,6 +553,123 @@
           <summary>Your turn</summary>
           <p>Which blood vessel has valves, and what are the valves for?</p>
           <p class="reveal">Veins. The valves stop blood from flowing backward as it travels toward the heart.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5b. HUMANS VS FISH (extension) -->
+  <section class="sec" id="fish" aria-labelledby="fish-h">
+    <div class="sec-head"><h2 id="fish-h"><span class="chno">Ch 4</span>Humans vs fish: breathing and circulation</h2><span class="strand">Systems · Extension (not in the textbook contents)</span></div>
+
+    <div class="panel">
+      <h3>Breathing: gills take oxygen from water</h3>
+      <div class="figs wide" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+        <figure>
+          <svg viewBox="0 0 280 150" role="img" aria-label="A fish seen from the side. Water enters through the mouth, flows over the gills just behind the head, and leaves from under the gill cover.">
+            <defs><marker id="ah2" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="8" refY="4" orient="auto"><path d="M0,0 L9,4 L0,8 Z" style="fill:var(--ink)"/></marker></defs>
+            <path class="shape" d="M40 75 C70 40 150 38 190 70 L238 45 L238 105 L190 80 C150 112 70 110 40 75 Z"/>
+            <circle class="dot" cx="62" cy="66" r="2.5"/>
+            <g fill="none" stroke="var(--artery)" stroke-width="3" stroke-linecap="round">
+              <path d="M78 56 Q84 75 78 94"/><path d="M85 55 Q91 75 85 95"/><path d="M92 54 Q98 75 92 96"/>
+            </g>
+            <path class="ray" d="M100 52 Q114 75 100 98" style="stroke-width:2"/>
+            <path class="ray" d="M6 75 H34" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3"/>
+            <path class="dash" d="M46 75 H74" style="stroke:var(--vein);stroke-width:2"/>
+            <path class="ray" d="M106 94 Q120 108 128 128" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3"/>
+            <text class="lbl" x="4" y="62" text-anchor="start">water in</text>
+            <text class="mut" x="34" y="98" text-anchor="middle">mouth</text>
+            <text class="lbl" x="86" y="26" text-anchor="middle">gills</text>
+            <line class="dash" x1="86" y1="30" x2="86" y2="52"/>
+            <text class="mut" x="132" y="30" text-anchor="start">gill cover</text>
+            <line class="dash" x1="130" y1="34" x2="108" y2="60"/>
+            <text class="lbl" x="134" y="140" text-anchor="start">water out</text>
+          </svg>
+          <figcaption><b>Water in at the mouth, out under the gill cover</b>it passes over the gills on the way</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 280 150" role="img" aria-label="Close-up of a gill. Water flows along the top, blood flows the opposite way along the bottom, and a thin wall lies between them. Oxygen passes from the water into the blood, and carbon dioxide passes from the blood into the water.">
+            <rect x="30" y="18" width="220" height="42" style="fill:var(--vein);opacity:.22"/>
+            <rect x="30" y="72" width="220" height="42" style="fill:var(--artery);opacity:.22"/>
+            <rect class="plain" x="30" y="60" width="220" height="12"/>
+            <text class="mut" x="140" y="69" text-anchor="middle">thin wall</text>
+            <text class="lbl" x="38" y="38" text-anchor="start">water</text>
+            <path class="ray" d="M84 34 H236" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3"/>
+            <text class="lbl" x="38" y="104" text-anchor="start">blood</text>
+            <path class="ray" d="M236 100 H80" marker-end="url(#ah2)" style="stroke:var(--artery);stroke-width:3"/>
+            <path class="ray" d="M112 50 V90" marker-end="url(#ah2)"/>
+            <text class="lbl" x="120" y="54" text-anchor="start">O₂</text>
+            <path class="ray" d="M192 90 V50" marker-end="url(#ah2)"/>
+            <text class="lbl" x="200" y="54" text-anchor="start">CO₂</text>
+            <text class="mut" x="140" y="136" text-anchor="middle">water and blood flow in opposite directions</text>
+          </svg>
+          <figcaption><b>Inside a gill</b>oxygen goes into the blood, carbon dioxide into the water</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="panel" style="margin-top:16px">
+      <h3>Circulation: one loop vs two</h3>
+      <div class="figs wide" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr))">
+        <figure>
+          <svg viewBox="0 0 220 185" role="img" aria-label="Fish single circulation. Blood goes from the two-chambered heart to the gills, then on to the body, then back to the heart. It passes through the heart once per loop.">
+            <rect class="node" x="14" y="68" width="72" height="42" rx="10"/>
+            <text class="lbl" x="50" y="86" text-anchor="middle">heart</text>
+            <text class="mut" x="50" y="100" text-anchor="middle">2 chambers</text>
+            <rect class="node" x="116" y="12" width="76" height="34" rx="10"/>
+            <text class="lbl" x="154" y="33" text-anchor="middle">gills</text>
+            <rect class="node" x="116" y="126" width="76" height="34" rx="10"/>
+            <text class="lbl" x="154" y="147" text-anchor="middle">body</text>
+            <path class="ray" d="M60 66 Q60 29 112 29" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3"/>
+            <path class="ray" d="M154 48 V122" marker-end="url(#ah2)" style="stroke:var(--artery);stroke-width:3"/>
+            <text class="mut" x="162" y="90" text-anchor="start">oxygen-rich</text>
+            <path class="ray" d="M114 143 Q64 143 56 114" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3"/>
+            <text class="mut" x="20" y="48" text-anchor="start">oxygen-poor</text>
+            <text class="mut" x="110" y="178" text-anchor="middle">through the heart once per loop</text>
+          </svg>
+          <figcaption><b>Fish: single circulation</b>heart → gills → body → heart</figcaption>
+        </figure>
+        <figure>
+          <svg viewBox="0 0 220 200" role="img" aria-label="Human double circulation. Blood goes from the four-chambered heart to the lungs and back to the heart, then to the body and back to the heart. It passes through the heart twice per full trip.">
+            <rect class="node" x="70" y="72" width="80" height="42" rx="10"/>
+            <text class="lbl" x="110" y="90" text-anchor="middle">heart</text>
+            <text class="mut" x="110" y="104" text-anchor="middle">4 chambers</text>
+            <rect class="node" x="70" y="10" width="80" height="30" rx="10"/>
+            <text class="lbl" x="110" y="30" text-anchor="middle">lungs</text>
+            <rect class="node" x="70" y="146" width="80" height="30" rx="10"/>
+            <text class="lbl" x="110" y="166" text-anchor="middle">body</text>
+            <path class="ray" d="M88 70 V44" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3"/>
+            <path class="ray" d="M132 42 V68" marker-end="url(#ah2)" style="stroke:var(--artery);stroke-width:3"/>
+            <path class="ray" d="M132 116 V142" marker-end="url(#ah2)" style="stroke:var(--artery);stroke-width:3"/>
+            <path class="ray" d="M88 144 V118" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3"/>
+            <text class="mut" x="158" y="58" text-anchor="start">lung loop</text>
+            <text class="mut" x="158" y="132" text-anchor="start">body loop</text>
+            <text class="mut" x="110" y="196" text-anchor="middle">through the heart twice per trip</text>
+          </svg>
+          <figcaption><b>Human: double circulation</b>heart → lungs → heart → body → heart</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="cols" style="margin-top:16px">
+      <div class="panel">
+        <h3>Key facts</h3>
+        <ul class="rules">
+          <li><b>Fish breathe with gills</b><span>Gills take oxygen that is dissolved in water. Water goes in through the mouth, over the gills, and out under the gill covers.</span></li>
+          <li><b>Why gills work well</b><span>Many thin filaments (large surface area), very thin walls, and blood vessels close to the surface — the same reasons alveoli work in human lungs.</span></li>
+          <li><b>Opposite flow</b><span>Blood flows the opposite way to the water, so the blood keeps meeting water with more oxygen in it.</span></li>
+          <li><b>Fish heart: 2 chambers</b><span>One atrium and one ventricle. It pumps blood to the gills.</span></li>
+          <li><b>Single circulation (fish)</b><span>Heart → gills → body → heart. Blood passes through the heart once per full loop.</span></li>
+          <li><b>Double circulation (humans)</b><span>Heart → lungs → heart → body → heart. Blood passes through the heart twice per full trip, so it is pushed on again after the lungs.</span></li>
+          <li><b>Why the difference</b><span>Blood pressure drops after the tiny gill vessels, so blood reaches a fish's body more slowly. That is enough for a cold-blooded animal that needs less energy.</span></li>
+        </ul>
+      </div>
+      <div class="stack">
+        <div class="warn"><b>Watch out:</b> fish gills and single circulation are not in the Primary 5 textbook contents, so treat this as extension. If a question asks about gas exchange, the exam reasons are the same everywhere: thin walls, many blood vessels, large surface area. Don't say fish "breathe water" — they take dissolved oxygen out of it.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>How many times does blood pass through a fish's heart on one full loop around the body? How is that different in humans?</p>
+          <p class="reveal">Once (heart → gills → body → heart). In humans it passes through the heart twice: once to go to the lungs and once to go to the body.</p>
         </details>
       </div>
     </div>
