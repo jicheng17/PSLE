@@ -172,6 +172,7 @@
     <a href="#matter">Ch 2 · Cycles in Water</a>
     <a href="#lungs">Ch 4 · Respiratory</a>
     <a href="#heart">Ch 4 · Circulatory</a>
+    <a href="#flow">Ch 4 · Breathing + blood flow</a>
     <a href="#fish">Ch 4 · Humans vs fish</a>
     <a href="#circuits">Ch 5 · Electrical Systems</a>
     <a href="#habits">Exam habits</a>
@@ -186,7 +187,7 @@
         <li><b>Chapter 2 · Cycles in Water</b><span>Textbook p. 30 · on this page: <a href="#matter">states of matter and the water cycle</a></span></li>
         <li><b>Theme – Systems</b><span>Chapters 3–6 · closes at p. 140</span></li>
         <li><b>Chapter 3 · Plant Transport System</b><span>Textbook p. 62 · not on this page yet</span></li>
-        <li><b>Chapter 4 · The Human Respiratory and Circulatory Systems</b><span>Textbook p. 75 · on this page: <a href="#lungs">respiratory</a>, <a href="#heart">circulatory</a> and an extension on <a href="#fish">fish</a></span></li>
+        <li><b>Chapter 4 · The Human Respiratory and Circulatory Systems</b><span>Textbook p. 75 · on this page: <a href="#lungs">respiratory</a>, <a href="#heart">circulatory</a>, <a href="#flow">how they work together</a> and an extension on <a href="#fish">fish</a></span></li>
         <li><b>Chapter 5 · Electrical Systems</b><span>Textbook p. 104 · on this page: <a href="#circuits">electrical circuits</a></span></li>
         <li><b>Chapter 6 · Simple Series and Parallel Electric Circuits</b><span>Textbook p. 121 · series circuits are in the <a href="#circuits">circuits section</a>; parallel circuits not added yet</span></li>
       </ul>
@@ -571,6 +572,91 @@
           <summary>Your turn</summary>
           <p>Which blood vessel has valves, and what are the valves for?</p>
           <p class="reveal">Veins. The valves stop blood from flowing backward as it travels toward the heart.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5a. HUMAN BREATHING + CIRCULATION FLOW -->
+  <section class="sec" id="flow" aria-labelledby="flow-h">
+    <div class="sec-head"><h2 id="flow-h"><span class="chno">Ch 4</span>Humans: how breathing and blood flow work together</h2><span class="strand">Systems · Respiratory + Circulatory</span></div>
+    <div class="cols">
+      <div class="panel">
+        <h3>The flow of air and blood</h3>
+        <svg viewBox="0 0 400 306" role="img" aria-label="Flow diagram. Air goes in and out of the lungs. In the lungs, oxygen passes into the blood and carbon dioxide passes out. Oxygen-rich blood flows from the lungs to the heart, and the heart pumps it to the body cells. In the body, oxygen passes into the cells and carbon dioxide passes into the blood. Oxygen-poor blood flows back to the heart, and the heart pumps it to the lungs.">
+          <path class="ray" d="M170 6 V36" marker-end="url(#ah2)" style="stroke:var(--accent);stroke-width:3"/>
+          <path class="ray" d="M230 38 V8" marker-end="url(#ah2)" style="stroke:var(--accent);stroke-width:3"/>
+          <text class="lbl" x="162" y="22" text-anchor="end">air in</text>
+          <text class="mut" x="162" y="34" text-anchor="end">more oxygen</text>
+          <text class="lbl" x="238" y="22" text-anchor="start">air out</text>
+          <text class="mut" x="238" y="34" text-anchor="start">more CO₂</text>
+
+          <rect class="node" x="120" y="42" width="160" height="46" rx="10"/>
+          <text class="lbl" x="200" y="62" text-anchor="middle">lungs</text>
+          <text class="mut" x="200" y="77" text-anchor="middle">gas exchange at the alveoli</text>
+
+          <path class="ray" d="M170 134 V92" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3.5"/>
+          <path class="ray" d="M230 92 V134" marker-end="url(#ah2)" style="stroke:var(--artery);stroke-width:3.5"/>
+          <text class="mut" x="162" y="108" text-anchor="end">blood to the lungs</text>
+          <text class="mut" x="162" y="120" text-anchor="end" style="fill:var(--vein)">oxygen-poor</text>
+          <text class="mut" x="238" y="108" text-anchor="start">blood from the lungs</text>
+          <text class="mut" x="238" y="120" text-anchor="start" style="fill:var(--artery)">oxygen-rich</text>
+
+          <rect class="node" x="120" y="138" width="160" height="48" rx="10"/>
+          <text class="lbl" x="200" y="159" text-anchor="middle">heart</text>
+          <text class="mut" x="200" y="174" text-anchor="middle">pumps the blood</text>
+
+          <path class="ray" d="M170 232 V190" marker-end="url(#ah2)" style="stroke:var(--vein);stroke-width:3.5"/>
+          <path class="ray" d="M230 190 V232" marker-end="url(#ah2)" style="stroke:var(--artery);stroke-width:3.5"/>
+          <text class="mut" x="162" y="206" text-anchor="end">blood from the body</text>
+          <text class="mut" x="162" y="218" text-anchor="end" style="fill:var(--vein)">oxygen-poor</text>
+          <text class="mut" x="238" y="206" text-anchor="start">blood to the body</text>
+          <text class="mut" x="238" y="218" text-anchor="start" style="fill:var(--artery)">oxygen-rich</text>
+
+          <rect class="node" x="120" y="236" width="160" height="48" rx="10"/>
+          <text class="lbl" x="200" y="257" text-anchor="middle">body cells</text>
+          <text class="mut" x="200" y="272" text-anchor="middle">use oxygen for energy</text>
+
+          <text class="lbl" x="288" y="58" text-anchor="start">in the lungs</text>
+          <text class="mut" x="288" y="70" text-anchor="start">oxygen into blood</text>
+          <text class="mut" x="288" y="81" text-anchor="start">CO₂ out of blood</text>
+          <text class="lbl" x="288" y="252" text-anchor="start">in the body</text>
+          <text class="mut" x="288" y="264" text-anchor="start">oxygen into cells</text>
+          <text class="mut" x="288" y="275" text-anchor="start">CO₂ into blood</text>
+
+          <line class="ray" x1="20" y1="298" x2="46" y2="298" style="stroke:var(--artery);stroke-width:3.5"/>
+          <text class="mut" x="52" y="301" text-anchor="start">oxygen-rich blood</text>
+          <line class="ray" x1="170" y1="298" x2="196" y2="298" style="stroke:var(--vein);stroke-width:3.5"/>
+          <text class="mut" x="202" y="301" text-anchor="start">oxygen-poor blood</text>
+          <line class="ray" x1="320" y1="298" x2="346" y2="298" style="stroke:var(--accent);stroke-width:3"/>
+          <text class="mut" x="352" y="301" text-anchor="start">air</text>
+        </svg>
+      </div>
+      <div class="stack">
+        <div class="panel">
+          <h3>Follow the oxygen</h3>
+          <ul class="rules">
+            <li><b>1 · Breathe in</b><span>Air travels nose → windpipe → air tubes → lungs → alveoli.</span></li>
+            <li><b>2 · Oxygen enters the blood</b><span>In the alveoli, oxygen passes through the thin walls into the blood in the capillaries around them.</span></li>
+            <li><b>3 · Back to the heart</b><span>Oxygen-rich blood flows from the lungs to the heart.</span></li>
+            <li><b>4 · Pumped to the body</b><span>The heart pumps the oxygen-rich blood through arteries to every part of the body.</span></li>
+            <li><b>5 · Oxygen enters the cells</b><span>In the capillaries beside the cells, oxygen passes out of the blood into the cells. The cells use it, with food, to release energy.</span></li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h3>Follow the carbon dioxide</h3>
+          <ul class="rules">
+            <li><b>6 · Cells make it</b><span>Carbon dioxide is a waste made when cells release energy. It passes from the cells into the blood in the capillaries.</span></li>
+            <li><b>7 · Back to the lungs</b><span>Oxygen-poor blood flows through veins to the heart, and the heart pumps it to the lungs.</span></li>
+            <li><b>8 · Breathed out</b><span>In the alveoli, carbon dioxide passes from the blood into the air, and you breathe it out.</span></li>
+            <li><b>Why exercise makes you breathe faster</b><span>Muscles need more energy, so they need more oxygen and make more carbon dioxide. Breathing and heart rate speed up to deliver the oxygen and remove the carbon dioxide faster.</span></li>
+          </ul>
+        </div>
+        <div class="warn"><b>Watch out:</b> the two systems are different jobs. Breathing moves <i>air</i> in and out of the lungs; the heart moves <i>blood</i> around the body. They meet only at the alveoli, where oxygen and carbon dioxide pass between the air and the blood.</div>
+        <details class="try">
+          <summary>Your turn</summary>
+          <p>Describe how oxygen gets from the air you breathe in to a muscle cell in your leg.</p>
+          <p class="reveal">Air goes down the windpipe and air tubes to the alveoli. Oxygen passes into the blood in the capillaries, and the oxygen-rich blood goes to the heart. The heart pumps it through arteries to the leg, where oxygen passes from the capillaries into the muscle cell.</p>
         </details>
       </div>
     </div>
